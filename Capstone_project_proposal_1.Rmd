@@ -17,52 +17,52 @@ output: html_document
     + About 170 countries
 
     + Life Expectancy (1960-2016)	
-    + http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx
 
     + GDP per capita (1960-2011)
-    + http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx
 
     + Per capita total expenditure on health at average exchange rate (1995-2010)
-    + http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx 
+        + http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx 
 
     +	Per capita government expenditure on health at average exchange rate (1995-2010)
-    + http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx 
+        + http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx 
 
     +	Out-of-pocket expenditure as percentage of total health expenditure (1995-2010)
-    + http://docs.google.com/spreadsheet/pub?key=tXf6_OUYVmyEMZo0g4DQw6w&output=xlsx 
+        + http://docs.google.com/spreadsheet/pub?key=tXf6_OUYVmyEMZo0g4DQw6w&output=xlsx 
 
     +	Breast cancer deaths per 100,000 female (1950-2002) 
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj3wJUwXXDdiGg&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj3wJUwXXDdiGg&output=xlsx
 
     +	Cervical cancer deaths per 100,000 women (1950-2002) 
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj0jPl21g3mqfQ&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj0jPl21g3mqfQ&output=xlsx
     
     + Colon & Rectum cancer deaths per 100,000 male 
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj0VhkB8-rRHQg&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj0VhkB8-rRHQg&output=xlsx
 
     + Colon & Rectum cancer deaths per 100,000 female 
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj3bdzmKAvdUSw&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj3bdzmKAvdUSw&output=xlsx
 
     +	Liver cancer deaths per 100,000 male (1950-2002) 
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj3rojF8TmZtOw&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj3rojF8TmZtOw&output=xlsx
 
     +	Liver cancer deaths per 100,000 female (1955-2002) 
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj2ItBsVpK9VBA&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj2ItBsVpK9VBA&output=xlsx
 
     +	Lung cancer deaths per 100,000 male (1950-2002) 
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj2_ibAjsuNgYA&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj2_ibAjsuNgYA&output=xlsx
 
     +	Lung cancer deaths per 100,000 female (1950-2002) 
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj2hZorcv6aVLA&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj2hZorcv6aVLA&output=xlsx
 
     +	Prostate cancer deaths per 100,000 male (1950-2002) 
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj2S9phBhTP3dw&output=xlsx
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj2S9phBhTP3dw&output=xlsx
 
     +	Stomach cancer deaths per 100,000 male (1950-2002) 
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj3ky4_oAkatBw&output=xlsx 
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj3ky4_oAkatBw&output=xlsx 
 
     +	Stomach cancer deaths per 100,000 female (1950-2002)
-    + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj0RpUEQPgGcZQ&output=xlsx 
+        + http://docs.google.com/spreadsheet/pub?key=phAwcNAVuyj0RpUEQPgGcZQ&output=xlsx 
 
 
 #### What is the problem I want to solve?
