@@ -1,0 +1,57 @@
+---
+title: "Capstone Project v1"
+author: "H Karen Tam"
+date: "October 18, 2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r echo=FALSE}
+
+# Load tidyr
+suppressMessages(library(tidyr))
+
+# Load dplyr
+suppressMessages(library(dplyr))
+
+# Reshape income_pp. Make values of different years as rows. 
+income_pp_year_as_row <- gather(income_pp, "Year", "Income_per_person", 2:53, na.rm = FALSE)
+
+# Print income_pp_year_as_row
+income_pp_year_as_row
+
+# change income_per_person's value as numberic 
+as.numeric(income_pp_year_as_row$Income_per_person)
+
+# Round up values in Income_per_person column to 2 decimal places
+# round(income_pp_year_as_row$Income_per_person, 2)
+  
+```
+```{r}
+
+summary(income_pp_year_as_row)
+
+ipp_sd <- round(sd(income_pp_year_as_row$Income_per_person, na.rm = TRUE), 2)
+
+paste("The Standard Deviation of Income Per Person is", ipp_sd)
+  
+```
+
+```{r}
+
+hist(income_pp$`2010`, xlab="Income Per Person 2010", main="Income In Different Countries in 2010")
+
+hist(income_pp$`2000`, xlab="Income Per Person 2000", main="Income In Different Countries in 2000")
+
+hist(income_pp$`1990`, xlab="Income Per Person 1990", main="Income In Different Countries in 1990")
+
+hist(income_pp$`1980`, xlab="Income Per Person 1980", main="Income In Different Countries in 1980")
+
+hist(income_pp$`1970`, xlab="Income Per Person 1970", main="Income In Different Countries in 1970")
+
+hist(income_pp$`1960`, xlab="Income Per Person 1960", main="Income In Different Countries in 1960")
+
+```
+
