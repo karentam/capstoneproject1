@@ -27,6 +27,11 @@ as.numeric(income_pp_year_as_row$Income_per_person)
 
 # Round up values in Income_per_person column to 2 decimal places
 # round(income_pp_year_as_row$Income_per_person, 2)
+
+income_pp_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Income_per_person)) %>%
+  arrange(desc(mean))
   
 ```
 ```{r}
@@ -52,6 +57,80 @@ hist(income_pp$`1980`, xlab="Income Per Person 1980", main="Income In Different 
 hist(income_pp$`1970`, xlab="Income Per Person 1970", main="Income In Different Countries in 1970")
 
 hist(income_pp$`1960`, xlab="Income Per Person 1960", main="Income In Different Countries in 1960")
+
+```
+```{r}
+
+# Reshape life_expectancy. Make values of different years as rows. 
+life_expectancy_year_as_row <- gather(life_expectancy, "Year", "Life_Expectancy", 2:58, na.rm = FALSE)
+
+# Print life_expectancy_year_as_row
+life_expectancy_year_as_row
+
+# change Life_Expectancy's value as numberic 
+as.numeric(life_expectancy_year_as_row$Life_Expectancy)
+
+life_expectancy_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Life_Expectancy)) %>%
+  arrange(desc(mean))
+
+```
+
+```{r}
+
+# Reshape total_health_spending_pp. Make values of different years as rows. 
+total_health_spending_pp_year_as_row <- gather(total_health_spending_pp, "Year", "Total_Health_Spending_Per_Person", 2:17, na.rm = FALSE)
+
+# Print total_health_spending_pp_year_as_row
+total_health_spending_pp_year_as_row
+
+# change Total Health Spending's value as numberic 
+as.numeric(total_health_spending_pp_year_as_row$Total_Health_Spending_Per_Person)
+
+total_health_spending_pp_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Total_Health_Spending_Per_Person)) %>%
+  arrange(desc(mean))
+
+```
+```{r}
+
+# Reshape government_health_spending_pp. Make values of different years as rows. 
+government_health_spending_pp_year_as_row <- gather(government_health_spending_pp, "Year", "Government_Health_Spending_Per_Person", 2:17, na.rm = FALSE)
+
+# Print government_health_spending_pp_year_as_row
+government_health_spending_pp_year_as_row
+
+# change Total Health Spending's value as numberic 
+as.numeric(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person)
+
+government_health_spending_pp_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Government_Health_Spending_Per_Person)) %>%
+  arrange(desc(mean))
+
+```
+
+```{r}
+# Combine income_pp_year_as_row and life_expectancy_year_as_row
+
+income_vs_life_expectancy <- inner_join(income_pp_year_as_row, life_expectancy_year_as_row)
+
+income_vs_life_expectancy
+
+# Combine income_pp_year_as_row, life_expectancy_year_as_row, and total_health_spending_pp_year_as_row
+
+income_vs_life_vs_spending <- inner_join(income_vs_life_expectancy, total_health_spending_pp_year_as_row)
+
+income_vs_life_vs_spending
+
+```
+```{r}
+# Simple Scatterplot
+attach(income_vs_life_vs_spending)
+plot(Income_per_person, Life_Expectancy, main="Income vs Life Expectancy", 
+  	xlab="Income Per Person", ylab="LIfe Expectancy")
 
 ```
 
