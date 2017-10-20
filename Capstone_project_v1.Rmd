@@ -4,11 +4,9 @@ author: "H Karen Tam"
 date: "October 18, 2017"
 output:
   html_document: default
-  pdf_document: default
 ---
 
-
-```{r echo=FALSE}
+```{r}
 
 # Load tidyr
 suppressMessages(library(tidyr))
@@ -16,11 +14,32 @@ suppressMessages(library(tidyr))
 # Load dplyr
 suppressMessages(library(dplyr))
 
+# Load readxl - read excel files
+library(readxl)
+
+# Import excel files
+income_pp <- read_excel("income_pp.xlsx")
+life_expectancy <- read_excel("life_expectancy.xlsx")
+total_health_spending_pp <- read_excel("total_health_spending_pp.xlsx")
+government_health_spending_pp <- read_excel("government_health_spending_pp.xlsx")
+breast_cancer_death <- read_excel("breast_cancer_death.xlsx")
+cervical_cancer_death <- read_excel("cervical_cancer_death.xlsx")
+liver_cancer_death_male <- read_excel("liver_cancer_death_male.xlsx")
+liver_cancer_death_female <- read_excel("liver_cancer_death_female.xlsx")
+lung_cancer_death_male <- read_excel("lung_cancer_death_male.xlsx")
+lung_cancer_death_female <- read_excel("lung_cancer_death_female.xlsx")
+prostate_cancer_death <- read_excel("prostate_cancer_death.xlsx")
+stomach_cancer_death_male <- read_excel("stomach_cancer_death_male.xlsx")
+stomach_cancer_death_female <- read_excel("stomach_cancer_death_female.xlsx")
+
+```
+```{r}
+
 # Reshape income_pp. Make values of different years as rows. 
 income_pp_year_as_row <- gather(income_pp, "Year", "Income_per_person", 2:53, na.rm = FALSE)
 
 # Print income_pp_year_as_row
-income_pp_year_as_row
+# income_pp_year_as_row
 
 # change income_per_person's value as numberic 
 as.numeric(income_pp_year_as_row$Income_per_person)
@@ -29,12 +48,14 @@ as.numeric(income_pp_year_as_row$Income_per_person)
 # round(income_pp_year_as_row$Income_per_person, 2)
 
 # Show the mean of GDP per capita of each country from 1960 to 2011
+paste("The Mean of Income Per Person(GDP Per Capita) By Country from 1960 to 2011")
 income_pp_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Income_per_person, na.rm = TRUE), count=sum(!is.na(Income_per_person))) %>%
   arrange(desc(mean))
   
 ```
+
 ```{r}
 
 # Show basic descriptive statistics
@@ -42,7 +63,7 @@ summary(income_pp_year_as_row)
 
 # Standard Deviation of Income Per Person
 ipp_sd <- round(sd(income_pp_year_as_row$Income_per_person, na.rm = TRUE), 2)
-paste("The Standard Deviation of GDP Per Capita is", ipp_sd)
+paste("The Standard Deviation of GDP Per Capita is", ipp_sd,".")
   
 ```
 
@@ -63,18 +84,20 @@ hist(income_pp$`1970`, xlab="GDP Per Capita 1970", main="Income In Different Cou
 hist(income_pp$`1960`, xlab="GDP Per Capita 1960", main="Income In Different Countries in 1960")
 
 ```
+
 ```{r}
 
 # Reshape life_expectancy. Make values of different years as rows. 
 life_expectancy_year_as_row <- gather(life_expectancy, "Year", "Life_Expectancy", 2:58, na.rm = FALSE)
 
 # Print life_expectancy_year_as_row
-life_expectancy_year_as_row
+# life_expectancy_year_as_row
 
 # change Life_Expectancy's value as numberic 
 as.numeric(life_expectancy_year_as_row$Life_Expectancy)
 
 # Show the mean of life expectancy at birth by year of each country from 1960 to 2016
+paste("The Mean of Life Expectancy at Birth (Year) By Country from 1960 to 2016")
 life_expectancy_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Life_Expectancy, na.rm = TRUE), count=sum(!is.na(Life_Expectancy))) %>%
@@ -92,6 +115,7 @@ ipp_sd <- round(sd(life_expectancy_year_as_row$Life_Expectancy, na.rm = TRUE), 2
 paste("The Standard Deviation of Life Expectancy is", ipp_sd, "years")
   
 ```
+
 ```{r}
 
 # Histogram showing life expectancy in different countries
@@ -118,18 +142,20 @@ hist(life_expectancy$`1960`, xlab="Life Expectancy 1960", main="Life Expectancy 
 total_health_spending_pp_year_as_row <- gather(total_health_spending_pp, "Year", "Total_Health_Spending_Per_Person", 2:17, na.rm = FALSE)
 
 # Print total_health_spending_pp_year_as_row
-total_health_spending_pp_year_as_row
+# total_health_spending_pp_year_as_row
 
 # change Total Health Spending's value as numberic 
 as.numeric(total_health_spending_pp_year_as_row$Total_Health_Spending_Per_Person)
 
 # Show the mean of total health spending in US$ of each country from 1995 to 2010
+paste("The Mean of Total Health Spending in US$ By Country from 1995 to 2010")
 total_health_spending_pp_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Total_Health_Spending_Per_Person, na.rm = TRUE), count=sum(!is.na(Total_Health_Spending_Per_Person))) %>%
   arrange(desc(mean))
 
 ```
+
 ```{r}
 
 # Show basic descriptive statistics
@@ -140,6 +166,7 @@ ipp_sd <- round(sd(total_health_spending_pp_year_as_row$Total_Health_Spending_Pe
 paste("The Standard Deviation of Total Health Spending is $", ipp_sd, "US Dollars per person.")
   
 ```
+
 ```{r}
 
 # Histogram showing total health spending in different countries
@@ -157,12 +184,13 @@ hist(total_health_spending_pp$`2000`, xlab="Total Health Spending Per Person in 
 government_health_spending_pp_year_as_row <- gather(government_health_spending_pp, "Year", "Government_Health_Spending_Per_Person", 2:17, na.rm = FALSE)
 
 # Print government_health_spending_pp_year_as_row
-government_health_spending_pp_year_as_row
+# government_health_spending_pp_year_as_row
 
 # change Total Health Spending's value as numberic 
 as.numeric(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person)
 
 # Show the mean of government health spending in US$ of each country from 1995 to 2010
+paste("The Mean of Government Health Spending in US$ By Country from 1995 to 2010")
 government_health_spending_pp_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Government_Health_Spending_Per_Person, na.rm = TRUE), count=sum(!is.na(Government_Health_Spending_Per_Person))) %>%
@@ -199,30 +227,32 @@ hist(government_health_spending_pp$`2000`, xlab="Government Health Spending Per 
 breast_cancer_death_year_as_row <- gather(breast_cancer_death, "Year", "Breast_Cancer_Death", 2:54, na.rm = FALSE)
 
 # Print breast_cancer_death_year_as_row
-breast_cancer_death_year_as_row
+# breast_cancer_death_year_as_row
 
 # change breast cacner death's value as numberic 
 as.numeric(breast_cancer_death_year_as_row$Breast_Cancer_Death)
 
 # Show the mean of breast cancer deaths per 100,000 female of each country from 1950 to 2002
+paste("The Mean of Breast Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
 breast_cancer_death_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Breast_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Breast_Cancer_Death))) %>%
   arrange(desc(mean))
 
 ```
+
 ```{r}
 
 # Show basic descriptive statistics
 summary(breast_cancer_death_year_as_row)
 
-# Standard Deviation of breast cancer death per 100,000 female
+# Standard Deviation of breast cancer deaths per 100,000 female
 ipp_sd <- round(sd(breast_cancer_death_year_as_row$Breast_Cancer_Death, na.rm = TRUE), 2)
-paste("The Standard Deviation of breast cancert death per 100,000 female is ", ipp_sd, ".")
+paste("The Standard Deviation of Breast Cancer Deaths per 100,000 female is ", ipp_sd, ".")
 
-# Histogram showing breast cancer death in different countries
+# Histogram showing breast cancer deaths in different countries
 
-hist(breast_cancer_death$`2000`, xlab="Breast Cancer Death Per 100,000 Female 2000", main="Breast Cancer Dealths In Different Countries in 2000")
+hist(breast_cancer_death$`2000`, xlab="Breast Cancer Deaths Per 100,000 Female 2000", main="Breast Cancer Deaths In Different Countries in 2000")
   
 ```
 
@@ -232,12 +262,13 @@ hist(breast_cancer_death$`2000`, xlab="Breast Cancer Death Per 100,000 Female 20
 cervical_cancer_death_year_as_row <- gather(cervical_cancer_death, "Year", "Cervical_Cancer_Death", 2:54, na.rm = FALSE)
 
 # Print cervical_cancer_death_year_as_row
-cervical_cancer_death_year_as_row
+# cervical_cancer_death_year_as_row
 
 # Change cervical cancer death's value as numberic 
 as.numeric(cervical_cancer_death_year_as_row$Cervical_Cancer_Death)
 
 # Show the mean of cervical cancer deaths per 100,000 female of each country from 1950 to 2002
+paste("The Mean of Cervical Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
 cervical_cancer_death_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Cervical_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Cervical_Cancer_Death))) %>%
@@ -250,13 +281,13 @@ cervical_cancer_death_year_as_row %>%
 # Show basic descriptive statistics
 summary(cervical_cancer_death_year_as_row)
 
-# Standard Deviation of cervical cancer death per 100,000 female
+# Standard Deviation of cervical cancer deaths per 100,000 female
 ipp_sd <- round(sd(cervical_cancer_death_year_as_row$Cervical_Cancer_Death, na.rm = TRUE), 2)
-paste("The Standard Deviation of cervical cancer death per 100,000 female is ", ipp_sd, ".")
+paste("The Standard Deviation of Cervical Cancer Deaths Per 100,000 Female is ", ipp_sd, ".")
 
-# Histogram showing cervical cancer death in different countries
+# Histogram showing cervical cancer deaths in different countries
 
-hist(cervical_cancer_death$`2000`, xlab="Cervical Cancer Death Per 100,000 Female 2000", main="Cervical Cancer Deaths In Different Countries in 2000")
+hist(cervical_cancer_death$`2000`, xlab="Cervical Cancer Deaths Per 100,000 Female 2000", main="Cervical Cancer Deaths In Different Countries in 2000")
   
 ```
 
@@ -266,12 +297,13 @@ hist(cervical_cancer_death$`2000`, xlab="Cervical Cancer Death Per 100,000 Femal
 liver_cancer_death_male_year_as_row <- gather(liver_cancer_death_male, "Year", "Liver_Cancer_Death_Male", 2:49, na.rm = FALSE)
 
 # Print liver_cancer_death_male_year_as_row
-liver_cancer_death_male_year_as_row
+# liver_cancer_death_male_year_as_row
 
 # Change liver cancer death's value as numberic 
 as.numeric(liver_cancer_death_male_year_as_row$Liver_Cancer_Death_Male)
 
 # Show the mean of liver cancer deaths per 100,000 male of each country from 1955 to 2002
+paste("The Mean of Liver Cancer Deaths Per 100,000 Male By Country from 1955 to 2002")
 liver_cancer_death_male_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Liver_Cancer_Death_Male, na.rm = TRUE), count=sum(!is.na(Liver_Cancer_Death_Male))) %>%
@@ -285,12 +317,13 @@ liver_cancer_death_male_year_as_row %>%
 liver_cancer_death_female_year_as_row <- gather(liver_cancer_death_female, "Year", "Liver_Cancer_Death_Female", 2:49, na.rm = FALSE)
 
 # Print liver_cancer_death_female_year_as_row
-liver_cancer_death_female_year_as_row
+# liver_cancer_death_female_year_as_row
 
 # Change liver cancer death's value as numberic 
 as.numeric(liver_cancer_death_female_year_as_row$Liver_Cancer_Death_Female)
 
 # Show the mean of liver cancer deaths per 100,000 female of each country from 1955 to 2002
+paste("The Mean of Liver Cancer Deaths Per 100,000 Female By Country from 1955 to 2002")
 liver_cancer_death_female_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Liver_Cancer_Death_Female, na.rm = TRUE), count=sum(!is.na(Liver_Cancer_Death_Female))) %>%
@@ -308,9 +341,10 @@ liver_cancer_death_year_as_row <- liver_cancer_death_year_as_row %>%
   mutate(Liver_Cancer_Death = Liver_Cancer_Death_Male + Liver_Cancer_Death_Female)
 
 # Print liver_cancer_death_year_as_row
-liver_cancer_death_year_as_row
+# liver_cancer_death_year_as_row
 
-# Show the mean of liver cancer deaths per 100,000 persons of each country from 1955 to 2002
+# Show the mean of liver cancer deaths per 100,000 person of each country from 1955 to 2002
+paste("The Mean of Liver Cancer Deaths Per 100,000 Person By Country from 1955 to 2002")
 liver_cancer_death_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Liver_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Liver_Cancer_Death))) %>%
@@ -323,9 +357,9 @@ liver_cancer_death_year_as_row %>%
 # Show basic descriptive statistics
 summary(liver_cancer_death_year_as_row)
 
-# Standard Deviation of liver cancer death per 100,000 person
+# Standard Deviation of liver cancer deaths per 100,000 person
 ipp_sd <- round(sd(liver_cancer_death_year_as_row$Liver_Cancer_Death, na.rm = TRUE), 2)
-paste("The Standard Deviation of liver cancer death per 100,000 person is ", ipp_sd, ".")
+paste("The Standard Deviation of Liver Cancer Deaths Per 100,000 Person Is ", ipp_sd, ".")
 
   
 ```
@@ -336,12 +370,13 @@ paste("The Standard Deviation of liver cancer death per 100,000 person is ", ipp
 lung_cancer_death_male_year_as_row <- gather(lung_cancer_death_male, "Year", "Lung_Cancer_Death_Male", 2:54, na.rm = FALSE)
 
 # Print lung_cancer_death_male_year_as_row
-lung_cancer_death_male_year_as_row
+# lung_cancer_death_male_year_as_row
 
 # Change lung cancer death's value as numberic 
 as.numeric(lung_cancer_death_male_year_as_row$Lung_Cancer_Death_Male)
 
 # Show the mean of lung cancer deaths per 100,000 male of each country from 1950 to 2002
+paste("The Mean of Lung Cancer Deaths Per 100,000 Male By Country from 1950 to 2002")
 lung_cancer_death_male_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Lung_Cancer_Death_Male, na.rm = TRUE), count=sum(!is.na(Lung_Cancer_Death_Male))) %>%
@@ -355,12 +390,13 @@ lung_cancer_death_male_year_as_row %>%
 lung_cancer_death_female_year_as_row <- gather(lung_cancer_death_female, "Year", "Lung_Cancer_Death_Female", 2:54, na.rm = FALSE)
 
 # Print lung_cancer_death_female_year_as_row
-lung_cancer_death_female_year_as_row
+# lung_cancer_death_female_year_as_row
 
 # Change lung cancer death's value as numberic 
 as.numeric(lung_cancer_death_female_year_as_row$Lung_Cancer_Death_Female)
 
 # Show the mean of lung cancer deaths per 100,000 female of each country from 1950 to 2002
+paste("The Mean of Lung Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
 lung_cancer_death_female_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Lung_Cancer_Death_Female, na.rm = TRUE), count=sum(!is.na(Lung_Cancer_Death_Female))) %>%
@@ -377,9 +413,10 @@ lung_cancer_death_year_as_row <- lung_cancer_death_year_as_row %>%
   mutate(Lung_Cancer_Death = Lung_Cancer_Death_Male + Lung_Cancer_Death_Female)
 
 # Print lung_cancer_death_year_as_row
-lung_cancer_death_year_as_row
+# lung_cancer_death_year_as_row
 
-# Show the mean of lung cancer deaths per 100,000 persons of each country from 1950 to 2002
+# Show the mean of lung cancer deaths per 100,000 person of each country from 1950 to 2002
+paste("The Mean of Lung Cancer Deaths Per 100,000 Person By Country from 1950 to 2002")
 lung_cancer_death_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Lung_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Lung_Cancer_Death))) %>%
@@ -389,11 +426,11 @@ lung_cancer_death_year_as_row %>%
 ```{r}
 
 # Show basic descriptive statistics
-summary(prostate_cancer_death_year_as_row)
+summary(lung_cancer_death_year_as_row)
 
-# Standard Deviation of prostate cancer death per 100,000 male
-ipp_sd <- round(sd(prostate_cancer_death_year_as_row$Prostate_Cancer_Death, na.rm = TRUE), 2)
-paste("The Standard Deviation of prostate cancer death per 100,000 person is ", ipp_sd, ".")
+# Standard Deviation of lung cancer death per 100,000 persons
+ipp_sd <- round(sd(lung_cancer_death_year_as_row$Lung_Cancer_Death, na.rm = TRUE), 2)
+paste("The Standard Deviation of Lung Cancer Deaths Per 100,000 Person Is ", ipp_sd, ".")
 
   
 ```
@@ -404,12 +441,13 @@ paste("The Standard Deviation of prostate cancer death per 100,000 person is ", 
 prostate_cancer_death_year_as_row <- gather(prostate_cancer_death, "Year", "Prostate_Cancer_Death", 2:54, na.rm = FALSE)
 
 # Print prostate_cancer_death_year_as_row
-prostate_cancer_death_year_as_row
+# prostate_cancer_death_year_as_row
 
 # Change prostate cancer death's value as numberic 
 as.numeric(prostate_cancer_death_year_as_row$Prostate_Cancer_Death)
 
 # Show the mean of prostate cancer deaths per 100,000 male of each country from 1950 to 2002
+paste("The Mean of Prostate Cancer Deaths Per 100,000 Male By Country from 1950 to 2002")
 prostate_cancer_death_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Prostate_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Prostate_Cancer_Death))) %>%
@@ -421,13 +459,13 @@ prostate_cancer_death_year_as_row %>%
 # Show basic descriptive statistics
 summary(prostate_cancer_death_year_as_row)
 
-# Standard Deviation of prostate cancer death per 100,000 male
+# Standard Deviation of prostate cancer deaths per 100,000 male
 ipp_sd <- round(sd(prostate_cancer_death_year_as_row$Prostate_Cancer_Death, na.rm = TRUE), 2)
-paste("The Standard Deviation of prostate cancer death per 100,000 male is ", ipp_sd, ".")
+paste("The Standard Deviation of Prostate Cancer Deaths Per 100,000 Male Is ", ipp_sd, ".")
 
-# Histogram showing prostate cancer death in different countries
+# Histogram showing prostate cancer deaths in different countries
 
-hist(prostate_cancer_death$`2000`, xlab="Prostate Cancer Death Per 100,000 Male 2000", main="Prostate Cancer Deaths In Different Countries in 2000")
+hist(prostate_cancer_death$`2000`, xlab="Prostate Cancer Deaths Per 100,000 Male 2000", main="Prostate Cancer Deaths In Different Countries in 2000")
   
 ```
 
@@ -437,12 +475,13 @@ hist(prostate_cancer_death$`2000`, xlab="Prostate Cancer Death Per 100,000 Male 
 stomach_cancer_death_male_year_as_row <- gather(stomach_cancer_death_male, "Year", "Stomach_Cancer_Death_Male", 2:54, na.rm = FALSE)
 
 # Print stomach_cancer_death_male_year_as_row
-stomach_cancer_death_male_year_as_row
+# stomach_cancer_death_male_year_as_row
 
 # Change stomach cancer death's value as numberic 
 as.numeric(stomach_cancer_death_male_year_as_row$Stomach_Cancer_Death_Male)
 
 # Show the mean of stomach cancer deaths per 100,000 male of each country from 1950 to 2002
+paste("The Mean of Stomach Cancer Deaths Per 100,000 Male By Country from 1950 to 2002")
 stomach_cancer_death_male_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Stomach_Cancer_Death_Male, na.rm = TRUE), count=sum(!is.na(Stomach_Cancer_Death_Male))) %>%
@@ -455,12 +494,13 @@ stomach_cancer_death_male_year_as_row %>%
 stomach_cancer_death_female_year_as_row <- gather(stomach_cancer_death_female, "Year", "Stomach_Cancer_Death_Female", 2:54, na.rm = FALSE)
 
 # Print stomach_cancer_death_female_year_as_row
-stomach_cancer_death_female_year_as_row
+# stomach_cancer_death_female_year_as_row
 
 # Change stomach cancer death's value as numberic 
 as.numeric(stomach_cancer_death_female_year_as_row$Stomach_Cancer_Death_Female)
 
 # Show the mean of stomach cancer deaths per 100,000 female of each country from 1950 to 2002
+paste("The Mean of Stomach Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
 stomach_cancer_death_female_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Stomach_Cancer_Death_Female, na.rm = TRUE), count=sum(!is.na(Stomach_Cancer_Death_Female))) %>%
@@ -478,9 +518,10 @@ stomach_cancer_death_year_as_row <- stomach_cancer_death_year_as_row %>%
   mutate(Stomach_Cancer_Death = Stomach_Cancer_Death_Male + Stomach_Cancer_Death_Female)
 
 # Print stomach_cancer_death_year_as_row
-stomach_cancer_death_year_as_row
+# stomach_cancer_death_year_as_row
 
-# Show the mean of stomach cancer deaths per 100,000 persons of each country from 1950 to 2002
+# Show the mean of stomach cancer deaths per 100,000 person of each country from 1950 to 2002
+paste("The Mean of Stomach Cancer Deaths Per 100,000 Person By Country from 1950 to 2002")
 stomach_cancer_death_year_as_row %>% 
   group_by(Country) %>% 
   summarise(mean=mean(Stomach_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Stomach_Cancer_Death))) %>%
@@ -494,9 +535,9 @@ stomach_cancer_death_year_as_row %>%
 # Show basic descriptive statistics
 summary(stomach_cancer_death_year_as_row)
 
-# Standard Deviation of stomach cancer death per 100,000 person
+# Standard Deviation of stomach cancer deaths per 100,000 person
 ipp_sd <- round(sd(stomach_cancer_death_year_as_row$Stomach_Cancer_Death, na.rm = TRUE), 2)
-paste("The Standard Deviation of stomach cancer death per 100,000 person is ", ipp_sd, ".")
+paste("The Standard Deviation of Stomach Cancer Deaths Per 100,000 Person Is ", ipp_sd, ".")
 
 ```
 
@@ -527,22 +568,22 @@ income_vs_life_vs_spending
 ```{r}
 # Simple Scatterplot
 attach(income_vs_life_expectancy)
-plot(Income_per_person, Life_Expectancy, main="Income vs Life Expectancy", 
-  	xlab="GDP Per Capita (US$)", ylab="LIfe Expectancy At Birth-Year")
+plot(Income_per_person, Life_Expectancy, main="Income vs Life Expectancy", log="x", xlab="GDP Per Capita (US$)", ylab="LIfe Expectancy At Birth-Year")
 
 ```
 
 ```{r}
 # Simple Scatterplot
 attach(income_vs_life_vs_spending)
-plot(Total_Health_Spending_Per_Person, Life_Expectancy, main="Health Spending vs Life Expectancy", 
-  	xlab="Total Health Spending (US$)", ylab="LIfe Expectancy At Birth-Year")
+plot(Total_Health_Spending_Per_Person, Life_Expectancy, main="Health Spending vs Life Expectancy", log="x", xlab="Total Health Spending (US$)", ylab="LIfe Expectancy At Birth-Year")
 
 ```
 ```{r}
 # Simple Scatterplot
 attach(income_vs_life_vs_spending)
-plot(Government_Health_Spending_Per_Person, Life_Expectancy, main="Government Health Spending vs Life Expectancy", 
-  	xlab="Government Health Spending (US$)", ylab="LIfe Expectancy At Birth-Year")
+plot(Government_Health_Spending_Per_Person, Life_Expectancy, main="Government Health Spending vs Life Expectancy", log="x", xlab="Government Health Spending (US$)", ylab="LIfe Expectancy At Birth-Year")
+
+```
+
 
 ```
