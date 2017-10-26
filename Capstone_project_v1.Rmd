@@ -67,6 +67,7 @@ paste("The Standard Deviation of GDP Per Capita is", ipp_sd,".")
   
 ```
 
+
 ```{r}
 
 # Histogram showing income per person in different countries
@@ -82,6 +83,13 @@ hist(income_pp$`1980`, xlab="GDP Per Capita 1980", main="Income In Different Cou
 hist(income_pp$`1970`, xlab="GDP Per Capita 1970", main="Income In Different Countries in 1970")
 
 hist(income_pp$`1960`, xlab="GDP Per Capita 1960", main="Income In Different Countries in 1960")
+
+```
+
+```{r}
+# Check to see the outliers are resasonable.
+
+subset(income_pp_year_as_row, Income_per_person > 50000)
 
 ```
 
@@ -116,6 +124,7 @@ paste("The Standard Deviation of Life Expectancy is", ipp_sd, "years")
   
 ```
 
+
 ```{r}
 
 # Histogram showing life expectancy in different countries
@@ -133,6 +142,16 @@ hist(life_expectancy$`1980`, xlab="Life Expectancy 1980", main="Life Expectancy 
 hist(life_expectancy$`1970`, xlab="Life Expectancy 1970", main="Life Expectancy In Different Countries in 1970")
 
 hist(life_expectancy$`1960`, xlab="Life Expectancy 1960", main="Life Expectancy In Different Countries in 1960")
+
+```
+
+```{r}
+
+# Check values of life expectancy under 30 years old.
+
+# There are 9 records in this subset. The numbers are from Mali in 1960 and 1961, Cambodia from 1975 to 1980, and Rwanda in 1994. The short lives can be explained by wars in these countries in the stated years. 
+
+subset(life_expectancy_year_as_row, Life_Expectancy < 30)
 
 ```
 
@@ -167,14 +186,27 @@ paste("The Standard Deviation of Total Health Spending is $", ipp_sd, "US Dollar
   
 ```
 
+
 ```{r}
 
 # Histogram showing total health spending in different countries
 
-hist(total_health_spending_pp$`2010`, xlab="Total Health Spending Per Person in US Dollar in 2010", main="Total Health Spending Per Person In Different Countries in 2010")
+hist(total_health_spending_pp$`2010`, xlab="Total Health Spending Per Person in US Dollar in 2010", main="Total Health Spending In Different Countries in 2010")
 
-hist(total_health_spending_pp$`2000`, xlab="Total Health Spending Per Person in US Dollar in 2000", main="Total Health Spending Per Person In Different Countries in 2000")
+hist(total_health_spending_pp$`2005`, xlab="Total Health Spending Per Person in US Dollar in 2005", main="Total Health Spending In Different Countries in 2005")
 
+hist(total_health_spending_pp$`2000`, xlab="Total Health Spending Per Person in US Dollar in 2000", main="Total Health Spending In Different Countries in 2000")
+
+hist(total_health_spending_pp$`1995`, xlab="Total Health Spending Per Person in US Dollar in 1995", main="Total Health Spending In Different Countries in 1995")
+
+```
+
+```{r}
+# Check the outliers to see whether they are reasonable.
+
+# There are 6 records in this subset. The countries are Luxembourg, Norway, and United States from 2008 to 2010. These are rich countries, and the numbers seem to be reasonable.
+
+subset(total_health_spending_pp_year_as_row, Total_Health_Spending_Per_Person > 8000)
 
 ```
 
@@ -210,14 +242,27 @@ paste("The Standard Deviation of Government Health Spending is $", ipp_sd, "US D
   
 ```
 
+
 ```{r}
 
 # Histogram showing government health spending in different countries
 
-hist(government_health_spending_pp$`2010`, xlab="Government Health Spending Per Person in US Dollar in 2010", main="Government Health Spending Per Person In Different Countries in 2010")
+hist(government_health_spending_pp$`2010`, xlab="Government Health Spending Per Person in US Dollar in 2010", main="Government Health Spending In Different Countries in 2010")
 
-hist(government_health_spending_pp$`2000`, xlab="Government Health Spending Per Person in US Dollar in 2000", main="Government Health Spending Per Person In Different Countries in 2000")
+hist(government_health_spending_pp$`2005`, xlab="Government Health Spending Per Person in US Dollar in 2005", main="Government Health Spending In Different Countries in 2005")
 
+hist(government_health_spending_pp$`2000`, xlab="Government Health Spending Per Person in US Dollar in 2000", main="Government Health Spending In Different Countries in 2000")
+
+hist(government_health_spending_pp$`1995`, xlab="Government Health Spending Per Person in US Dollar in 1995", main="Government Health Spending In Different Countries in 1995")
+
+```
+
+```{r}
+
+# Check the outliers of Government Health Spending Per Person
+# There are 8 records of numbers higher than US$6,000. These numbers are from Luxembourg and Norway from 2007 to 2010. The numbers should be reasonable.
+
+subset(government_health_spending_pp_year_as_row, Government_Health_Spending_Per_Person > 6000)
 
 ```
 
@@ -250,10 +295,28 @@ summary(breast_cancer_death_year_as_row)
 ipp_sd <- round(sd(breast_cancer_death_year_as_row$Breast_Cancer_Death, na.rm = TRUE), 2)
 paste("The Standard Deviation of Breast Cancer Deaths per 100,000 female is ", ipp_sd, ".")
 
+```
+
+```{r}
+
 # Histogram showing breast cancer deaths in different countries
 
-hist(breast_cancer_death$`2000`, xlab="Breast Cancer Deaths Per 100,000 Female 2000", main="Breast Cancer Deaths In Different Countries in 2000")
-  
+hist(breast_cancer_death$`1987`, xlab="Breast Cancer Deaths Per 100,000 Female 1987", main="Breast Cancer Deaths In Different Countries in 1987")
+hist(breast_cancer_death$`1992`, xlab="Breast Cancer Deaths Per 100,000 Female 1992", main="Breast Cancer Deaths In Different Countries in 1992")
+hist(breast_cancer_death$`1997`, xlab="Breast Cancer Deaths Per 100,000 Female 1997", main="Breast Cancer Deaths In Different Countries in 1997")
+hist(breast_cancer_death$`2002`, xlab="Breast Cancer Deaths Per 100,000 Female 2002", main="Breast Cancer Deaths In Different Countries in 2002")
+
+
+```
+
+```{r}
+
+# Check the outliers to see whether they are reasonable.
+
+# There are a total of 12 records shown in this subset. The countries are Iceland, Ireland, and Malta. In 1951, Iceland had highest number of breast cancer death since 1950. It is reasonable because its numbers are relatively high in other years. 
+
+subset(breast_cancer_death_year_as_row, Breast_Cancer_Death > 30)
+
 ```
 
 ```{r} 
@@ -285,10 +348,28 @@ summary(cervical_cancer_death_year_as_row)
 ipp_sd <- round(sd(cervical_cancer_death_year_as_row$Cervical_Cancer_Death, na.rm = TRUE), 2)
 paste("The Standard Deviation of Cervical Cancer Deaths Per 100,000 Female is ", ipp_sd, ".")
 
+```
+
+```{r}
+
 # Histogram showing cervical cancer deaths in different countries
 
-hist(cervical_cancer_death$`2000`, xlab="Cervical Cancer Deaths Per 100,000 Female 2000", main="Cervical Cancer Deaths In Different Countries in 2000")
+hist(cervical_cancer_death$`1987`, xlab="Cervical Cancer Deaths Per 100,000 Female 1987", main="Cervical Cancer Deaths In Different Countries in 1987")
+hist(cervical_cancer_death$`1992`, xlab="Cervical Cancer Deaths Per 100,000 Female 1992", main="Cervical Cancer Deaths In Different Countries in 1992")
+hist(cervical_cancer_death$`1997`, xlab="Cervical Cancer Deaths Per 100,000 Female 1997", main="Cervical Cancer Deaths In Different Countries in 1997")
+hist(cervical_cancer_death$`2002`, xlab="Cervical Cancer Deaths Per 100,000 Female 2002", main="Cervical Cancer Deaths In Different Countries in 2002")
   
+```
+
+```{r}
+
+# Check the outliers to see whether they are reasonable.
+
+# There are a total of 8 records shown in this subset. All outliers are from year 2002. It is reasonable because 2012 numbers are relatively higher than other years. 
+
+subset(cervical_cancer_death_year_as_row, Cervical_Cancer_Death > 40)
+
+
 ```
 
 ```{r} 
@@ -361,7 +442,33 @@ summary(liver_cancer_death_year_as_row)
 ipp_sd <- round(sd(liver_cancer_death_year_as_row$Liver_Cancer_Death, na.rm = TRUE), 2)
 paste("The Standard Deviation of Liver Cancer Deaths Per 100,000 Person Is ", ipp_sd, ".")
 
-  
+```
+
+```{r}
+
+# Create tables for different years in order to create histograms
+liver_cancer_death_1987 <- subset(liver_cancer_death_year_as_row, Year == 1987) 
+liver_cancer_death_1992 <- subset(liver_cancer_death_year_as_row, Year == 1992) 
+liver_cancer_death_1997 <- subset(liver_cancer_death_year_as_row, Year == 1997) 
+liver_cancer_death_2002 <- subset(liver_cancer_death_year_as_row, Year == 2002) 
+
+# Histogram showing liver cancer deaths in different countries
+
+hist(liver_cancer_death_1987$Liver_Cancer_Death, xlab="Liver Cancer Deaths Per 100,000 Person 1987", main="Liver Cancer Deaths In Different Countries in 1987")
+hist(liver_cancer_death_1992$Liver_Cancer_Death, xlab="Liver Cancer Deaths Per 100,000 Person 1992", main="Liver Cancer Deaths In Different Countries in 1992")
+hist(liver_cancer_death_1997$Liver_Cancer_Death, xlab="Liver Cancer Deaths Per 100,000 Person 1997", main="Liver Cancer Deaths In Different Countries in 1997")
+hist(liver_cancer_death_2002$Liver_Cancer_Death, xlab="Liver Cancer Deaths Per 100,000 Person 2002", main="Liver Cancer Deaths In Different Countries in 2002")
+
+```
+
+```{r}
+
+# Check whether the outliers are reasonable.
+# Indeed, Mongolia and Mozambique have much higher rate of liver cancer according to online resources. So the outliers should be correct. 
+
+subset(liver_cancer_death_year_as_row, Liver_Cancer_Death > 80)
+
+
 ```
 
 ```{r} 
@@ -432,8 +539,36 @@ summary(lung_cancer_death_year_as_row)
 ipp_sd <- round(sd(lung_cancer_death_year_as_row$Lung_Cancer_Death, na.rm = TRUE), 2)
 paste("The Standard Deviation of Lung Cancer Deaths Per 100,000 Person Is ", ipp_sd, ".")
 
-  
 ```
+
+```{r}
+
+# Create tables for different years in order to create histograms
+
+lung_cancer_death_1987 <- subset(lung_cancer_death_year_as_row, Year == 1987) 
+lung_cancer_death_1992 <- subset(lung_cancer_death_year_as_row, Year == 1992) 
+lung_cancer_death_1997 <- subset(lung_cancer_death_year_as_row, Year == 1997) 
+lung_cancer_death_2002 <- subset(lung_cancer_death_year_as_row, Year == 2002) 
+
+# Histogram showing lung cancer deaths in different countries
+
+hist(lung_cancer_death_1987$Lung_Cancer_Death, xlab="Lung Cancer Deaths Per 100,000 Person 1987", main="Lung Cancer Deaths In Different Countries in 1987")
+hist(lung_cancer_death_1992$Lung_Cancer_Death, xlab="Lung Cancer Deaths Per 100,000 Person 1992", main="Lung Cancer Deaths In Different Countries in 1992")
+hist(lung_cancer_death_1997$Lung_Cancer_Death, xlab="Lung Cancer Deaths Per 100,000 Person 1997", main="Lung Cancer Deaths In Different Countries in 1997")
+hist(lung_cancer_death_2002$Lung_Cancer_Death, xlab="Lung Cancer Deaths Per 100,000 Person 2002", main="Lung Cancer Deaths In Different Countries in 2002")
+
+```
+
+```{r}
+
+# Check whether the outliers are reasonable.
+# All outliers are from Hungary from 1993 to 2002. This country has the highest lung cancer rate. The numbers should be correct. 
+
+subset(lung_cancer_death_year_as_row, Lung_Cancer_Death > 100)
+
+
+```
+
 
 ```{r} 
 
@@ -463,10 +598,30 @@ summary(prostate_cancer_death_year_as_row)
 ipp_sd <- round(sd(prostate_cancer_death_year_as_row$Prostate_Cancer_Death, na.rm = TRUE), 2)
 paste("The Standard Deviation of Prostate Cancer Deaths Per 100,000 Male Is ", ipp_sd, ".")
 
+```
+
+```{r}
+
 # Histogram showing prostate cancer deaths in different countries
 
-hist(prostate_cancer_death$`2000`, xlab="Prostate Cancer Deaths Per 100,000 Male 2000", main="Prostate Cancer Deaths In Different Countries in 2000")
+hist(prostate_cancer_death$`1987`, xlab="Prostate Cancer Deaths Per 100,000 Male 1987", main="Prostate Cancer Deaths In Different Countries in 1987")
+
+hist(prostate_cancer_death$`1992`, xlab="Prostate Cancer Deaths Per 100,000 Male 1992", main="Prostate Cancer Deaths In Different Countries in 1992")
+
+hist(prostate_cancer_death$`1997`, xlab="Prostate Cancer Deaths Per 100,000 Male 1997", main="Prostate Cancer Deaths In Different Countries in 1997")
+
+hist(prostate_cancer_death$`2002`, xlab="Prostate Cancer Deaths Per 100,000 Male 2002", main="Prostate Cancer Deaths In Different Countries in 2002")
   
+```
+
+```{r}
+
+# Check whether the outliers are reasonable.
+# There are 9 records in this subset. All outliers are from Barbados, as well as Trinidad and Tobago. These countries indeed have higher prostate cancer rate than other countries. The numbers should be correct. 
+
+subset(prostate_cancer_death_year_as_row, Prostate_Cancer_Death > 50)
+
+
 ```
 
 ```{r} 
@@ -488,6 +643,7 @@ stomach_cancer_death_male_year_as_row %>%
   arrange(desc(mean))
 
 ```
+
 ```{r}
 
 # Reshape stomach_cancer_death_female. Make values of different years as rows. 
@@ -542,48 +698,130 @@ paste("The Standard Deviation of Stomach Cancer Deaths Per 100,000 Person Is ", 
 ```
 
 ```{r}
+
+# Create tables for different years in order to create histograms
+
+stomach_cancer_death_1987 <- subset(stomach_cancer_death_year_as_row, Year == 1987) 
+stomach_cancer_death_1992 <- subset(stomach_cancer_death_year_as_row, Year == 1992) 
+stomach_cancer_death_1997 <- subset(stomach_cancer_death_year_as_row, Year == 1997) 
+stomach_cancer_death_2002 <- subset(stomach_cancer_death_year_as_row, Year == 2002) 
+
+# Histogram showing stomach cancer deaths in different countries
+
+hist(stomach_cancer_death_1987$Stomach_Cancer_Death, xlab="Stomach Cancer Deaths Per 100,000 Person 1987", main="Stomach Cancer Deaths In Different Countries in 1987")
+hist(stomach_cancer_death_1992$Stomach_Cancer_Death, xlab="Stomach Cancer Deaths Per 100,000 Person 1992", main="Stomach Cancer Deaths In Different Countries in 1992")
+hist(stomach_cancer_death_1997$Stomach_Cancer_Death, xlab="Stomach Cancer Deaths Per 100,000 Person 1997", main="Stomach Cancer Deaths In Different Countries in 1997")
+hist(stomach_cancer_death_2002$Stomach_Cancer_Death, xlab="Stomach Cancer Deaths Per 100,000 Person 2002", main="Stomach Cancer Deaths In Different Countries in 2002")
+
+```
+
+```{r}
+
+# Check whether the outliers are reasonable.
+# There is only one outlier that is over 110 deaths. It is not surprising that Iceland has the highest numbers because its stomach cancer death numbers have been high in different years. 
+
+subset(stomach_cancer_death_year_as_row, Stomach_Cancer_Death > 110)
+
+
+```
+
+```{r}
+
+# Join all "year_as_row"" data frame using full_Join
+
 # Join income_pp_year_as_row and life_expectancy_year_as_row
 
-income_vs_life_expectancy <- inner_join(income_pp_year_as_row, life_expectancy_year_as_row)
-
-income_vs_life_expectancy
+income_vs_life_expectancy <- full_join(income_pp_year_as_row, life_expectancy_year_as_row)
 
 # Join total_health_spending_pp_year_as_row and government_health_spending_pp_year_as_row
 
-total_n_gov_health_spending <- inner_join(total_health_spending_pp_year_as_row, government_health_spending_pp_year_as_row)
-
-total_n_gov_health_spending
+total_n_gov_health_spending <- full_join(total_health_spending_pp_year_as_row, government_health_spending_pp_year_as_row)
 
 # Join income_vs_life_expectancy and total_n_gov_health_spending
 
-income_vs_life_vs_spending <- inner_join(income_vs_life_expectancy, total_n_gov_health_spending)
+income_vs_life_vs_spending <- full_join(income_vs_life_expectancy, total_n_gov_health_spending)
 
-income_vs_life_vs_spending
+# Join data frames of all types of cancer deaths
+
+breast_cervical_c <- full_join(breast_cancer_death_year_as_row, cervical_cancer_death_year_as_row)
+
+breast_cervical_lung_c <- full_join(breast_cervical_c, lung_cancer_death_year_as_row)
+
+breast_cervical_lung_liver_c <- full_join(breast_cervical_lung_c, liver_cancer_death_year_as_row)
+
+breast_cervical_lung_liver_prostate_c <- full_join(breast_cervical_lung_liver_c, prostate_cancer_death_year_as_row)
+
+breast_cervical_lung_liver_prostate_stomach_c <- full_join(breast_cervical_lung_liver_prostate_c, stomach_cancer_death_year_as_row)
+
+# Join cancer death data frame and income/life expectancy/health spending data frame
+
+all_year_as_row <- full_join(income_vs_life_vs_spending, breast_cervical_lung_liver_prostate_stomach_c)
 
 
 ```
 
+```{r}
 
+# Load ggplot2
+suppressMessages(library(ggplot2))
+
+# Join income_pp_year_as_row and life_expectancy_year_as_row by inner_join
+income_vs_life_expectancy_in <- inner_join(income_pp_year_as_row, life_expectancy_year_as_row)
+
+# Create subsets for income data of 1960, 1970, 1980, 1990, 2000, and 2010
+income_vs_life_expectancy_in_1960 <- subset(income_vs_life_expectancy_in, Year == 1960) 
+income_vs_life_expectancy_in_1970 <- subset(income_vs_life_expectancy_in, Year == 1970) 
+income_vs_life_expectancy_in_1980 <- subset(income_vs_life_expectancy_in, Year == 1980) 
+income_vs_life_expectancy_in_1990 <- subset(income_vs_life_expectancy_in, Year == 1990) 
+income_vs_life_expectancy_in_2000 <- subset(income_vs_life_expectancy_in, Year == 2000) 
+income_vs_life_expectancy_in_2010 <- subset(income_vs_life_expectancy_in, Year == 2010) 
+
+# Bind rows in all subsets for income data of 1960, 1970, 1980, 1990, 2000, and 2010
+
+income_vs_life_expectancy_in_every10yrs <- bind_rows(income_vs_life_expectancy_in_2010, income_vs_life_expectancy_in_2000)
+
+income_vs_life_expectancy_in_every10yrs <- bind_rows(income_vs_life_expectancy_in_every10yrs, income_vs_life_expectancy_in_1990)
+
+income_vs_life_expectancy_in_every10yrs <- bind_rows(income_vs_life_expectancy_in_every10yrs, income_vs_life_expectancy_in_1980)
+
+income_vs_life_expectancy_in_every10yrs <- bind_rows(income_vs_life_expectancy_in_every10yrs, income_vs_life_expectancy_in_1970)
+
+income_vs_life_expectancy_in_every10yrs <- bind_rows(income_vs_life_expectancy_in_every10yrs, income_vs_life_expectancy_in_1960)
+
+
+# Scatterplot - From US$0 - US$40000
+ggplot(income_vs_life_expectancy_in_every10yrs, aes(x = Income_per_person, y = Life_Expectancy, fill = Year)) + geom_point(shape = 21) + xlim(0, 40000) + labs(x = "GDP Per Capita", y = "Life Expectancy (Year)", title = "Income and Life Expectancy by Year")
+
+# Scatterplot - From US$0 - US$5000
+ggplot(income_vs_life_expectancy_in_every10yrs, aes(x = Income_per_person, y = Life_Expectancy, fill = Year)) + geom_point(shape = 21) + xlim(0, 5000) + labs(x = "GDP Per Capita", y = "Life Expectancy (Year)", title = "Income and Life Expectancy by Year")
+
+```
 
 ```{r}
 # Simple Scatterplot
-attach(income_vs_life_expectancy)
-plot(Income_per_person, Life_Expectancy, main="Income vs Life Expectancy", log="x", xlab="GDP Per Capita (US$)", ylab="LIfe Expectancy At Birth-Year")
+# attach(income_vs_life_expectancy)
+# plot(Income_per_person, Life_Expectancy, main="Income vs Life Expectancy", log="x", xlab="GDP # Per Capita (US$)", ylab="LIfe Expectancy At Birth-Year")
 
 ```
 
 ```{r}
 # Simple Scatterplot
-attach(income_vs_life_vs_spending)
-plot(Total_Health_Spending_Per_Person, Life_Expectancy, main="Health Spending vs Life Expectancy", log="x", xlab="Total Health Spending (US$)", ylab="LIfe Expectancy At Birth-Year")
+# attach(income_vs_life_vs_spending)
+# plot(Total_Health_Spending_Per_Person, Life_Expectancy, main="Health Spending vs Life Expectancy", log="x", xlab="Total Health Spending (US$)", ylab="LIfe Expectancy At Birth-Year")
 
 ```
 ```{r}
 # Simple Scatterplot
-attach(income_vs_life_vs_spending)
-plot(Government_Health_Spending_Per_Person, Life_Expectancy, main="Government Health Spending vs Life Expectancy", log="x", xlab="Government Health Spending (US$)", ylab="LIfe Expectancy At Birth-Year")
+# attach(income_vs_life_vs_spending)
+# plot(Government_Health_Spending_Per_Person, Life_Expectancy, main="Government Health Spending vs Life Expectancy", log="x", xlab="Government Health Spending (US$)", ylab="LIfe Expectancy At Birth-Year")
 
 ```
 
+
+```{r}
+
+# Save the cleaned file as .csv
+
+write.csv(all_year_as_row, "income_life_spend_cancer_full_join.csv", row.names = FALSE)
 
 ```
