@@ -41,16 +41,16 @@ https://github.com/karentam/capstoneproject1/tree/master/Histogram%20for%20Data%
 
 The plot shows that the higher the income, the longer life the person has. However, the difference of life expectancy between wealthy and poor countries is getting smaller in the most recent two to three decades. 
 
-![](https://drive.google.com/file/d/1LlgpybYpbrMD9yoEFvhLsiVuKuwRO0gv/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_Log10.png?raw=true)
 
 
 #### Life Expectancy vs Total Health Spending / Government Health Spending
 
 The plots show that the higher the total and government health spending, the longer people can live.  
 
-![Total Health Spending](https://drive.google.com/file/d/10bOx7wFe_DAYpUuoFTtsei_6MEsZCpTZ/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10.png?raw=true)
 
-![Government Health Spending](https://drive.google.com/file/d/1ICUQ76eNdR3L0pviRZLhvcNgmXWJOYOD/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10.png?raw=true)
 
 #### Income, Life Expectancy, Total and Government Health Spending
 
@@ -60,7 +60,7 @@ It is clear that the higher the income, the more the government and total health
 
 It also shows positive relationships between income and life expectancy, and between life expectancy and total/government health spending. But these relationships are not so clear, meaning that people from different countries live in a certain range of years, except cases of wars and natural disasters. 
 
-![](https://drive.google.com/file/d/1Xkbr3-_76-pyh-jnmKSPoXxsjE9q0Sic/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/Pairs_IncomeLifeSpend_Log10.png?raw=true)
 
 #### Life Expectancy vs All Cancer Deaths
 
@@ -70,46 +70,46 @@ On the other hand, it does not show a clear relationship between life expectancy
 
 It is interesting that it shows positive relationships between life expectancy and lung cancer death, and between life expectancy and stomach cancer death. There may be other unknown variables that connect them together. 
 
-![](https://drive.google.com/file/d/1m524dpRgG4meWUdLd-Lol1XKhqMpvFvC/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_Log10.png?raw=true)
 
 #### Life Expectancy vs Breast Cancer Deaths
 
 The plot shows the very slight increase in the year of life when the number of breast cancer deaths goes up. It possibly shows that breast cancer death itself does not closely related to the general life expectancy in countries.
 
-![](https://drive.google.com/file/d/1GwJpTOQaOmFDPd4kDOHmkfBDRv8c_B7d/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_BreastCLife_Log10.png?raw=true)
 
 #### Life Expectancy vs Cervical Cancer Deaths
 
 On the other hand, this plot shows the higher the cervical cancer death number, the shorter people live. The strongest negative relationship is shown in 2002.
 
-![](https://drive.google.com/file/d/1XKOy-oEUE2EAhv3UfuwVp_4VJGw3l3gS/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_CervicalCLife_Log10.png?raw=true)
 
 
 #### Life Expectancy vs Lung Cancer Deaths
 
 Similar to breast cancer death, the plot does not show close relationship between life expectancy and lung cancer death. It possibly shows that lung cancer death itself does not closely related to the general life expectancy in countries. 
 
-![](https://drive.google.com/file/d/1-GKwqYLQVa3fzzO3qzvlOmtBh1gZlytZ/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_LungCLife_Log10.png?raw=true)
 
 #### Life Expectancy vs Liver Cancer Deaths
 
 The plots do not show strong relationship between life expecancy and liver cancer death from 1987 to 1997. However, in 2002, the higher the liver cancer death number, the shorter people live.  
 
-![](https://drive.google.com/file/d/1yMImKTGRORyEfC9_yCy22BUEG5Giv0Qr/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_LiverCLife_Log10.png?raw=true)
 
 
 #### Life Expectancy vs Prostate Cancer Deaths
 
 The plots do not show strong relationship between life expectancy and prostate cancer death. It possibly shows that prostate cancer death itself does not closely related to the general life expectancy in countries. 
 
-![](https://drive.google.com/file/d/1cLldsJRFT1LG_sn6K7VP8tQuYIzdoUBo/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_ProstateCLife_Log10.png?raw=true)
 
 
 #### Life Expectancy vs Stomach Cancer Deaths
 
 The plots show the slight negative relationship from 1987 to 1997 and very slight positive relationship in 2002 between life expectancy and stomach center death. It possibly shows that stomach cancer death itself does not closely related to the general life expectancy in countries. 
 
-![](https://drive.google.com/file/d/1BkKqUfpZi_pzlQj2tu7qtYMnITDLQcJa/view?usp=sharing)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_StomachCLife_Log10.png?raw=true)
 
 
 
