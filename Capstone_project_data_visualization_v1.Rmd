@@ -1,10 +1,10 @@
 ---
 title: "Capstone Project Data Visualization"
 author: "H Karen Tam"
-date: "November 8, 2017"
+date: "November 9, 2017"
 output:
   html_document: default
-  word_document: default
+
 ---
 
 ```{r, message=FALSE, echo=FALSE}
@@ -26,13 +26,28 @@ suppressMessages(library(ggplot2))
 # Apply Data Visualization to Capstone Project
 
 
-Histograms and Scatter Plots
+Histograms, Density Plots, and Scatter Plots
 
 
 ### Histograms: 
 
 https://github.com/karentam/capstoneproject1/tree/master/Histogram%20for%20Data%20Wrangling
 
+### Density Plots:
+
+![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Income.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Life.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_TotHealthSpend.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_GovHealthSpend.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Water.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Food.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_TotC.png?raw=true)
 
 ### Scatter Plots:
 
@@ -41,16 +56,16 @@ https://github.com/karentam/capstoneproject1/tree/master/Histogram%20for%20Data%
 
 The plot shows that the higher the income, the longer life the person has. However, the difference of life expectancy between wealthy and poor countries is getting smaller in the most recent decade. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_1960n2010_Log10.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_Log10_CI.png?raw=true)
 
 
 #### Life Expectancy vs Total Health Spending / Government Health Spending
 
 The plots show that the higher the total and government health spending, the longer people can live.  
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10_CI.png?raw=true)
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10_CI.png?raw=true)
 
 #### Income, Life Expectancy, Total and Government Health Spending
 
@@ -66,7 +81,7 @@ It also shows positive relationships between income and life expectancy, and bet
 
 The plot shows the positive relationship between life expectancy and the average calories intake per person per day in different countries. The more food supply, the longer people can live. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_Log10.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_Log10_CI.png?raw=true)
 
 #### Life Expectancy vs Clean Drinking Water Sources
 
@@ -74,7 +89,7 @@ The plot also shows the positive relationship between life expectancy and percen
 
 The plot is created on square root scale. Plot created on Log 10 will have the similar look. There were 108 countries in 2007 and 97 countries in 1997 that reaches more than 90%. So many points are located closed to 100%. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_WaterLife_Sqrt.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_WaterLife_Sqrt_CI.png?raw=true)
 
 #### Life Expectancy vs Total Death of Various Cancer Types
 
@@ -82,7 +97,7 @@ The plot shows that there is a slight negative relationship between life expecta
 
 The major reason of its slight negative relationship is that cancer is just one of the many factors that affects life expectancy of countries. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_TotCLife_2002_Log10.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_Log10_CI.png?raw=true)
 
 #### Life Expectancy vs Different Types of Cancer Deaths
 
