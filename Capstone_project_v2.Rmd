@@ -72,6 +72,13 @@ paste("The Standard Deviation of GDP Per Capita is", ipp_sd,".")
   
 ```
 
+```{r}
+
+# Density Plot for income_per_person_as_row
+
+ggplot(income_pp_year_as_row, aes(x = Income_per_person)) + geom_density() + scale_x_continuous(name = "GDP Per Capita (US$)", breaks = seq(0, 80000, 20000), limits=c(0, 80000)) + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Income Per Person") 
+
+```
 
 ```{r}
 
@@ -128,7 +135,13 @@ ipp_sd <- round(sd(life_expectancy_year_as_row$Life_Expectancy, na.rm = TRUE), 2
 paste("The Standard Deviation of Life Expectancy is", ipp_sd, "years")
   
 ```
+```{r}
 
+# Density Plot for life_expectancy_year_as_row
+
+ggplot(life_expectancy_year_as_row, aes(x = Life_Expectancy)) + geom_density() + scale_x_continuous(name = "Life Expectancy (Year)") + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Life Expectancy") 
+
+```
 
 ```{r}
 
@@ -191,6 +204,14 @@ paste("The Standard Deviation of Total Health Spending is $", ipp_sd, "US Dollar
   
 ```
 
+```{r}
+
+# Density Plot for total_health_spending_pp_year_as_row
+
+ggplot(total_health_spending_pp_year_as_row, aes(x = Total_Health_Spending_Per_Person)) + geom_density() + scale_x_continuous(name = "Total Health Spending Per Person (US$)", breaks = seq(0, 5000, 1000), limits=c(0, 5000)) + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Total Health Spending Per Person in US$")
+
+```
+
 
 ```{r}
 
@@ -245,6 +266,14 @@ summary(government_health_spending_pp_year_as_row)
 ipp_sd <- round(sd(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person, na.rm = TRUE), 2)
 paste("The Standard Deviation of Government Health Spending is $", ipp_sd, "US Dollars per person.")
   
+```
+
+```{r}
+
+# Density Plot for government_health_spending_pp_year_as_row
+
+ggplot(government_health_spending_pp_year_as_row, aes(x = Government_Health_Spending_Per_Person)) + geom_density() + scale_x_continuous(name = "Government Health Spending Per Person (US$)", breaks = seq(0, 4000, 1000), limits=c(0, 4000)) + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Government Health Spending Per Person in US$")
+
 ```
 
 
@@ -305,6 +334,14 @@ paste("The Standard Deviation of Food Supply is", ipp_sd, "Calories per person p
 
 ```{r}
 
+# Density Plot for food_supply_year_as_row
+
+ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + geom_density() + scale_x_continuous(name = "Food Supply by Calories Per Person Per Day") + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Food Supply")
+
+```
+
+```{r}
+
 # Histogram showing food supply in different countries
 
 hist(food_supply$`2007`, xlab="Food Supply in Calories Per Person Per Day in 2007", main="Food Supply In Different Countries in 2007")
@@ -354,6 +391,14 @@ summary(improved_drinking_water_year_as_row)
 ipp_sd <- round(sd(improved_drinking_water_year_as_row$Improved_Water, na.rm = TRUE), 2)
 paste("The Standard Deviation of the Percentage of the Population Using Improved Drinking Water Sources is", ipp_sd, ".")
   
+```
+
+```{r}
+
+# Density Plot for improved_drinking_water_year_as_row
+
+ggplot(improved_drinking_water_year_as_row, aes(x = Improved_Water)) + geom_density() + scale_x_continuous(name = "Percentage of Population Using Improved Drinking Water Sources") + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Improved Drinking Water Sources")
+
 ```
 
 ```{r}
@@ -1011,6 +1056,10 @@ all_cancer_as_row_2002 <- gather(all_cancer_as_row_2002, "Cancer", "Death", 7:12
 
 # Scatterplot - Total cancer death per 100000 person
 ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death, y = Life_Expectancy)) + geom_point(size = 3, alpha = 0.5, position = "jitter") + labs(x = "All Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "All Cancer Death and Life Expectancy in 2002") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+# Density Plot for total_cancer_death_2002
+
+ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death)) + geom_density() + scale_x_continuous(name = "Total Cancer Death Per 100000 Person") + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Total Cancer Death Per 100000 Person")
 
 # Scatterplot - Different Types of cancer deaths per 100000 person
 ggplot(all_cancer_as_row_2002, aes(x = Death, y = Life_Expectancy, col = Cancer)) + geom_point(size = 1, alpha = 0.3, position = "jitter") + labs(x = "Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "Different Types of Cancer Death and Life Expectancy in 2002") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
