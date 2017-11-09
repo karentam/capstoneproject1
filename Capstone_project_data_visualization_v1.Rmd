@@ -1,13 +1,13 @@
 ---
-title: "Capstone Project Data Wrangling v1"
+title: "Capstone Project Data Visualization"
 author: "H Karen Tam"
-date: "October 26, 2017"
+date: "November 8, 2017"
 output:
   html_document: default
   word_document: default
 ---
 
-```{r, echo=FALSE}
+```{r, message=FALSE, echo=FALSE}
 
 # Load tidyr
 suppressMessages(library(tidyr))
@@ -39,9 +39,9 @@ https://github.com/karentam/capstoneproject1/tree/master/Histogram%20for%20Data%
 
 #### Income vs Life Expectancy
 
-The plot shows that the higher the income, the longer life the person has. However, the difference of life expectancy between wealthy and poor countries is getting smaller in the most recent two to three decades. 
+The plot shows that the higher the income, the longer life the person has. However, the difference of life expectancy between wealthy and poor countries is getting smaller in the most recent decade. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_Log10.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_1960n2010_Log10.png?raw=true)
 
 
 #### Life Expectancy vs Total Health Spending / Government Health Spending
@@ -62,7 +62,29 @@ It also shows positive relationships between income and life expectancy, and bet
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/Pairs_IncomeLifeSpend_Log10.png?raw=true)
 
-#### Life Expectancy vs All Cancer Deaths
+#### Life Expectancy vs Food Supply
+
+The plot shows the positive relationship between life expectancy and the average calories intake per person per day in different countries. The more food supply, the longer people can live. 
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_Log10.png?raw=true)
+
+#### Life Expectancy vs Clean Drinking Water Sources
+
+The plot also shows the positive relationship between life expectancy and percentage of the total population using the improved drinking water sources. Improved drinking water sources include piped water into dwelling, plot or yard; public tap/standpipe; borehole/tube well; protected dug well; protected spring; rainwater collection and bottled water (if a secondary available source is also improved). 
+
+The plot is created on square root scale. Plot created on Log 10 will have the similar look. There were 108 countries in 2007 and 97 countries in 1997 that reaches more than 90%. So many points are located closed to 100%. 
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_WaterLife_Sqrt.png?raw=true)
+
+#### Life Expectancy vs Total Death of Various Cancer Types
+
+The plot shows that there is a slight negative relationship between life expectancy and total cancer death. When cancer death increases, the length of life decreases. The total cancer death includes breast, cervical, lung, liver, stomach, and prostate cancers. 
+
+The major reason of its slight negative relationship is that cancer is just one of the many factors that affects life expectancy of countries. 
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_TotCLife_2002_Log10.png?raw=true)
+
+#### Life Expectancy vs Different Types of Cancer Deaths
 
 The plot shows that the longer life the country people, the less the death numbers of cervical and liver cancers are. 
 
@@ -70,7 +92,7 @@ On the other hand, it does not show a clear relationship between life expectancy
 
 It is interesting that it shows positive relationships between life expectancy and lung cancer death, and between life expectancy and stomach cancer death. There may be other unknown variables that connect them together. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_Log10.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_2002_Log10.png?raw=true)
 
 #### Life Expectancy vs Breast Cancer Deaths
 
