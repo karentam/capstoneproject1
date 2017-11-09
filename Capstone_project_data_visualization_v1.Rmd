@@ -63,9 +63,9 @@ The plot shows that the higher the income, the longer life the person has. Howev
 
 The plots show that the higher the total and government health spending, the longer people can live.  
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10_CI.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10.png?raw=true)
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10_CI.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10.png?raw=true)
 
 #### Income, Life Expectancy, Total and Government Health Spending
 
@@ -93,7 +93,7 @@ The plot is created on square root scale. Plot created on Log 10 will have the s
 
 #### Life Expectancy vs Total Death of Various Cancer Types
 
-The plot shows that there is a slight negative relationship between life expectancy and total cancer death. When cancer death increases, the length of life decreases. The total cancer death includes breast, cervical, lung, liver, stomach, and prostate cancers. 
+The plot shows that there is a slight negative relationship between life expectancy and total cancer death. When cancer death increases, the length of life decreases. The total number of cancer death here includes breast, cervical, lung, liver, stomach, and prostate cancers. 
 
 The major reason of its slight negative relationship is that cancer is just one of the many factors that affects life expectancy of countries. 
 
@@ -103,7 +103,7 @@ The major reason of its slight negative relationship is that cancer is just one 
 
 The plot shows that the longer life the country people, the less the death numbers of cervical and liver cancers are. 
 
-On the other hand, it does not show a clear relationship between life expectancy and prostate cancer death, and between life expectancy and breast cancer death. 
+On the other hand, it does not show a clear relationship between life expectancy and prostate cancer death, and between life expectancy and breast cancer death. Prostate and breast cancers have high survival rates if they are diagnosed and treated at early stage. 
 
 It is interesting that it shows positive relationships between life expectancy and lung cancer death, and between life expectancy and stomach cancer death. There may be other unknown variables that connect them together. 
 
