@@ -76,7 +76,16 @@ paste("The Standard Deviation of GDP Per Capita is", ipp_sd,".")
 
 # Density Plot for income_per_person_as_row
 
-ggplot(income_pp_year_as_row, aes(x = Income_per_person)) + geom_density() + scale_x_continuous(name = "GDP Per Capita (US$)", breaks = seq(0, 80000, 20000), limits=c(0, 80000)) + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Income Per Person") 
+ggplot(income_pp_year_as_row, aes(x = Income_per_person)) + geom_density() + labs(x = "GDP Per Capita (US$)", y = "Density", title = "Density Plot of Income Per Person") + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+
+```
+
+```{r}
+
+# Empirical Cumulative Density Function Plot for income_per_person_as_row
+
+ggplot(income_pp_year_as_row, aes(x = Income_per_person)) + stat_ecdf(geom = "point") + labs(x = "GDP Per Capita (US$)", y = "F(Income)", title = "Empirical Cumulative Density Function of Income Per Person")
 
 ```
 
@@ -139,7 +148,14 @@ paste("The Standard Deviation of Life Expectancy is", ipp_sd, "years")
 
 # Density Plot for life_expectancy_year_as_row
 
-ggplot(life_expectancy_year_as_row, aes(x = Life_Expectancy)) + geom_density() + scale_x_continuous(name = "Life Expectancy (Year)") + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Life Expectancy") 
+ggplot(life_expectancy_year_as_row, aes(x = Life_Expectancy)) + geom_density() + labs(x = "Life Expectancy (Year)", y = "Density", title = "Density Plot of Life Expectancy") + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+```
+```{r}
+
+# Empirical Cumulative Density Function for life_expectancy_year_as_row
+
+ggplot(life_expectancy_year_as_row, aes(x = Life_Expectancy)) + stat_ecdf(geom = "point") + labs(x = "Life Expectancy (Year)", y = "F(Life Expectancy)", title = "Empirical Cumulative Density Function of Life Expectancy")
 
 ```
 
@@ -208,10 +224,17 @@ paste("The Standard Deviation of Total Health Spending is $", ipp_sd, "US Dollar
 
 # Density Plot for total_health_spending_pp_year_as_row
 
-ggplot(total_health_spending_pp_year_as_row, aes(x = Total_Health_Spending_Per_Person)) + geom_density() + scale_x_continuous(name = "Total Health Spending Per Person (US$)", breaks = seq(0, 5000, 1000), limits=c(0, 5000)) + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Total Health Spending Per Person in US$")
+ggplot(total_health_spending_pp_year_as_row, aes(x = Total_Health_Spending_Per_Person)) + geom_density() + labs(x = "Total Health Spending Per Person (US$)", y = "Density", title = "Density Plot of Total Health Spending Per Person in US$") + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
 
 ```
 
+```{r}
+
+# Empirical Cumulative Density Function for total_health_spending_pp_year_as_row
+
+ggplot(total_health_spending_pp_year_as_row, aes(x = Total_Health_Spending_Per_Person)) + stat_ecdf(geom = "point") + labs(x = "Total Health Spending Per Person (US$)", y = "F(Total Health Spending)", title = "Empirical Cumulative Density Function \nof Total Health Spending Per Person in US$")
+
+```
 
 ```{r}
 
@@ -272,10 +295,17 @@ paste("The Standard Deviation of Government Health Spending is $", ipp_sd, "US D
 
 # Density Plot for government_health_spending_pp_year_as_row
 
-ggplot(government_health_spending_pp_year_as_row, aes(x = Government_Health_Spending_Per_Person)) + geom_density() + scale_x_continuous(name = "Government Health Spending Per Person (US$)", breaks = seq(0, 4000, 1000), limits=c(0, 4000)) + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Government Health Spending Per Person in US$")
+ggplot(government_health_spending_pp_year_as_row, aes(x = Government_Health_Spending_Per_Person)) + geom_density() + labs(x = "Government Health Spending Per Person (US$)", y = "Density", title = "Density Plot of Government Health Spending Per Person in US$") + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
 
 ```
 
+```{r}
+
+# Empirical Cumulative Density Function for government_health_spending_pp_year_as_row
+
+ggplot(government_health_spending_pp_year_as_row, aes(x = Government_Health_Spending_Per_Person)) + stat_ecdf(geom = "point") + labs(x = "Government Health Spending Per Person (US$)", y = "F(Government Health Spending)", title = "Empirical Cumulative Density Function \nof Government Health Spending Per Person in US$")
+
+```
 
 ```{r}
 
@@ -336,9 +366,18 @@ paste("The Standard Deviation of Food Supply is", ipp_sd, "Calories per person p
 
 # Density Plot for food_supply_year_as_row
 
-ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + geom_density() + scale_x_continuous(name = "Food Supply by Calories Per Person Per Day") + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Food Supply")
+ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + geom_density() + labs(x = "Food Supply by Calories Per Person Per Day", y = "Density", title = "Density Plot of Food Supply") + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
 
 ```
+
+```{r}
+
+# Empirical Cumulative Density Function for food_supply_year_as_row
+
+ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + stat_ecdf(geom = "point") + labs(x = "Food Supply by Calories Per Person Per Day", y = "F(Food Supply)", title = "Empirical Cumulative Density Function of Food Supply")
+
+```
+
 
 ```{r}
 
@@ -397,7 +436,15 @@ paste("The Standard Deviation of the Percentage of the Population Using Improved
 
 # Density Plot for improved_drinking_water_year_as_row
 
-ggplot(improved_drinking_water_year_as_row, aes(x = Improved_Water)) + geom_density() + scale_x_continuous(name = "Percentage of Population Using Improved Drinking Water Sources") + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Improved Drinking Water Sources")
+ggplot(improved_drinking_water_year_as_row, aes(x = Improved_Water)) + geom_density() + labs(x = "Percentage of Population Using Improved Drinking Water Sources", y = "Density", title = "Density Plot of Improved Drinking Water Sources") + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+```
+
+```{r}
+
+# Empirical Cumulative Density Function for improved_drinking_water_year_as_row
+
+ggplot(improved_drinking_water_year_as_row, aes(x = Improved_Water)) + stat_ecdf(geom = "point") + labs(x = "Percentage of Population Using Improved Drinking Water Sources", y = "F(Improved Drinking Water Sources)", title = "Empirical Cumulative Density Function of Improved Drinking Water Sources")
 
 ```
 
@@ -1059,7 +1106,11 @@ ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death, y = Life_Expectancy)) 
 
 # Density Plot for total_cancer_death_2002
 
-ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death)) + geom_density() + scale_x_continuous(name = "Total Cancer Death Per 100000 Person") + scale_y_continuous(name = "Density") + ggtitle("Density Plot of Total Cancer Death Per 100000 Person")
+ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death)) + geom_density() + labs(x = "Total Cancer Death Per 100000 Person", y = "Density", title = "Density Plot of Total Cancer Death Per 100000 Person in 2002") + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+# Empirical Cumulative Density Function Plot for total_cancer_death_2002
+
+ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death)) + stat_ecdf(geom = "point") + labs(x = "Total Cancer Death Per 100000 Person", y = "F(Total Cancer Death)", title = "Empirical Cumulative Density Function of Total Cancer Death \nPer 100000 Person in 2002")
 
 # Scatterplot - Different Types of cancer deaths per 100000 person
 ggplot(all_cancer_as_row_2002, aes(x = Death, y = Life_Expectancy, col = Cancer)) + geom_point(size = 1, alpha = 0.3, position = "jitter") + labs(x = "Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "Different Types of Cancer Death and Life Expectancy in 2002") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))

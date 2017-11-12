@@ -33,21 +33,35 @@ Histograms, Density Plots, and Scatter Plots
 
 https://github.com/karentam/capstoneproject1/tree/master/Histogram%20for%20Data%20Wrangling
 
-### Density Plots:
+### Density and Empirical Cumulative Density Function Plots:
 
-![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Income.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Income_Log10.png?raw=true)
 
-![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Life.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Income.png?raw=true)
 
-![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_TotHealthSpend.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Life_Log10.png?raw=true)
 
-![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_GovHealthSpend.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Life.png?raw=true)
 
-![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Water.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_TotHealthSpend_Log10.png?raw=true)
 
-![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Food.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_TotHealthSpend.png?raw=true)
 
-![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_TotC.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_GovHealthSpend_Log10.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_GovHealthSpend.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_Water_Log10.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Water.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_Food_Log10.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Food.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_TotC_Log10.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_TotC.png?raw=true)
 
 ### Scatter Plots:
 
@@ -79,7 +93,7 @@ It also shows positive relationships between income and life expectancy, and bet
 
 #### Life Expectancy vs Food Supply
 
-The plot shows the positive relationship between life expectancy and the average calories intake per person per day in different countries. The more food supply, the longer people can live. 
+The plot suggests that not having enough calory intake can threaten people's lives. It also suggests that income may take a role between food supply and life expectancy. When people have money to buy enough food, they will no longer face the threat of starvation. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_Log10_CI.png?raw=true)
 
