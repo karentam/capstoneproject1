@@ -1,7 +1,7 @@
 ---
-title: "Capstone Project Data Visualization"
+title: "Capstone Project - Exploratory Data Analysis"
 author: "H Karen Tam"
-date: "November 9, 2017"
+date: "November 16, 2017"
 output:
   html_document: default
 
@@ -23,10 +23,7 @@ suppressMessages(library(ggplot2))
 
 ```
 
-# Apply Data Visualization to Capstone Project
-
-
-Histograms, Density Plots, and Scatter Plots
+# Apply Exploratory Data Analysis to Capstone Project
 
 
 ### Histograms: 
@@ -35,29 +32,43 @@ https://github.com/karentam/capstoneproject1/tree/master/Histogram%20for%20Data%
 
 ### Density and Empirical Cumulative Density Function Plots:
 
+#### GDP Per Capita: It is not normally distributed. The mean is $6,615.54, but the median is $1,895.99. There are 1/3 of the countries with less than US$557 income per person. Outliers are countries with citizens who have very high income in average ($80,000). 
+
 ![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Income_Log10.png?raw=true)
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Income.png?raw=true)
+
+#### Life Expectancy: The mean is 64.90 years, and the median is $67.60 years. The data is left-skewed, suggesting that the majority of countries have longer life expectancy. Outliers are from countries with life expectancy of less than 30 years of age during wars or right after natural disasters. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Life_Log10.png?raw=true)
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Life.png?raw=true)
 
+#### Total Health Spending: The mean is US$653, and the median is US$156. It is not normally distributed and is right-skewed. There are 3/4 of the countries with the total health spending per person of US$564 or less. Outliers are countries with more than US$4,000 per person per year. 
+
 ![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_TotHealthSpend_Log10.png?raw=true)
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_TotHealthSpend.png?raw=true)
+
+#### Government Health Spending: The mean is US$460.63, and the median is US$87.67. It is not normally distributed and is right-skewed. There are about 3/4 of the countries with the government health spending per person of US$460 or less. Outliers are countries with more than US$3,000 per person per year. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_GovHealthSpend_Log10.png?raw=true)
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_GovHealthSpend.png?raw=true)
 
+#### Improved Drinking Water Sources: The mean is US$83.68, and the median is US$91.00. The data is left-skewed. There are about 2/3 of the countries with more than 90% of population using improved drinking water sources. Outliers are countries with less than 40% of population using improved drinking water.
+
 ![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_Water_Log10.png?raw=true)
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Water.png?raw=true)
 
+#### Food Supply: The mean is 2,522 calories per day per person, and the median is 2,434 carlories.  There are only 6 countries with the average daily intake of less than 1,000 calories, but those are from 1960s to 1990s. Outliers are countries with 3,700 calories per day per person or more.  
+
 ![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_Food_Log10.png?raw=true)
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Food.png?raw=true)
+
+#### Cancer Death: The mean is 99.76 deaths per 100,000 person, and the median is 98.51 deaths. The data is close to normally distributed but is still right-stewed. Outliers are countries with 200 cancer deaths per 100,000 person per year. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_TotC_Log10.png?raw=true)
 
@@ -70,16 +81,22 @@ https://github.com/karentam/capstoneproject1/tree/master/Histogram%20for%20Data%
 
 The plot shows that the higher the income, the longer life the person has. However, the difference of life expectancy between wealthy and poor countries is getting smaller in the most recent decade. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_Log10_CI.png?raw=true)
+r = 0.55 suggests that income and life expectancy have a moderate, positive relationship. 
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_Log10_CI_r.png?raw=true)
 
 
 #### Life Expectancy vs Total Health Spending / Government Health Spending
 
-The plots show that the higher the total and government health spending, the longer people can live.  
+The plots show that the higher the total and government health spending, the longer people can live. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10.png?raw=true)
+Total Health Spending vs Life Expectancy: r = 0.51 suggests that total health spending and life expectancy have a moderate, positive relationship. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10.png?raw=true)
+Government Health Spending vs Life Expectancy: r = 0.50 suggests that government health spending and life expectancy have a moderate, positive relationship. 
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10_r.png?raw=true)
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10_r.png?raw=true)
 
 #### Income, Life Expectancy, Total and Government Health Spending
 
@@ -87,23 +104,29 @@ The plot contains 12 graphs showing relationships between Income, Life Expectanc
 
 It is clear that the higher the income, the more the government and total health spending are. 
 
-It also shows positive relationships between income and life expectancy, and between life expectancy and total/government health spending. But these relationships are not so clear, meaning that people from different countries live in a certain range of years, except cases of wars and natural disasters. 
+Again, it shows positive relationships between income and life expectancy, and between life expectancy and total/government health spending. People from different countries live in a certain range of years, except cases of wars and natural disasters. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/Pairs_IncomeLifeSpend_Log10.png?raw=true)
 
 #### Life Expectancy vs Food Supply
 
-The plot suggests that not having enough calory intake can threaten people's lives. It also suggests that income may take a role between food supply and life expectancy. When people have money to buy enough food, they will no longer face the threat of starvation. 
+The plot suggests that not having enough calory intake can threaten people's lives. It is also reasonable that income may take a role between food supply and life expectancy. When people have money to buy enough food, they will no longer face the threat of starvation. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_Log10_CI.png?raw=true)
+r = 0.72 suggests that food supply and life expectancy have a strong, positive relationship. 
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_Log10_CI_r.png?raw=true)
 
 #### Life Expectancy vs Clean Drinking Water Sources
 
-The plot also shows the positive relationship between life expectancy and percentage of the total population using the improved drinking water sources. Improved drinking water sources include piped water into dwelling, plot or yard; public tap/standpipe; borehole/tube well; protected dug well; protected spring; rainwater collection and bottled water (if a secondary available source is also improved). 
+The plot also shows the positive relationship between life expectancy and percentage of the total population using the improved drinking water sources.
 
-The plot is created on square root scale. Plot created on Log 10 will have the similar look. There were 108 countries in 2007 and 97 countries in 1997 that reaches more than 90%. So many points are located closed to 100%. 
+Improved drinking water sources include piped water into dwelling, plot or yard; public tap/standpipe; borehole/tube well; protected dug well; protected spring; rainwater collection and bottled water (if a secondary available source is also improved). 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_WaterLife_Sqrt_CI.png?raw=true)
+The plot is created on square root scale. Plot created on Log 10 will have the similar look. There were 108 countries in 2007 and 97 countries in 1997 that reach more than 90%. So many points are located closed to 100%. 
+
+r = 0.77 suggests that improved drinking water sources and life expectancy have a strong, positive relationship. 
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_WaterLife_Sqrt_CI_r.png?raw=true)
 
 #### Life Expectancy vs Total Death of Various Cancer Types
 
@@ -111,7 +134,9 @@ The plot shows that there is a slight negative relationship between life expecta
 
 The major reason of its slight negative relationship is that cancer is just one of the many factors that affects life expectancy of countries. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_Log10_CI.png?raw=true)
+r = -0.05 suggests that cancer death and life expectancy have a very weak, negative relationship. 
+
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_Log10_CI_r.png?raw=true)
 
 #### Life Expectancy vs Different Types of Cancer Deaths
 

@@ -1,7 +1,7 @@
 ---
-title: "Capstone Project v1"
+title: "Capstone Project - Code"
 author: "H Karen Tam"
-date: "October 18, 2017"
+date: "November 16, 2017"
 output:
   html_document: default
 ---
@@ -396,7 +396,7 @@ hist(food_supply$`1961`, xlab="Food Supply in Calories Per Person Per Day in 196
 
 # (change) There are 3 records in this subset. The only country wiht mor ethan 3800 KCal per person per day is Austria in 2000s. 
 
-subset(food_supply_year_as_row, Food_Supply > 3800)
+subset(food_supply_year_as_row, Food_Supply > 3500)
 
 ```
 
@@ -986,8 +986,16 @@ income_vs_life_expectancy_in_2010 <- subset(income_vs_life_expectancy_in, Year =
 
 income_vs_life_expectancy_in_1960n2010 <- bind_rows(income_vs_life_expectancy_in_2010, income_vs_life_expectancy_in_1960)
 
+# Correlation Coefficient fo income and life expectancy  
+
+cor_income_life <- cor(income_vs_life_expectancy_in_1960n2010$Income_per_person, income_vs_life_expectancy_in_1960n2010$Life_Expectancy, use = "complete.obs")
+
+cor_income_life <- paste("r = ", round(cor_income_life, 2), "(1960 and 2010)")
+
+
 # Scatterplot 1960 and 2010
-ggplot(income_vs_life_expectancy_in_1960n2010, aes(x = Income_per_person, y = Life_Expectancy, col = Year)) + geom_point(size = 3, alpha = 0.3, position = "jitter") + labs(x = "GDP Per Capita (US$)", y = "Life Expectancy (Year)", title = "Income and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x))) 
+
+ggplot(income_vs_life_expectancy_in_1960n2010, aes(x = Income_per_person, y = Life_Expectancy, col = Year)) + geom_point(size = 3, alpha = 0.3, position = "jitter") + labs(x = "GDP Per Capita (US$)", y = "Life Expectancy (Year)", title = "Income and Life Expectancy by Year", subtitle = cor_income_life) + geom_smooth(method = "lm", linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x))) 
 
 # Bind rows in all subsets for income/life data of 1960, 1970, 1980, 1990, 2000, and 2010
 
@@ -1031,11 +1039,21 @@ life_total_gov_spend_in_every5yrs <- bind_rows(life_total_gov_spend_in_every5yrs
 
 life_total_gov_spend_in_every5yrs <- bind_rows(life_total_gov_spend_in_every5yrs, life_total_gov_spend_in_2010)
 
+# Correlation Coefficient for life expectancy and total health spending
+cor_life_tothealthspend <- cor(life_total_gov_spend_in_every5yrs$Total_Health_Spending_Per_Person, life_total_gov_spend_in_every5yrs$Life_Expectancy, use = "complete.obs")
+
+cor_life_tothealthspend <- paste("r = ", round(cor_life_tothealthspend, 2), "(4 years combined)")
+
+# Correlation Coefficient for life expectancy and government health spending
+cor_life_govhealthspend <- cor(life_total_gov_spend_in_every5yrs$Government_Health_Spending_Per_Person, life_total_gov_spend_in_every5yrs$Life_Expectancy, use = "complete.obs")
+
+cor_life_govhealthspend <- paste("r = ", round(cor_life_govhealthspend, 2), "(4 years combined)")
+
 # Scatterplot - total health spending 
-ggplot(life_total_gov_spend_in_every5yrs, aes(x = Total_Health_Spending_Per_Person, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Total Health Spending Per Person (US$)", y = "Life Expectancy (Year)", title = "Total Health Spending and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+ggplot(life_total_gov_spend_in_every5yrs, aes(x = Total_Health_Spending_Per_Person, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Total Health Spending Per Person (US$)", y = "Life Expectancy (Year)", title = "Total Health Spending and Life Expectancy by Year", subtitle = cor_life_tothealthspend) + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
 
 # Scatterplot - government health spending
-ggplot(life_total_gov_spend_in_every5yrs, aes(x = Government_Health_Spending_Per_Person, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Government Health Spending Per Person (US$)", y = "Life Expectancy (Year)", title = "Government Health Spending and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+ggplot(life_total_gov_spend_in_every5yrs, aes(x = Government_Health_Spending_Per_Person, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Government Health Spending Per Person (US$)", y = "Life Expectancy (Year)", title = "Government Health Spending and Life Expectancy by Year", subtitle = cor_life_govhealthspend) + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
 
 # pairs - Income, Life, Total and Government Health Spending
 pairs(~log10(Income_per_person)+log10(Life_Expectancy)+log10(Total_Health_Spending_Per_Person)+log10(Government_Health_Spending_Per_Person), data=all_year_as_row)
@@ -1054,8 +1072,13 @@ life_water_in_2007 <- subset(life_water_in, Year == 2007)
 # Bind rows in all subsets for data of 1997 and 2007
 life_water_in_2yrs <- bind_rows(life_water_in_1997, life_water_in_2007)
 
+# Correlation Coefficient for life expectancy and Improved Drinking Water
+cor_life_water <- cor(life_water_in_2yrs$Improved_Water, life_water_in_2yrs$Life_Expectancy, use = "complete.obs")
+
+cor_life_water <- paste("r = ", round(cor_life_water, 2), "(2 years combined)")
+
 # Scatterplot - Improved Drinking Water 
-ggplot(life_water_in_2yrs, aes(x = Improved_Water, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Percentage of Population Using Improved Drinking Water Sources", y = "Life Expectancy (Year)", title = "Improved Drinking Water Sources and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_sqrt()
+ggplot(life_water_in_2yrs, aes(x = Improved_Water, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Percentage of Population Using Improved Drinking Water Sources", y = "Life Expectancy (Year)", title = "Improved Drinking Water Sources and Life Expectancy by Year", subtitle = cor_life_water) + geom_smooth(method = "lm", linetype = 2) + scale_x_sqrt()
 ```
 ```{r}
 # Join life_expectancy_year_as_row and food_supply_year_as_row by inner_join
@@ -1069,8 +1092,13 @@ life_food_in_2007 <- subset(life_food_in, Year == 2007)
 # Bind rows in all subsets for data of 1997 and 2007
 life_food_in_2yrs <- bind_rows(life_food_in_1997, life_food_in_2007)
 
+# Correlation Coefficient for life expectancy and food supply
+cor_life_food <- cor(life_food_in_2yrs$Food_Supply, life_food_in_2yrs$Life_Expectancy, use = "complete.obs")
+
+cor_life_food <- paste("r = ", round(cor_life_food, 2), "(2 years combined)")
+
 # Scatterplot - Food Supply 
-ggplot(life_food_in_2yrs, aes(x = Food_Supply, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "KCal Per Person Per Day", y = "Life Expectancy (Year)", title = "Food Supply and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+ggplot(life_food_in_2yrs, aes(x = Food_Supply, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "KCal Per Person Per Day", y = "Life Expectancy (Year)", title = "Food Supply and Life Expectancy by Year", subtitle = cor_life_food) + geom_smooth(method = "lm", linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
 ```
 
 
@@ -1101,8 +1129,16 @@ all_cancer_as_row_2002 <- select(all_year_as_row_2002, Country, Year, Income_per
 
 all_cancer_as_row_2002 <- gather(all_cancer_as_row_2002, "Cancer", "Death", 7:12, na.rm = FALSE)
 
+# Descriptive Statistics of totao_cancer_death_2002
+summary(total_cancer_death_2002)
+
+# Correlation Coefficient for life expectancy and total cancer death
+cor_life_totc <- cor(total_cancer_death_2002$All_Cancer_Death, total_cancer_death_2002$Life_Expectancy, use = "complete.obs")
+
+cor_life_totc <- paste("r = ", round(cor_life_totc, 2))
+
 # Scatterplot - Total cancer death per 100000 person
-ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death, y = Life_Expectancy)) + geom_point(size = 3, alpha = 0.5, position = "jitter") + labs(x = "All Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "All Cancer Death and Life Expectancy in 2002") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death, y = Life_Expectancy)) + geom_point(size = 3, alpha = 0.5, position = "jitter") + labs(x = "All Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "All Cancer Death and Life Expectancy in 2002", subtitle = cor_life_totc) + geom_smooth(method = "lm", linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
 
 # Density Plot for total_cancer_death_2002
 
