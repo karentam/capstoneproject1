@@ -56,7 +56,7 @@ https://github.com/karentam/capstoneproject1/tree/master/Histogram%20for%20Data%
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_GovHealthSpend.png?raw=true)
 
-#### Improved Drinking Water Sources: The mean is US$83.68, and the median is US$91.00. The data is left-skewed. There are about 2/3 of the countries with more than 90% of population using improved drinking water sources. Outliers are countries with less than 40% of population using improved drinking water.
+#### Improved Drinking Water Sources: The mean is 83.68%, and the median is 91.00%. The data is left-skewed. There are about 2/3 of the countries with more than 90% of population using improved drinking water sources. Outliers are countries with less than 40% of population using improved drinking water.
 
 ![](https://github.com/karentam/capstoneproject1/blob/a226688cf505b183561712929dd25e475294431b/DensityPlot_Water_Log10.png?raw=true)
 
