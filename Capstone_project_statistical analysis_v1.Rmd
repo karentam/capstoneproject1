@@ -64,11 +64,11 @@ Outliers are countries with total health spending more than US$8,000 per person 
 <tr>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_TotHealthSpend_Log10.png?raw=true">
-<h6>Source: Gapminder, Total health spending per person (US$) http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx   </h6>
+<h6>Source: Gapminder, Total health spending per person (USD)   http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx   </h6>
 </td>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_TotHealthSpend.png?raw=true">
-<h6>Source: Gapminder, Total health spending per person (US$) http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx   </h6>
+<h6>Source: Gapminder, Total health spending per person (USD)   http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx   </h6>
 </td>
 </tr>
 </table>
@@ -83,11 +83,11 @@ Outliers are Luxembourg and Norway from 2007 to 2010 with more than US$6,000 gov
 <tr>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_GovHealthSpend_Log10.png?raw=true">
-<h6>Source: Gapminder, Government health spending per person (US$) http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx   </h6>
+<h6>Source: Gapminder, Government health spending per person (USD)    http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx   </h6>
 </td>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_GovHealthSpend.png?raw=true">
-<h6>Source: Gapminder, Government health spending per person (US$) http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx   </h6>
+<h6>Source: Gapminder, Government health spending per person (USD)    http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx   </h6>
 </td>
 </tr>
 </table>
@@ -106,7 +106,7 @@ Outliers are from Afghanistan in different years in 1990s with less than 10% of 
 </td>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Water.png?raw=true">
-<h6>Source: Gapminder, Improved water sourc-overall access (%) http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEd98lRwrU3gIg&output=xlsx   </h6>
+<h6>Source: Gapminder, Improved water source-overall access (%) http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEd98lRwrU3gIg&output=xlsx   </h6>
 </td>
 </tr>
 </table>
@@ -121,11 +121,11 @@ There are only 6 countries with the average daily intake of less than 1,000 calo
 <tr>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Food.png?raw=true">
-<h6>Source: Gapminder, Food Supply (Kilocalories/Person & Day) http://docs.google.com/spreadsheet/pub?key=0ArfEDsV3bBwCdGlYVVpXX20tbU13STZyVG0yNkRrZnc&output=xlsx </h6>
+<h6>Source: Gapminder, Food supply (kilocalories/person & day) http://docs.google.com/spreadsheet/pub?key=0ArfEDsV3bBwCdGlYVVpXX20tbU13STZyVG0yNkRrZnc&output=xlsx </h6>
 </td>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Food.png?raw=true">
-<h6>Source: Gapminder, Food Supply (Kilocalories/Person & Day) http://docs.google.com/spreadsheet/pub?key=0ArfEDsV3bBwCdGlYVVpXX20tbU13STZyVG0yNkRrZnc&output=xlsx </h6>
+<h6>Source: Gapminder, Food supply (kilocalories/person & day) http://docs.google.com/spreadsheet/pub?key=0ArfEDsV3bBwCdGlYVVpXX20tbU13STZyVG0yNkRrZnc&output=xlsx </h6>
 </td>
 </tr>
 </table>
@@ -160,7 +160,10 @@ The correlation of 0.58 in 2010 suggests that income and life expectancy have a 
 However, there is a difference in life expectancy between countries on the same income level according to Professor Hans Rosling from Gapmider because it depends on how the money is distributed and how it is used. For example, Swaziland had $5,850 GDP Per Capita in 2002. However, the country had a much shorter life expectancy of 48 years. The reason was that 63% of Swazis lived below the national poverty line which was relatively high for a lower middle income country. 3.1 million people living with HIV was another public concern that affected the country's life expectancy. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_Log10_CI_2r.png?raw=true)
-
+<h6>Source: Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted) http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx 
+<br>
+Gapminder, Life Expectancy (Years) http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx </h6>
+<br><br><br>
 
 #### Life Expectancy vs Total Health Spending / Government Health Spending
 
@@ -176,12 +179,19 @@ Generally speaking, country's citizens live longer with higher total health spen
 <tr>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10_4r.png?raw=true">
+<h6>Source: Gapminder, Total health spending per person (USD) http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx  
+<br>
+Gapminder, Life Expectancy (Years) http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx </h6>
 </td>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10_4r.png?raw=true">
+<h6>Source: Gapminder, Government health spending per person (USD)    http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx 
+<br>
+Gapminder, Life Expectancy (Years)    http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx </h6>
 </td>
 </tr>
 </table>
+<br><br><br>
 
 #### Income, Life Expectancy, Total and Government Health Spending
 
@@ -192,6 +202,15 @@ It is clear that the higher the income, the more the government and total health
 Again, it shows positive relationships between income and life expectancy, and between life expectancy and total/government health spending. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/Pairs_IncomeLifeSpend_Log10.png?raw=true)
+<h6>Source: Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)    http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx
+<br>
+Gapminder, Life Expectancy (Years)   http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx
+<br>
+Gapminder, Total health spending per person (USD)     http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx
+<br>
+Gapminder, Government health spending per person (USD)      http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx
+</h6>
+<br><br><br>
 
 #### Life Expectancy vs Food Supply
 
@@ -200,6 +219,11 @@ Using data of 273 countries in 1997 and 2007, the plot suggests that not having 
 It is also reasonable that income may take a role between food supply and life expectancy. When people have money to buy enough food, they will no longer face the threat of starvation. On the other hand, proper nutrition also affects life expectancy by decreasing the chance of having preventable diseases. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_CI_2r.png?raw=true)
+<h6>Source: Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted) http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx
+<br>
+Gapminder, Food supply (kilocalories/person & day) http://docs.google.com/spreadsheet/pub?key=0ArfEDsV3bBwCdGlYVVpXX20tbU13STZyVG0yNkRrZnc&output=xlsx
+</h6>
+<br><br><br>
 
 #### Life Expectancy vs Clean Drinking Water Sources
 
@@ -210,6 +234,11 @@ Improved drinking water sources include piped water into dwelling, plot or yard;
 The plot is created on square root scale. Plot created on Log 10 will have the similar look. There were 108 countries in 2007 and 97 countries in 1997 that reach more than 90%. So many points are located closed to 100%. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_WaterLife_Sqrt_CI_2r.png?raw=true)
+<h6>Source: Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted) http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx
+<br>
+Gapminder, Improved water source-overall access (%) http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEd98lRwrU3gIg&output=xlsx
+</h6>
+<br><br><br>
 
 #### Life Expectancy vs Total Death of Various Cancer Types
 
@@ -218,5 +247,10 @@ Using data of 276 countries in 2002, the plot shows that there is a slight negat
 The correlation of -0.05 suggests that cancer death and life expectancy have a very weak, negative relationship. Cancer is not the major reason of death nowaday, especially in richer countries, because of widespread screening programs that detect cancers at early and treatable stage. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_CI_r.png?raw=true)
+<h6>Source: Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted) http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx
+<br>
+Gapminder, Cancer Deaths Per 100,000 Persons http://www.gapminder.org/data/ (Search Keyword: Cancer)
+</h6>
+
 
 
