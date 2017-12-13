@@ -1,11 +1,11 @@
 ---
 title: "Capstone Project Proposal"
 author: "H Karen Tam"
-date: "October 16, 2017"
+date: "October 16, 2017" 
 output: html_document
 ---
 
-#### Updated on 11/16/2017
+Update: 12/13/2017
 
 #### Dataset:
 
