@@ -5,6 +5,7 @@ date: "December 13, 2017"
 output: html_document
 --
 
+
 #### An introduction to the problem
 
 There are many reasons, directly or indirectly, to lead to longer or shorter life expectancy from the global perspective. This project will examine relationships of life expectancy and predictors variables including income, total and government health spending, clean drinking water sources, food supply, and cancer death, and whether these variables are good predictors of life expectancy. 
@@ -146,7 +147,8 @@ There are many reasons of death in the world. The dataset only contains very lim
 
 #### Preliminary Exploration and Initial Finding
 <br>
-**GDP Per Capita**
+
+** GDP Per Capita**
 
 Data of 273 countries from 1960 to 2011 is used in plots below. GDP per capital by country is not normally distributed. The mean of GDP Per Capita is $6,615.54, but the median is $1,895.99. The standard deviation is $10,671.26 which shows large difference of GDP Per Capita between countries. 
 
