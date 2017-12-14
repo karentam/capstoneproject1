@@ -3,25 +3,18 @@ title: "Capstone Project Milestone Report"
 author: "H Karen Tam"
 date: "December 13, 2017"
 output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
-<br><br> 
+--
 
 #### An introduction to the problem
 
 There are many reasons, directly or indirectly, to lead to longer or shorter life expectancy from the global perspective. This project will examine relationships of life expectancy and predictors variables including income, total and government health spending, clean drinking water sources, food supply, and cancer death, and whether these variables are good predictors of life expectancy. 
 
-<br><br> 
+<br>
 
 #### Dataset
 
 **Important fields and information**
-<br><br> 
+<br>
 
 <table border=1, cellspacing=50>
 
@@ -123,37 +116,33 @@ Cancer Death
 
 </table>
 
-<br><br> 
+<br>
 
 **Limitations**
 
 There are many reasons of death in the world. The dataset only contains very limited variables that are probably related to the life expectation. This dataset cannot answer the questions about relationships between life expectancy and diseases other than cancers. It also does not have data to show the relationship between pollution and life expectancy. 
+
+<br>
 
 **Cleaning and Wrangling**
 
   + Reshape the data for making plots and statistical analysis
 
     + I use gather() in tidyr package to gather year columns into key-value pairs. The restructured dataset is easier to do scatter plots and statistical analysis based on countries and years.
-    
-<br>
 
   + Join the data from different datasets
 
     + I use full_join () and inner_join() in dplyr package to join variables together into a dataset. I also obtain total numbers of lung, liver, and stomach cancer deaths for each country in different years by adding numbers of male and female, and enter these numbers into the dataset. 
-    
-<br>
 
   + Examine outliers
 
     + I run summary statistics and make subsets to identify outliers for each variable. Outliers are examined and are reasonable with the countries' situations in specific years. For example, very short life expectancy numbers are appeared due to wars and natural disasters in specific countries and in specific time period. It is the fact that a few countries may have very high cancer deaths of a particular type of cancer. Various cancer deaths and life expectancy are normally distributed. It is expected that income and health spending have more outliers because some countries are wealthier than other countries.
-    
-<br>
 
   + My code to perform the above works:
 
     + https://github.com/karentam/capstoneproject1/blob/master/Capstone_project_v1.Rmd
 
-<br><br> 
+<br>
 
 #### Preliminary Exploration and Initial Finding
 <br>
@@ -411,7 +400,7 @@ The correlation of -0.05 suggests that cancer death and life expectancy have a v
 Gapminder, Cancer Deaths Per 100,000 Persons http://www.gapminder.org/data/ (Search Keyword: Cancer)
 </h6>
 
-<br><br>
+<br>
 
 #### Approach That Will Be Taken
 
@@ -424,8 +413,4 @@ Next, I would like to see how good income, health spending, cancer death, food s
 <br><br>
 
 
-
-```{r, echo=FALSE}
-
-```
 
