@@ -1,9 +1,5 @@
----
-title: "Capstone Project Milestone Report"
-author: "H Karen Tam"
-date: "December 13, 2017"
-output: html_document
---
+Title: Capstone Project Milestone Report 
+Name: H Karen Tam
 
 Update: December 21, 2017
 
@@ -449,7 +445,148 @@ There are different levels of correlations between life expectancy and predictor
 
 Income and health spending have moderate, positive relationships with life expectancy. Food supply and clean drinking water have strong, positive relationships with life expectancy. But cancer death has weak, negative relationship with life expectancy according to its correlation coefficient. 
 
-Next, I would like to see how good income, health spending, cancer death, food supply, and clean drinking water can predict life expectancy. Therefore, I will use Multiple Linear Regression to test how change in predictor variables predicts the level of change in life expectancy. In the meantime, Pearson's correlation will be used to check the correlation between predictor variables because high correlation between predictor variables suggests that effects on life expectancy are somewhat bounded together. 
+Next, I would like to see how good income, health spending, cancer death, food supply, and clean drinking water can predict life expectancy. Therefore, I am using Multiple Linear Regression to test how change in predictor variables predicts the level of change in life expectancy. 
+
+<br>
+
+#### Multiple Linear Regression
+
+**Model 1 - Include all independent variables**
+  
+* Dependent variable: Life Expectancy
+* Independent variables: Income, Total Health Spending, Government Health Spending, Food Supply, Improved Drinking Water Source, and Cancer Death.
+  
+<img src="https://github.com/karentam/capstoneproject1/blob/master/Regression_model1.png?raw=true">
+
+Food supply and improved drinking water source are significant in the model. But income, total health spending, government health spending, and cancer death are not. Therefore, I remove the non-significant variables in different models and check whether the model can be improved. 
+
+<br>
+
+**Models removing non-significant varibles**
+
+<table border=1>
+
+<tr>
+<td>
+</td>
+<td>
+Model 1 (All variables)
+</td>
+<td>
+Model 2 (All except cancer death)
+</td>
+<td>
+Model 3 (All except income)
+</td>
+<td>
+Model 4 (All except total health spending)
+</td>
+<td>
+Model 5 (All except government health spending)
+</td>
+<td>
+Model 6 (All except total and government health spending)
+</td>
+</tr>
+
+<tr>
+<td>
+Multiple R-Squared 
+</td>
+<td>
+0.6904
+</td>
+<td>
+0.6797 (worse)
+</td>
+<td>
+0.6886 (better)
+</td>
+<td>
+0.6902 (worse)
+</td>
+<td>
+0.6904 (no change)
+</td>
+<td>
+0.6845 (worse)
+</td>
+</tr>
+
+<tr>
+<td>
+Adjusted R-Squared
+</td>
+<td>
+0.6774
+</td>
+<td>
+0.669 (worse)
+</td>
+<td>
+0.6778 (better)
+</td>
+<td>
+0.6796 (better)
+</td>
+<td>
+0.6795 (better)
+</td>
+<td>
+0.6759 (worse)
+</td>
+</tr>
+
+<tr>
+<td>
+Sum of Squared Errors
+</td>
+<td>
+4415.881
+</td>
+<td>
+4637.064 (worse)
+</td>
+<td>
+4468.012 (worse)
+</td>
+<td>
+4420 (worse)
+</td>
+<td>
+4416.737 (worse)
+</td>
+<td>
+4652 (worse)
+</td>
+</tr>
+
+<tr>
+<td>
+Other significant variables
+</td>
+<td>
+Food Supply, Improved Drinking Water Source
+</td>
+<td>
+Food Supply, Improved Drinking Water Source
+</td>
+<td>
+Food Supply, Improved Drinking Water Source
+</td>
+<td>
+Food Supply, Improved Drinking Water Source
+</td>
+<td>
+Food Supply, Improved Drinking Water Source
+</td>
+<td>
+Food Supply, Improved Drinking Water Source, Income, Cancer Death
+</td>
+</tr>
+
+</table>
+
 
 <br><br>
 
