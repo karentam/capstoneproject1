@@ -1,12 +1,12 @@
 Title: Capstone Project Milestone Report 
 Name: H Karen Tam
 
-Update: December 21, 2017
+Update: December 27, 2017
 
 
 #### An introduction to the problem
 
-There are many reasons, directly or indirectly, to lead to longer or shorter life expectancy from the global perspective. This project will examine relationships of life expectancy and predictors variables including income, total and government health spending, clean drinking water sources, food supply, and cancer death, and whether these variables are good predictors of life expectancy. 
+There are many factors that can affect people's life expectancy from the global perspective. This project will examine relationships between life expectancy and predictor variables including income, total and government health spending, clean drinking water sources, food supply, and cancer death. We will also test whether these variables are good predictors of life expectancy.
 
 <br>
 
@@ -15,7 +15,7 @@ There are many reasons, directly or indirectly, to lead to longer or shorter lif
 **Important fields and information**
 <br>
 
-<table border=1, cellspacing=50>
+<table border=1, cellspacing=30>
 
 <tr>
 <th>
@@ -37,7 +37,7 @@ Life Expectancy (Year)
 1960 - 2016
 </td>
 <td>
-273
+209
 </td>
 </tr>
 
@@ -49,7 +49,7 @@ GDP Per Capita (USD)
 1960 - 2011
 </td>
 <td>
-273
+200
 </td>
 </tr>
 
@@ -61,7 +61,7 @@ Total Health Spending Per Person (USD)
 1995 - 2010
 </td>
 <td>
-273
+189
 </td>
 </tr>
 
@@ -73,7 +73,7 @@ Government Health Spending Per Person (USD)
 1995 - 2010
 </td>
 <td>
-273
+191
 </td>
 </tr>
 
@@ -85,7 +85,7 @@ Improved Drinking Water Sources
 1990 - 2010
 </td>
 <td>
-273
+201
 </td>
 </tr>
 
@@ -97,7 +97,7 @@ Food Supply (Calories Intake Per Person Per Day)
 1961 - 2007
 </td>
 <td>
-273
+176
 </td>
 </tr>
 
@@ -109,7 +109,7 @@ Cancer Death
 2002
 </td>
 <td>
-276
+174
 </td>
 </tr>
 
@@ -119,27 +119,27 @@ Cancer Death
 
 **Limitations**
 
-There are many reasons of death in the world. The dataset only contains very limited variables that are probably related to the life expectation. This dataset cannot answer the questions about relationships between life expectancy and diseases other than cancers. It also does not have data to show the relationship between pollution and life expectancy. 
+There are many reasons for death. The dataset only contains very limited variables that are probably related to the life expectancy. This dataset cannot answer questions about relationships between life expectancy, diseases other than cancers and pollution. 
 
 <br>
 
 **Cleaning and Wrangling**
 
-  + Reshape the data for making plots and statistical analysis
+  + Reshape the data for plots and statistical analysis
 
-    + I use gather() in tidyr package to gather year columns into key-value pairs. The restructured dataset is easier to do scatter plots and statistical analysis based on countries and years.
+    + I used gather() in tidyr package to gather year columns into key-value pairs. It was easier to make scatter plots and do statistical analysis by using the restructured dataset based on countries and years.
 
   + Join the data from different datasets
 
-    + I use full_join () and inner_join() in dplyr package to join variables together into a dataset. I also obtain total numbers of lung, liver, and stomach cancer deaths for each country in different years by adding numbers of male and female, and enter these numbers into the dataset. 
+    + I used full_join () and inner_join() in dplyr package to join variables together into a dataset. I also calculated total numbers of cancer death for each country in different years by adding numbers of various male and female cancer death. 
 
   + Examine outliers
 
-    + I run summary statistics and make subsets to identify outliers for each variable. Outliers are examined and are reasonable with the countries' situations in specific years. For example, very short life expectancy numbers are appeared due to wars and natural disasters in specific countries and in specific time period. It is the fact that a few countries may have very high cancer deaths of a particular type of cancer. Various cancer deaths and life expectancy are normally distributed. It is expected that income and health spending have more outliers because some countries are wealthier than other countries.
+    + I ran summary statistics and made subsets to identify outliers for each variable. Outliers were examined. These are reasonable with the countries' situations in specific years. For example, extremely short life expectancy are appeared due to wars and natural disasters in specific countries and in the specific time period. It was the fact that a few countries might have very high number of death of a particular type of cancer. Various cancer deaths and life expectancy are normally distributed. It is expected that income and health spending have more outliers because some countries are wealthier than other countries.
 
   + My code to perform the above works:
 
-    + https://github.com/karentam/capstoneproject1/blob/master/Capstone_project_v1.Rmd
+    + https://github.com/karentam/capstoneproject1/blob/master/Capstone_project_v2.Rmd
 
 <br>
 
@@ -148,23 +148,24 @@ There are many reasons of death in the world. The dataset only contains very lim
 
 **GDP Per Capita**
 
-Data of 273 countries is used in plots below. GDP per capital by country is not normally distributed. 
+Data from 200 countries is used in plots below. GDP Per Capita by country is not normally distributed. 
 
-There are 1/3 of the countries with less than US$557 income per person. Nine of the ten countries with the lowest means of GDP Per Capita are from different parts of Africa. Nepal is the only one Asian country in the bottom ten list. 
+There are 1/3 of the countries with less than US$557 income per person. Nine of the ten countries with the lowest means of GDP Per Capita are from different parts of Africa. Nepal is the only one Asian country on the bottom ten list. 
 
-Outliers are countries with citizens who have very high income in average ($80,000). The top five countries with the highest means of GDP Per Capita are small countries and territories in Western Europe. United Arab Emirates and Qatar in the Middle East, Japan in Asia, and United States in North America are among the top ten as well. 
+Outliers are countries with citizens who have very high income in average ($80,000). The top five countries with the highest means of GDP Per Capita are small countries and territories in Western Europe. The United Arab Emirates and Qatar in the Middle East, Japan in Asia, and United States in North America are among the top ten as well. 
 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Income_Log10_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Income_Log10_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Income_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/ECDFPlot_Income_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
 <td colspan="2" align="center">
+<h6>Observation: 14,196. Observation containing missing data: 6,208.</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a></h6>
 </td>
 </tr>
@@ -174,21 +175,22 @@ Outliers are countries with citizens who have very high income in average ($80,0
 
 **Life Expectancy**
 
-Data of life expectancy was from 273 countries. The data is left-skewed, suggesting that the majority of countries have longer life expectancy. 
+Data on life expectancy was from 209 countries. The data is left-skewed, suggesting that the majority of countries have the longer life expectancy. 
 
-Outliers are from countries with life expectancy of less than 30 years of age during wars. They include Mali in 1960 and 1961. Since gaining independence from France in 1960, the West African state of Mali has been afflicted by several rebellions, insurrections, and coups. Another outliers were created by the genocide in Cambodia from 1975 to 1980, that resulted in the deaths of 25% of the country's population from starvation, overwork and executions. Rwanda is one of these outliers as well due to the genocide in 1994. There were 500,000 to 1,000,000 deaths during that year.
+Outliers are from countries with the life expectancy of fewer than 30 years of age during wars. They include Mali in 1960 and 1961. Since gaining independence from France in 1960, the West African state of Mali has been afflicted by several rebellions, insurrections, and coups. Other outliers were created by the genocide in Cambodia from 1975 to 1980, that resulted in the deaths of 25% of the country's population from starvation, overwork, and executions. Rwanda is one of these outliers as well due to the genocide in 1994. There were 500,000 to 1,000,000 deaths during that year.
 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/DensityPlot_Life_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/DensityPlot_Life_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/ECDFPlot_Life_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/ECDFPlot_Life_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
 <td colspan="2" align="center">
+<h6>Observation: 15,561. Observation containing missing data: 3,931.</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx" target="_blank">Gapminder, Life Expectancy (Years)</a></h6>
 </td>
 </tr>
@@ -198,21 +200,22 @@ Outliers are from countries with life expectancy of less than 30 years of age du
 
 **Total Health Spending**
 
-Data of total health spending was from 273 countries. It is not normally distributed and is right-skewed. There are 3/4 of countries with the total health spending per person of US$564 or less. 
+Data on total health spending was from 189 countries. It is not normally distributed and is right-skewed. There are 3/4 of countries with the total health spending per person of US$564 or less. 
 
 Outliers are countries with total health spending more than US$8,000 per person per year. There are 6 records in this subset. The countries are Luxembourg, Norway, and United States from 2008 to 2010. These are rich countries, and their annual expenses are from $8,054 to $8,361.
 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/DensityPlot_TotHealthSpend_Log10_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/DensityPlot_TotHealthSpend_Log10_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/ECDFPlot_TotHealthSpend_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/ECDFPlot_TotHealthSpend_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
 <td colspan="2" align="center">
+<h6>Observation: 4,368. Observation containing missing data: 1,360.</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx" target="_blank">Gapminder, Total health spending per person (USD)</a></h6>
 </td>
 </tr>
@@ -222,21 +225,22 @@ Outliers are countries with total health spending more than US$8,000 per person 
 
 **Government Health Spending**
 
-Data of government health spending was from 273 countries. Similar to the total health spending, it is not normally distributed and is right-skewed. There are about 3/4 of the countries with the government health spending per person of US$460 or less. 
+Data on government health spending was from 191 countries. Similar to the total health spending, it is not normally distributed and is right-skewed. There are about 3/4 of the countries with the government health spending per person of US$460 or less. 
 
 Outliers are Luxembourg and Norway from 2007 to 2010 with more than US$6,000 government health spending per person per year. 
 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/DensityPlot_GovHealthSpend_Log10_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/DensityPlot_GovHealthSpend_Log10_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/ECDFPlot_GovHealthSpend_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/ECDFPlot_GovHealthSpend_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
 <td colspan="2" align="center">
+<h6>Observation: 4,368. Observation containing missing data: 1,329.</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx" target="_blank">Gapminder, Government health spending per person (USD)</a></h6>
 </td>
 </tr>
@@ -246,21 +250,22 @@ Outliers are Luxembourg and Norway from 2007 to 2010 with more than US$6,000 gov
 
 **Improved Drinking Water Sources**
 
-Data of improved drinking water sources was from 273 countries. The data is left-skewed, and there are about 2/3 of the countries with more than 90% of population using improved drinking water sources. 
+Data on improved drinking water sources was from 201 countries. The data is left-skewed, and there are about 2/3 of the countries with more than 90% of the population using improved drinking water sources. 
 
-Outliers are from Afghanistan in different years in 1990s with less than 10% of population using improved drinking water sources. In 2007, Afghanistan has improved the accessability to clean drinking water to 50% of its population. 
+Outliers are from Afghanistan in different years in the 1990s with less than 10% of the population using improved drinking water sources. In 2007, Afghanistan has improved the accessibility to clean drinking water to 50% of its population. 
 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/DensityPlot_Water_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Water_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/ECDFPlot_Water_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Water_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
 <td colspan="2" align="center">
+<h6>Observation: 15,561. Observation containing missing data: 3,931.</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEd98lRwrU3gIg&output=xlsx" target="_blank">Gapminder, Improved water source-overall access (%)</a></h6>
 </td>
 </tr>
@@ -270,21 +275,22 @@ Outliers are from Afghanistan in different years in 1990s with less than 10% of 
 
 **Food Supply**
 
-Data of average daily intake was from 273 countries. According to the National Health Service, UK, the average male adult needs approximately 2,500 calories per day to keep his weight constant, while the average adult female needs 2,000 calories per day. In this regard, the mean and median are close to recommended daily calories intakes. 
+Data on average daily intake was from 176 countries. According to the National Health Service of the United Kingdom, the average male adult needs approximately 2,500 calories per day to keep his weight constant, while the average adult female needs 2,000 calories per day. In this regard, the mean and median are close to recommended daily calories intakes. 
 
-There are only 6 countries with the average daily intake of less than 1,000 calories, but those are from 1960s to 1990s. Countries include China, Burkina Faso, Maldives in 1960s; Ethiopia and Djibouti in 1970s, and Eritrea in 1990s. Outliers are countries with 3,750 calories per day per person or more, including United States from 2002 to 2006, Hungary in 1987 and 1989, and Austria in 1999, 2000, 2001, 2006, and 2007.  
+There are only 6 countries with the average daily intake of less than 1,000 calories, but those are from the 1960s to 1990s. Countries include China, Burkina Faso, Maldives in the 1960s; Ethiopia and Djibouti in the 1970s, and Eritrea in the 1990s. Outliers are countries with 3,750 calories per day per person or more, including the United States from 2002 to 2006, Hungary in 1987 and 1989, and Austria in 1999, 2000, 2001, 2006, and 2007.  
 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/DensityPlot_Food_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Food_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/ECDFPlot_Food_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Food_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
 <td colspan="2" align="center">
+<h6>Observation: 12,831. Observation containing missing data: 5,331.</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=0ArfEDsV3bBwCdGlYVVpXX20tbU13STZyVG0yNkRrZnc&output=xlsx" target="_blank">Gapminder, Food supply (kilocalories/person & day)</a></h6>
 </td>
 </tr>
@@ -294,23 +300,23 @@ There are only 6 countries with the average daily intake of less than 1,000 calo
 
 **Cancer Death**
 
-Data of various cancer death was from 276 countries in 2002. The most updated available data that fit the dataset used here is 2002's. The types of cancer include breast, cervical, liver, stomach, lung, and prostate. The data is close to normally distributed but is still right-stewed. 
+Data on various cancer deaths was from 174 countries in 2002. The most updated available data is 2002's. The types of cancer include breast, cervical, liver, stomach, lung, and prostate. The data is almost normally distributed but is still right-stewed. 
 
 The outlier with 249.4 cancer deaths per 100,000 person per year in 2002 is Mongolia due to its extremely high rate of liver cancer (140.6 deaths per 100,000 person). Mongolia has the world's highest rate of liver cancer mortality. High rates of hepatitis C and B infection along with widespread alcohol use have left Mongolia with a burden of liver cancer that it is ill-equipped to handle. 
 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/DensityPlot_TotC_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_TotC_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/8c15847c336f512e01666ba3119f6533f1236676/ECDFPlot_TotC_Text.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_TotC_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
 <td colspan="2" align="center">
-<h6>Source: <a href="http://www.gapminder.org/data/" target="_blank">Gapminder, Cancer Deaths Per 100,000 Persons</a> (Search Keyword: Cancer)
-</h6>
+<h6>Observation: 276. Observation containing missing data: 102.</h6>
+<h6>Source: <a href="http://www.gapminder.org/data/" target="_blank">Gapminder, Cancer Deaths Per 100,000 Persons</a> (Search Keyword: Cancer)</h6>
 </td>
 </tr>
 </table>
@@ -319,35 +325,36 @@ The outlier with 249.4 cancer deaths per 100,000 person per year in 2002 is Mong
 
 **Income vs Life Expectancy**
 
-Using data of 270 countries in 1960 and 2010, the plot shows that the higher the income, the longer life the person has. However, the difference of life expectancy between wealthy and poor countries is getting smaller in the most recent decades. 
+Using data from different countries in 1960 and 2010, the plot shows that the higher the income, the longer life the person has. However, the difference in life expectancy between wealthy and poor countries is getting smaller in the most recent decades. 
 
-The correlation of 0.58 in 2010 suggests that income and life expectancy have a moderate, positive relationship. The correlation of 0.75 in 1960 shows stronger positive relationship between income and life expectancy. It confirms that the gap of life expectancy between richer and poorer countries is getting closer.
+The correlation of 0.58 in 2010 suggests that income and life expectancy have a moderate, positive relationship. The correlation of 0.75 in 1960 shows the stronger positive relationship between income and life expectancy. It confirms that the gap in life expectancy between richer and poorer countries is getting closer.
 
-However, there is a difference in life expectancy between countries on the same income level according to Professor Hans Rosling from Gapmider because it depends on how the money is distributed and how it is used. For example, Swaziland had $5,850 GDP Per Capita in 2002. However, the country had a much shorter life expectancy of 48 years. The reason was that 63% of Swazis lived below the national poverty line which was relatively high for a lower middle income country. 3.1 million people living with HIV was another public concern that affected the country's life expectancy. 
+However, there is a difference in life expectancy between countries on the same income level according to Professor Hans Rosling from Gapmider because it depends on how the money is distributed and how it is used in each country. For example, Swaziland had $5,850 GDP Per Capita in 2002. However, the country had a much shorter life expectancy of 48 years. The reason was that 63% of Swazis lived below the national poverty line which was relatively high for a lower middle-income country. 3.1 million people living with HIV was another public concern that affected the country's life expectancy. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_Log10_CI_2r.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_Log10_CI_2r_Annot.png?raw=true)
+<h6>Observation: 540. Observation containing missing data: 267.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a>  
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx" target="_blank">Gapminder, Life Expectancy (Years)</a></h6>
-
 <br>
 
 **Life Expectancy vs Total Health Spending / Government Health Spending**
 
-Using data of 273 countries in 1995, 2000, 2005, and 2010, the plots show that the higher the total and government health spending, the longer people can live. 
+Using data from different countries in 1995, 2000, 2005, and 2010, the plots show that the higher the total and government health spending, the longer people can live. 
 
-Total Health Spending vs Life Expectancy: The correlations of 0.53 in 1995, 0.52 in 2000, 0.53 in 2005, and 0.54 in 2010 suggest that total health spending and life expectancy have a moderate, positive relationship. 
+Total Health Spending vs Life Expectancy: The correlations of 0.53 in 1995, 0.52 in 2000, 0.53 in 2005, and 0.54 in 2010 suggest that the total health spending and life expectancy have a moderate, positive relationship. 
 
 Government Health Spending vs Life Expectancy: The correlations of 0.52 in 1995, 0.52 in 2000, 0.51 in 2005, and 0.52 in 2010 suggest that government health spending and life expectancy also have a moderate, positive relationship. 
 
-Generally speaking, country's citizens live longer with higher total health spending. However, there are a few outliers. For example, United States spent US$8,360 per person on health, which was more than other countries. But US citizen's life expectancy is a little shorter compared to other countries with the similar amount of health expenditure because of the large inequality in health spending. 
+Generally speaking, country's citizens live longer with the higher total health spending. However, there are a few outliers. For example, the United States spent US$8,360 per person on health, which was more than other countries. But US citizen's life expectancy is a little shorter compared to other countries with the similar amount of health expenditure because of the large inequality in health spending. 
 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10_4r.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10_4r_Annot.png?raw=true">
+<h6>Observation: 1,092. Observation containing missing data: 375.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx" target="_blank">Gapminder, Total health spending per person (USD)</a>   
@@ -355,7 +362,8 @@ Generally speaking, country's citizens live longer with higher total health spen
 <a href="http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx" target="_blank">Gapminder, Life Expectancy (Years)</a></h6>
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10_4r.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10_4r_Annot.png?raw=true">
+<h6>Observation: 1,092. Observation containing missing data: 368.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx" target="_blank">Gapminder, Government health spending per person (USD)</a>     
@@ -369,7 +377,7 @@ Generally speaking, country's citizens live longer with higher total health spen
 
 **Income, Life Expectancy, Total and Government Health Spending**
 
-Using data of 273 countries from 1995 to 2010, the pairs plot contains 12 graphs showing relationships between Income, Life Expectancy, Total and Government Health Spending. 
+Using data from different countries from 1995 to 2010, the pairs plot contains 12 graphs showing relationships between Income, Life Expectancy, Total and Government Health Spending. 
 
 It is clear that the higher the income, the more the government and total health spending are. 
 
@@ -391,11 +399,12 @@ Again, it shows positive relationships between income and life expectancy, and b
 
 **Life Expectancy vs Food Supply**
 
-Using data of 273 countries in 1997 and 2007, the plot suggests that not having enough calories intake can threaten people's lives. The correlations of 0.75 in 1997 and 0.68 in 2007 suggest that food supply and life expectancy have a strong, positive relationship. 
+Using data from about different countries in 1997 and 2007, the plot suggests that not having enough calories intake can threaten people's lives. The correlations of 0.75 in 1997 and 0.68 in 2007 suggest that food supply and life expectancy have a strong, positive relationship. 
 
-It is also reasonable that income may take a role between food supply and life expectancy. When people have money to buy enough food, they will no longer face the threat of starvation. On the other hand, proper nutrition also affects life expectancy by decreasing the chance of having preventable diseases. 
+It is also reasonable that income may take a role in food supply and life expectancy. When people have money to buy enough food, they will no longer face the threat of starvation. On the other hand, proper nutrition also affects life expectancy by decreasing the chance of having preventable diseases. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_CI_2r.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_CI_2r_Annot.png?raw=true)
+<h6>Observation: 546. Observation containing missing data: 199.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a> 
@@ -407,13 +416,14 @@ It is also reasonable that income may take a role between food supply and life e
 
 **Life Expectancy vs Clean Drinking Water Sources**
 
-Using data of 273 countries from 1997 to 2007, the plot shows the positive relationship between life expectancy and percentage of the total population using improved drinking water sources. The correlations of 0.79 in 1997 and 0.75 in 2007 suggest that improved drinking water sources and life expectancy have a strong, positive relationship. 
+Using data from different countries from 1997 to 2007, the plot shows the positive relationship between life expectancy and percentage of the total population using improved drinking water sources. The correlations of 0.79 in 1997 and 0.75 in 2007 suggest that improved drinking water sources and life expectancy have a strong, positive relationship. 
 
 Improved drinking water sources include piped water into dwelling, plot or yard; public tap/standpipe; borehole/tube well; protected dug well; protected spring; rainwater collection and bottled water (if a secondary available source is also improved). 
 
-The plot is created on square root scale. Plot created on Log 10 will have the similar look. There were 108 countries in 2007 and 97 countries in 1997 that reach more than 90%. So many points are located closed to 100%. 
+The plot is created on square root scale. Plot created on Log 10 would have the similar look. There were 108 countries in 2007 and 97 countries in 1997 that could provide clean drinking water sources to more than 90% of the population. So many points are located close to 100%. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_WaterLife_Sqrt_CI_2r.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_WaterLife_Sqrt_CI_2r_Annot.png?raw=true)
+<h6>Observation: 546. Observation containing missing data: 182.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a> 
@@ -425,11 +435,12 @@ The plot is created on square root scale. Plot created on Log 10 will have the s
 
 **Life Expectancy vs Total Cancer Death**
 
-Using data of 276 countries in 2002, the plot shows that there is a slight negative relationship between life expectancy and total cancer death. When cancer death increases, the length of life decreases. The total number of cancer death here includes breast, cervical, lung, liver, stomach, and prostate cancers. 
+Using data from 174 countries in 2002, the plot shows that there is a slight, negative relationship between life expectancy and total cancer death. When cancer death increases, the length of life decreases. The total number of cancer death here includes breast, cervical, lung, liver, stomach, and prostate cancers. 
 
-The correlation of -0.05 suggests that cancer death and life expectancy have a very weak, negative relationship. Cancer is not the major reason of death nowaday, especially in richer countries, because of widespread screening programs that detect cancers at early and treatable stage. 
+The correlation of -0.05 suggests that cancer death and life expectancy have a very weak, negative relationship. Cancer is not the major reason for death nowadays, especially in richer countries, because of widespread screening programs that detect cancers at the early and treatable stage. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_CI_r.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_CI_r_Annot.png?raw=true)
+<h6>Observation: 276. Observation containing missing data: 103.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a> 
@@ -441,152 +452,81 @@ The correlation of -0.05 suggests that cancer death and life expectancy have a v
 
 #### Approach That Will Be Taken
 
-There are different levels of correlations between life expectancy and predictor variables including income, health spending , food supply, clean water, and cancer death.
+There are different levels of correlations between life expectancy and predictor variables including income, health spending, food supply, clean water, and cancer death.
 
 Income and health spending have moderate, positive relationships with life expectancy. Food supply and clean drinking water have strong, positive relationships with life expectancy. But cancer death has weak, negative relationship with life expectancy according to its correlation coefficient. 
 
-Next, I would like to see how good income, health spending, cancer death, food supply, and clean drinking water can predict life expectancy. Therefore, I am using Multiple Linear Regression to test how change in predictor variables predicts the level of change in life expectancy. 
+Next, I would like to see how good income, health spending, cancer death, food supply, and clean drinking water can predict life expectancy. 
 
 <br>
 
 #### Multiple Linear Regression
 
-**Model 1 - Include all independent variables**
-  
-* Dependent variable: Life Expectancy
-* Independent variables: Income, Total Health Spending, Government Health Spending, Food Supply, Improved Drinking Water Source, and Cancer Death.
-  
-<img src="https://github.com/karentam/capstoneproject1/blob/master/Regression_model1.png?raw=true">
+Multiple Linear Regression is used to test how the change in predictor variables predicts the level of change in life expectancy. 
 
-Food supply and improved drinking water source are significant in the model. But income, total health spending, government health spending, and cancer death are not. Therefore, I remove the non-significant variables in different models and check whether the model can be improved. 
+**Dataset**
+
+The dataset used in this test contains the most updated available data in 2002 from the Gapminder. A total of 276 observations/countries are in the dataset, in which 127 observations have missing data. 
+
+**Variable Selection**
+
+Best Subsets Regression and Stepwise Forward Regression methods are used to select predictor variables that do the best at predicting life expectancy. The predict variables are selected based on the Adjusted R-Squared. Sum of Squared Errors is also considered when comparing the best models in the results of the Best Subsets Regression and Stepwise Forward Regression. 
 
 <br>
 
-**Models removing non-significant varibles**
+Result of Best Subsets Regression 
 
-<table border=1>
+![](https://github.com/karentam/capstoneproject1/blob/master/Best_subsets_regression_result.png?raw=true)
 
-<tr>
-<td>
-</td>
-<td>
-Model 1 (All variables)
-</td>
-<td>
-Model 2 (All except cancer death)
-</td>
-<td>
-Model 3 (All except income)
-</td>
-<td>
-Model 4 (All except total health spending)
-</td>
-<td>
-Model 5 (All except government health spending)
-</td>
-<td>
-Model 6 (All except total and government health spending)
-</td>
-</tr>
+<br> 
 
-<tr>
-<td>
-Multiple R-Squared 
-</td>
-<td>
-0.6904
-</td>
-<td>
-0.6797 (worse)
-</td>
-<td>
-0.6886 (better)
-</td>
-<td>
-0.6902 (worse)
-</td>
-<td>
-0.6904 (no change)
-</td>
-<td>
-0.6845 (worse)
-</td>
-</tr>
+Best Model Based on the Adjusted R-Squared:
 
-<tr>
-<td>
-Adjusted R-Squared
-</td>
-<td>
-0.6774
-</td>
-<td>
-0.669 (worse)
-</td>
-<td>
-0.6778 (better)
-</td>
-<td>
-0.6796 (better)
-</td>
-<td>
-0.6795 (better)
-</td>
-<td>
-0.6759 (worse)
-</td>
-</tr>
+  + Dependent variable: Life Expectancy
+  + Independent variables: Government Health Spending, Food Supply, Improved Drinking Water Source, and Cancer Death
+  + Adjusted R-Squared: 0.6802
+  + Sum of Squared Errors: 4469.646
 
-<tr>
-<td>
-Sum of Squared Errors
-</td>
-<td>
-4415.881
-</td>
-<td>
-4637.064 (worse)
-</td>
-<td>
-4468.012 (worse)
-</td>
-<td>
-4420 (worse)
-</td>
-<td>
-4416.737 (worse)
-</td>
-<td>
-4652 (worse)
-</td>
-</tr>
+<br>
 
-<tr>
-<td>
-Other significant variables
-</td>
-<td>
-Food Supply, Improved Drinking Water Source
-</td>
-<td>
-Food Supply, Improved Drinking Water Source
-</td>
-<td>
-Food Supply, Improved Drinking Water Source
-</td>
-<td>
-Food Supply, Improved Drinking Water Source
-</td>
-<td>
-Food Supply, Improved Drinking Water Source
-</td>
-<td>
-Food Supply, Improved Drinking Water Source, Income, Cancer Death
-</td>
-</tr>
+Result of Stepwise Forward Regression
 
-</table>
+![](https://github.com/karentam/capstoneproject1/blob/master/Stepwise_forward_regression_result.png?raw=true)
 
+<br>
+
+Best Model Based on the Adjusted R-Squared:
+
+  + Dependent variable: Life Expectancy
+  + Independent variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
+  + Adjusted R-Squared: 0.6759
+  + Sum of Squared Errors: 4652.93
+
+The best model from the Best Subsets Regression is choosen because it has the larger Adjusted R-Squared and lower Sum of Squared Errors. 
+
+<br>
+
+**Analysis Based on the Best Model**
+
+![](https://github.com/karentam/capstoneproject1/blob/master/Model_BSR_individual_regression_result.png?raw=true)
+
+There are 276 observations, in which 123 of them have missing data in this model. Predictors include government health spending, food supply, improved drinking water source, and cancer death.
+
+Adjusted R-Squared:
+The Adjusted R-Squared of 0.6802 suggests that about 68% of variation in life expectancy can be explained by this model. 
+
+P-Value:
+Government health spending, food supply, and improved drinking water sources are significant because their p-values are less than 0.05. Statistically significant means that the result is likely not due to random chance. Cancer death has a p-value of 0.1038. If the level of confidence is 90%, cancer death is very close to be a significant variable. 
+
+Residual Standard Error:
+Residual Standard Error of 5.495 shows that there are about 5.5 years between the observed life expectancy and predicted life expectancy. 
+
+Estimated Effect of Predictors:
+  + An increase of US$1 in government health spending is associated with an increase of 0.0017 year in life expectancy. 
+  + An increase of 1 calory intake is associated with an increase of 0.0054 year in life expectancy.
+  + An increase in 1% of country's population with an access to clean drinking water sources is associated with an increase in 0.2845 year in life expectancy.
+  + A decrease in 1 case of cancer death per 100,000 person per year is associated with an increase of 0.0242 year in life expectancy. 
+  
 
 <br><br>
 
