@@ -26,6 +26,12 @@ library(readxl)
 # Load grid
 library(grid)
 
+# Load Random Forest
+library(randomForest)
+
+# Load caTools
+library(caTools)
+
 # Import excel files
 income_pp <- read_excel("income_pp.xlsx")
 life_expectancy <- read_excel("life_expectancy.xlsx")
@@ -54,6 +60,12 @@ income_pp_year_as_row <- gather(income_pp, "Year", "Income_per_person", 2:53, na
 
 # change income_per_person's value as numberic 
 as.numeric(income_pp_year_as_row$Income_per_person)
+
+# Remove observations with missing values in independent variable columns
+income_pp_year_as_row <- filter(income_pp_year_as_row, !is.na(Income_per_person))
+
+# Change the N/A to mean 
+#income_pp_year_as_row$Income_per_person [which(is.na(income_pp_year_as_row$Income_per_person))] <- mean(income_pp_year_as_row$Income_per_person, na.rm = TRUE)
 
 # Round up values in Income_per_person column to 2 decimal places
 # round(income_pp_year_as_row$Income_per_person, 2)
@@ -149,6 +161,9 @@ life_expectancy_year_as_row <- gather(life_expectancy, "Year", "Life_Expectancy"
 # change Life_Expectancy's value as numberic 
 as.numeric(life_expectancy_year_as_row$Life_Expectancy)
 
+# Remove observations with missing values in independent variable columns
+life_expectancy_year_as_row <- filter(life_expectancy_year_as_row, !is.na(Life_Expectancy))
+
 # Show the mean of life expectancy at birth by year of each country from 1960 to 2016
 paste("The Mean of Life Expectancy at Birth (Year) By Country from 1960 to 2016")
 life_expectancy_year_as_row %>% 
@@ -243,6 +258,9 @@ total_health_spending_pp_year_as_row <- gather(total_health_spending_pp, "Year",
 # change Total Health Spending's value as numberic 
 as.numeric(total_health_spending_pp_year_as_row$Total_Health_Spending_Per_Person)
 
+# Remove observations with missing values in independent variable columns
+total_health_spending_pp_year_as_row <- filter(total_health_spending_pp_year_as_row, !is.na(Total_Health_Spending_Per_Person))
+
 # Show the mean of total health spending in US$ of each country from 1995 to 2010
 paste("The Mean of Total Health Spending in US$ By Country from 1995 to 2010")
 total_health_spending_pp_year_as_row %>% 
@@ -331,6 +349,9 @@ government_health_spending_pp_year_as_row <- gather(government_health_spending_p
 
 # change Total Health Spending's value as numberic 
 as.numeric(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person)
+
+# Remove observations with missing values in independent variable column
+government_health_spending_pp_year_as_row <- filter(government_health_spending_pp_year_as_row, !is.na(Government_Health_Spending_Per_Person))
 
 # Show the mean of government health spending in US$ of each country from 1995 to 2010
 paste("The Mean of Government Health Spending in US$ By Country from 1995 to 2010")
@@ -423,6 +444,9 @@ food_supply_year_as_row <- gather(food_supply, "Year", "Food_Supply", 2:48, na.r
 # change food_supply's value as numberic 
 as.numeric(food_supply_year_as_row$Food_Supply)
 
+# Remove observations with missing values in independent variable column
+food_supply_year_as_row <- filter(food_supply_year_as_row, !is.na(Food_Supply))
+
 # Show the mean of food supply in KCal per person per day in  each country from 1961 to 2007
 paste("The Mean of Food Supply in KCal Per Person Per Day By Country From 1961 to 2007")
 food_supply_year_as_row %>% 
@@ -511,6 +535,9 @@ improved_drinking_water_year_as_row <- gather(improved_drinking_water, "Year", "
 # change Improved drinking water's value as numberic 
 as.numeric(improved_drinking_water_year_as_row$Improved_Water)
 
+# Remove observations with missing values in independent variable column
+improved_drinking_water_year_as_row <- filter(improved_drinking_water_year_as_row, !is.na(Improved_Water))
+
 # Show the mean of the percentage of the total population using improved drinking water sources from 1990 to 2010
 paste("The Mean of the Percentage of the Population Using Improved Drinking Water Sources By Country From 1990 to 2010")
 improved_drinking_water_year_as_row %>% 
@@ -598,6 +625,9 @@ breast_cancer_death_year_as_row <- gather(breast_cancer_death, "Year", "Breast_C
 # change breast cacner death's value as numberic 
 as.numeric(breast_cancer_death_year_as_row$Breast_Cancer_Death)
 
+# Remove observations with missing values in independent variable column
+breast_cancer_death_year_as_row <- filter(breast_cancer_death_year_as_row, !is.na(Breast_Cancer_Death))
+
 # Show the mean of breast cancer deaths per 100,000 female of each country from 1950 to 2002
 paste("The Mean of Breast Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
 breast_cancer_death_year_as_row %>% 
@@ -650,6 +680,9 @@ cervical_cancer_death_year_as_row <- gather(cervical_cancer_death, "Year", "Cerv
 
 # Change cervical cancer death's value as numberic 
 as.numeric(cervical_cancer_death_year_as_row$Cervical_Cancer_Death)
+
+# Remove observations with missing values in independent variable column
+cervical_cancer_death_year_as_row <- filter(cervical_cancer_death_year_as_row, !is.na(Cervical_Cancer_Death))
 
 # Show the mean of cervical cancer deaths per 100,000 female of each country from 1950 to 2002
 paste("The Mean of Cervical Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
@@ -704,6 +737,9 @@ liver_cancer_death_male_year_as_row <- gather(liver_cancer_death_male, "Year", "
 # Change liver cancer death's value as numberic 
 as.numeric(liver_cancer_death_male_year_as_row$Liver_Cancer_Death_Male)
 
+# Remove observations with missing values in independent variable column
+liver_cancer_death_male_year_as_row <- filter(liver_cancer_death_male_year_as_row, !is.na(Liver_Cancer_Death_Male))
+
 # Show the mean of liver cancer deaths per 100,000 male of each country from 1955 to 2002
 paste("The Mean of Liver Cancer Deaths Per 100,000 Male By Country from 1955 to 2002")
 liver_cancer_death_male_year_as_row %>% 
@@ -723,6 +759,9 @@ liver_cancer_death_female_year_as_row <- gather(liver_cancer_death_female, "Year
 
 # Change liver cancer death's value as numberic 
 as.numeric(liver_cancer_death_female_year_as_row$Liver_Cancer_Death_Female)
+
+# Remove observations with missing values in independent variable column
+liver_cancer_death_female_year_as_row <- filter(liver_cancer_death_female_year_as_row, !is.na(Liver_Cancer_Death_Female))
 
 # Show the mean of liver cancer deaths per 100,000 female of each country from 1955 to 2002
 paste("The Mean of Liver Cancer Deaths Per 100,000 Female By Country from 1955 to 2002")
@@ -803,6 +842,9 @@ lung_cancer_death_male_year_as_row <- gather(lung_cancer_death_male, "Year", "Lu
 # Change lung cancer death's value as numberic 
 as.numeric(lung_cancer_death_male_year_as_row$Lung_Cancer_Death_Male)
 
+# Remove observations with missing values in independent variable column
+lung_cancer_death_male_year_as_row <- filter(lung_cancer_death_male_year_as_row, !is.na(Lung_Cancer_Death_Male))
+
 # Show the mean of lung cancer deaths per 100,000 male of each country from 1950 to 2002
 paste("The Mean of Lung Cancer Deaths Per 100,000 Male By Country from 1950 to 2002")
 lung_cancer_death_male_year_as_row %>% 
@@ -822,6 +864,9 @@ lung_cancer_death_female_year_as_row <- gather(lung_cancer_death_female, "Year",
 
 # Change lung cancer death's value as numberic 
 as.numeric(lung_cancer_death_female_year_as_row$Lung_Cancer_Death_Female)
+
+# Remove observations with missing values in independent variable column
+lung_cancer_death_female_year_as_row <- filter(lung_cancer_death_female_year_as_row, !is.na(Lung_Cancer_Death_Female))
 
 # Show the mean of lung cancer deaths per 100,000 female of each country from 1950 to 2002
 paste("The Mean of Lung Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
@@ -902,6 +947,9 @@ prostate_cancer_death_year_as_row <- gather(prostate_cancer_death, "Year", "Pros
 # Change prostate cancer death's value as numberic 
 as.numeric(prostate_cancer_death_year_as_row$Prostate_Cancer_Death)
 
+# Remove observations with missing values in independent variable column
+prostate_cancer_death_year_as_row <- filter(prostate_cancer_death_year_as_row, !is.na(Prostate_Cancer_Death))
+
 # Show the mean of prostate cancer deaths per 100,000 male of each country from 1950 to 2002
 paste("The Mean of Prostate Cancer Deaths Per 100,000 Male By Country from 1950 to 2002")
 prostate_cancer_death_year_as_row %>% 
@@ -956,6 +1004,9 @@ stomach_cancer_death_male_year_as_row <- gather(stomach_cancer_death_male, "Year
 # Change stomach cancer death's value as numberic 
 as.numeric(stomach_cancer_death_male_year_as_row$Stomach_Cancer_Death_Male)
 
+# Remove observations with missing values in independent variable column
+stomach_cancer_death_male_year_as_row <- filter(stomach_cancer_death_male_year_as_row, !is.na(Stomach_Cancer_Death_Male))
+
 # Show the mean of stomach cancer deaths per 100,000 male of each country from 1950 to 2002
 paste("The Mean of Stomach Cancer Deaths Per 100,000 Male By Country from 1950 to 2002")
 stomach_cancer_death_male_year_as_row %>% 
@@ -975,6 +1026,9 @@ stomach_cancer_death_female_year_as_row <- gather(stomach_cancer_death_female, "
 
 # Change stomach cancer death's value as numberic 
 as.numeric(stomach_cancer_death_female_year_as_row$Stomach_Cancer_Death_Female)
+
+# Remove observations with missing values in independent variable column
+stomach_cancer_death_female_year_as_row <- filter(stomach_cancer_death_female_year_as_row, !is.na(Stomach_Cancer_Death_Female))
 
 # Show the mean of stomach cancer deaths per 100,000 female of each country from 1950 to 2002
 paste("The Mean of Stomach Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
@@ -1048,44 +1102,44 @@ subset(stomach_cancer_death_year_as_row, Stomach_Cancer_Death > 110)
 
 ```{r}
 
-# Join all "year_as_row"" data frame using full_Join
+# Join all "year_as_row"" data frame using inner_join, not full_Join
 
 # Join income_pp_year_as_row and life_expectancy_year_as_row
 
-income_vs_life_expectancy <- full_join(income_pp_year_as_row, life_expectancy_year_as_row)
+income_vs_life_expectancy <- inner_join(income_pp_year_as_row, life_expectancy_year_as_row)
 
 # Join total_health_spending_pp_year_as_row and government_health_spending_pp_year_as_row
 
-total_n_gov_health_spending <- full_join(total_health_spending_pp_year_as_row, government_health_spending_pp_year_as_row)
+total_n_gov_health_spending <- inner_join(total_health_spending_pp_year_as_row, government_health_spending_pp_year_as_row)
 
 # Join income_vs_life_expectancy and total_n_gov_health_spending
 
-income_vs_life_vs_spending <- full_join(income_vs_life_expectancy, total_n_gov_health_spending)
+income_vs_life_vs_spending <- inner_join(income_vs_life_expectancy, total_n_gov_health_spending)
 
 
 # Join data frames of all types of cancer deaths
 
-breast_cervical_c <- full_join(breast_cancer_death_year_as_row, cervical_cancer_death_year_as_row)
+breast_cervical_c <- inner_join(breast_cancer_death_year_as_row, cervical_cancer_death_year_as_row)
 
-breast_cervical_lung_c <- full_join(breast_cervical_c, lung_cancer_death_year_as_row)
+breast_cervical_lung_c <- inner_join(breast_cervical_c, lung_cancer_death_year_as_row)
 
-breast_cervical_lung_liver_c <- full_join(breast_cervical_lung_c, liver_cancer_death_year_as_row)
+breast_cervical_lung_liver_c <- inner_join(breast_cervical_lung_c, liver_cancer_death_year_as_row)
 
-breast_cervical_lung_liver_prostate_c <- full_join(breast_cervical_lung_liver_c, prostate_cancer_death_year_as_row)
+breast_cervical_lung_liver_prostate_c <- inner_join(breast_cervical_lung_liver_c, prostate_cancer_death_year_as_row)
 
-breast_cervical_lung_liver_prostate_stomach_c <- full_join(breast_cervical_lung_liver_prostate_c, stomach_cancer_death_year_as_row)
+breast_cervical_lung_liver_prostate_stomach_c <- inner_join(breast_cervical_lung_liver_prostate_c, stomach_cancer_death_year_as_row)
 
 # Join food supply and improved_drinking_water
 
-food_n_water <- full_join(food_supply_year_as_row, improved_drinking_water_year_as_row)
+food_n_water <- inner_join(food_supply_year_as_row, improved_drinking_water_year_as_row)
 
 # Join cancer death data frame and income/life expectancy/health spending data frame
 
-all_year_as_row <- full_join(income_vs_life_vs_spending, breast_cervical_lung_liver_prostate_stomach_c)
+all_year_as_row <- inner_join(income_vs_life_vs_spending, breast_cervical_lung_liver_prostate_stomach_c)
 
 # Join all_year_as_row and food_n_water
 
-all_year_as_row <- full_join(all_year_as_row, food_n_water)
+all_year_as_row <- inner_join(all_year_as_row, food_n_water)
 
 ```
 
@@ -1401,7 +1455,7 @@ ggplot(life_cancer_every5yrs, aes(x = Stomach_Cancer_Death, y = Life_Expectancy,
 
 # Save the cleaned file as .csv
 
-# write.csv(all_year_as_row, "income_life_spend_cancer_full_join.csv", row.names = FALSE)
+write.csv(all_year_as_row, "income_life_spend_cancer_inner_join.csv", row.names = FALSE)
 
 ```
 
@@ -1411,129 +1465,88 @@ ggplot(life_cancer_every5yrs, aes(x = Stomach_Cancer_Death, y = Life_Expectancy,
 
 all_variables_2002 <- total_cancer_death_2002
 
-# Create model 1 with All independent variables
-
-
-model1 <- lm(Life_Expectancy ~ Income_per_person + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_2002)
-
-summary(model1)
-
-SSE=sum(model1$residuals^2)
-SSE
 
 ```
 
 ```{r}
+# Cross-Validation
+
+# Split the dataset to a training set and a testing set
+set.seed(100)
+split = sample.split(all_variables_2002$Life_Expectancy, SplitRatio = 0.7)
+Train2002 = subset(all_variables_2002, split == TRUE)
+Test2002 = subset(all_variables_2002, split == FALSE)
+
+# Create a regression model with all 6 predictor variables
+AllVariables2002Log_6p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train2002)
+summary(AllVariables2002Log_6p)
+
+SSE=sum(AllVariables2002Log_6p$residuals^2)
+SSE
+
+# Make a prediction on the testing set with 6 predictor variables
+str(Test2002)
+PredictTest2002_6p <- predict(AllVariables2002Log_6p, newdata = Test2002)
+
+# Calculate Out-of-sample (test) R-Squared with 6 predictor variables
+
+SSE_6p = sum((Test2002$Life_Expectancy - PredictTest2002_6p) ^ 2)
+SST_6p = sum((Test2002$Life_Expectancy - mean(all_variables_2002$Life_Expectancy))^ 2)
+1 - SSE_6p/SST_6p
+
+# Use different methods to select predictor variables
 # Create Best Subsets Regression
-
-ols_best_subset(model1)
-
-```
-```{r}
-
-model_BSR <- lm(Life_Expectancy ~ Government_Health_Spending_Per_Person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_2002)
-
-summary(model_BSR)
-
-SSE=sum(model_BSR$residuals^2)
-SSE
-
-```
-
-
-
-```{r}
+ols_best_subset(AllVariables2002Log_6p)
 
 # Create Stepwise Forward Regression 
+ols_step_forward(AllVariables2002Log_6p)
 
-ols_step_forward(model1)
+# Create Random forest
 
-```
-```{r}
+output_forest <- randomForest(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train2002, importance=TRUE)
 
+# View the Random forest results
 
-model_SFR <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_2002)
+print(output_forest) 
 
-summary(model_SFR)
+# Importance of each predictor (Random forest)
 
-SSE=sum(model_SFR$residuals^2)
+print(importance(output_forest)) 
+
+# Create two more regression models based on previous testings and determine which model is the best one. 
+# Create a regression model for a testing set with 4 predictor variables: Income, food, improved water source, and cancer death
+
+AllVariables2002Log_4p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = Train2002)
+summary(AllVariables2002Log_4p)
+
+SSE=sum(AllVariables2002Log_4p$residuals^2)
 SSE
 
-```
+# Make a prediction on the testing set with 4 predictor variables
+PredictTest2002_4p <- predict(AllVariables2002Log_4p, newdata = Test2002)
 
-```{r}
-# Create Stepwise Backword Regression
+# Calculate Out-of-sample (test) R-Squared with 4 predictor variables
 
-ols_step_backward(model1)
+SSE_4p = sum((Test2002$Life_Expectancy - PredictTest2002_4p) ^ 2)
+SST_4p = sum((Test2002$Life_Expectancy - mean(all_variables_2002$Life_Expectancy))^ 2)
+1 - SSE_4p/SST_4p
 
-```
-```{r}
+# Create a regression model for a testing set with 5 predictor variables: Income, food, improved water source, total health spending, and government health spending
 
-# Create Stepwise Regression
+AllVariables2002Log_5p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train2002)
+summary(AllVariables2002Log_5p)
 
-ols_stepwise(model1)
+SSE=sum(AllVariables2002Log_5p$residuals^2)
+SSE
 
-```
+# Make a prediction on the testing set with 4 predictor variables
+PredictTest2002_5p <- predict(AllVariables2002Log_5p, newdata = Test2002)
 
+# Calculate Out-of-sample (test) R-Squared with 4 predictor variables
 
-
-```{r}
-# Create model 2 with all independent variables except all cancer death
-
-# model2 <- lm(Life_Expectancy ~ Income_per_person + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person + Food_Supply + Improved_Water, data = all_variables_2002)
-
-# summary(model2)
-
-# SSE=sum(model2$residuals^2)
-# SSE
-
-
-```
-```{r}
-# Create model 3 with all independent variables except income
-
-# model3 <- lm(Life_Expectancy ~ Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_2002)
-
-# summary(model3)
-
-# SSE=sum(model3$residuals^2)
-# SSE
-
+SSE_5p = sum((Test2002$Life_Expectancy - PredictTest2002_5p) ^ 2)
+SST_5p = sum((Test2002$Life_Expectancy - mean(all_variables_2002$Life_Expectancy))^ 2)
+1 - SSE_5p/SST_5p
 
 ```
 
-```{r}
-# Create model 4 with all independent variables except total health spending
-
-# model4 <- lm(Life_Expectancy ~ Income_per_person + Government_Health_Spending_Per_Person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_2002)
-
-# summary(model4)
-
-# SSE=sum(model4$residuals^2)
-# SSE
-
-```
-```{r}
-# Create model 5 with all independent variables except government health spending
-
-# model5 <- lm(Life_Expectancy ~ Income_per_person + Total_Health_Spending_Per_Person + # Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_2002)
-
-# summary(model5)
-
-# SSE=sum(model5$residuals^2)
-# SSE
-
-
-```
-
-```{r}
-# Create model 6 with all independent variables except total and government health spending
-
-# model6 <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_2002)
-
-# summary(model6)
-
-# SSE=sum(model6$residuals^2)
-# SSE
-
-```
