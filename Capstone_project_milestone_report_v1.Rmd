@@ -2,7 +2,7 @@ Title: Capstone Project Milestone Report
 <br>
 Name: H Karen Tam
 
-Update: December 27, 2017
+Update: January 3, 2018
 
 
 ### An introduction to the problem
@@ -26,7 +26,7 @@ Variable
 Years
 </th>
 <th>
-Number of <br>Country
+Number of <br>Country & Territory
 </th>
 </tr>
 
@@ -130,9 +130,10 @@ There are many reasons for death. The dataset only contains very limited variabl
 
     + I used gather() in tidyr package to gather year columns into key-value pairs. It was easier to make scatter plots and do statistical analysis by using the restructured dataset based on countries and years.
 
-  + Join the data from different datasets
+  + Remove missing value and join the data from different datasets
 
-    + I used full_join () and inner_join() in dplyr package to join variables together into a dataset. I also calculated total numbers of cancer death for each country in different years by adding numbers of various male and female cancer death. 
+    + I removed missing values in each individual variable's dataset. 
+    + I used inner_join() in dplyr package to join all variables together into a large dataset. I also calculated total numbers of cancer death for each country in different years by adding numbers of various male and female cancer death. 
 
   + Examine outliers
 
@@ -457,7 +458,7 @@ There are different levels of correlations between life expectancy and predictor
 
 Income and health spending have moderate, positive relationships with life expectancy. Food supply and clean drinking water have strong, positive relationships with life expectancy. But cancer death has weak, negative relationship with life expectancy according to its correlation coefficient. 
 
-Next, I would like to see how good income, health spending, cancer death, food supply, and clean drinking water can predict life expectancy. 
+Next, I would like to see how good the model can predict life expectancy. 
 
 <br>
 
@@ -467,66 +468,146 @@ Multiple Linear Regression is used to test how the change in predictor variables
 
 **Dataset**
 
-The dataset used in this test contains the most updated available data in 2002 from the Gapminder. A total of 276 observations/countries are in the dataset, in which 127 observations have missing data. 
+The dataset used in this test contains the most updated available data in 2002 from the Gapminder. A total of 149 observations (countries/territories) are in the dataset. There is no missing data. 
+
+**Cross-Validation**
+
+The dataset is split into a training set and a testing set. The regression model is built based on the training set. Prediction is performed on the testing set. 
 
 **Variable Selection**
 
-Best Subsets Regression and Stepwise Forward Regression methods are used to select predictor variables that do the best at predicting life expectancy. The predict variables are selected based on the Adjusted R-Squared. Sum of Squared Errors is also considered when comparing the best models in the results of the Best Subsets Regression and Stepwise Forward Regression. 
+After creating a training set and a testing set, Best Subsets Regression, Stepwise Forward Regression, and Random Forest are performed to select predictor variables that do the best at predicting life expectancy. The predict variables are selected based on the Adjusted R-Squared. Sum of Squared Errors is also considered when comparing the models.
 
 <br>
 
 _Result of Best Subsets Regression_ 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/Best_subsets_regression_result.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/bad16ce8e9aedf38a09ec2dcad7584e8718b3e81/Best_subsets_regression_result.png?raw=true)
 
 <br> 
 
-Best Model shown in the Best Subsets Regression Based on the Adjusted R-Squared:
+The best model:
 
-  + Dependent variable: Life Expectancy
-  + Independent variables: Government Health Spending, Food Supply, Improved Drinking Water Source, and Cancer Death
-  + Adjusted R-Squared: 0.6802
-  + Sum of Squared Errors: 4469.646
+  + Dependent/Outcome variable: Life Expectancy
+  + Independent/Predictor variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
+  + Adjusted R-Squared: 0.6606
 
 <br>
 
 _Result of Stepwise Forward Regression_
 
-![](https://github.com/karentam/capstoneproject1/blob/master/Stepwise_forward_regression_result.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/bad16ce8e9aedf38a09ec2dcad7584e8718b3e81/Stepwise_forward_regression_result.png?raw=true)
 
 <br>
 
-Best Model shown in Stepwise Forward Regression Based on the Adjusted R-Squared:
+The best model:
 
-  + Dependent variable: Life Expectancy
-  + Independent variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
-  + Adjusted R-Squared: 0.6759
-  + Sum of Squared Errors: 4652.93
-
-The best model from the Best Subsets Regression is choosen because it has the larger Adjusted R-Squared and lower Sum of Squared Errors. 
+  + Dependent/Outcome variable: Life Expectancy
+  + Independent/Predictor variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
+  + Adjusted R-Squared: 0.6606
 
 <br>
+
+_Result of Random Forest_
+
+![](https://github.com/karentam/capstoneproject1/blob/bad16ce8e9aedf38a09ec2dcad7584e8718b3e81/Random_forest_result.png?raw=true)
+
+<br>
+
+The best model:
+
+  + Dependent/Outcome variable: Life Expectancy
+  + Independent/Predictor variables: Income, Food Supply, Improved Drinking Water Source, Total Health Spending, and Government Health Spending
+
+_Comparison of Models_
+
+<table>
+
+<tr>
+<td>
+Predictor Variables
+</td>
+<td>
+Adjusted R-Squared
+</td>
+<td>
+Out-Of-Sample R-Squared
+</td>
+<td>
+Sum of Squared Errors
+</td>
+</tr>
+
+<tr>
+<td>
+Income, Food Supply, Improved Water Source, Cancer Death, Total Health Spending, and Government Health Spending
+</td>
+<td>
+0.6544
+</td>
+<td>
+0.6905
+</td>
+<td>
+<font color="red">3403.779</font>
+</td>
+</tr>
+
+<tr>
+<td>
+Income, Food Supply, Improved Water Source, and Cancer Death
+</td>
+<td>
+<font color="red">0.6606</font>
+</td>
+<td>
+<font color="red">0.6926</font>
+</td>
+<td>
+3411.14
+</td>
+</tr>
+
+<tr>
+<td>
+Income, Food Supply, Improved Water Source, Total Health Spending, and Government Health Spending
+</td>
+<td>
+0.6539
+</td>
+<td>
+0.6799
+</td>
+<td>
+3443.38
+</td>
+</tr>
+
+</table>
+
+The model with predictor variables Income, Food Supply, Improved Water Source, and Cancer Death has the highest Adjusted R-Squared of 0.6606 and the highest Out-of-Sample R-Squared of 0.6926. Its Sum of Squared Errors of 3411.14 is close to the smallest one in the model with 6 predictors. Therefore, it is selected as the best model to predict life expectancy.
 
 **Analysis Based on the Best Model**
 
-![](https://github.com/karentam/capstoneproject1/blob/master/Model_BSR_individual_regression_result.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/bad16ce8e9aedf38a09ec2dcad7584e8718b3e81/Regression_AllVariables2002Log4p_result.png?raw=true)
 
-There are 276 observations, in which 123 of them have missing data in this model. Predictors include government health spending, food supply, improved drinking water source, and cancer death.
+There are 149 observations in this model without any missing data. Predictors include income, food supply, improved drinking water source, and cancer death.
 
 Adjusted R-Squared:
-The Adjusted R-Squared of 0.6802 suggests that about 68% of variation in life expectancy can be explained by this model. 
+The Adjusted R-Squared of 0.6606 suggests that about 66% of variation in life expectancy can be explained by this model. 
 
 P-Value:
-Government health spending, food supply, and improved drinking water sources are significant because their p-values are less than 0.05. Statistically significant means that the result is likely not due to random chance. Cancer death has a p-value of 0.1038. If the level of confidence is 90%, cancer death is very close to be a significant variable. 
+Food supply and improved drinking water sources are significant because their p-values are less than 0.05. Statistically significant means that the result is likely not due to random chance. Income has a p-value of 0.1345. If the level of confidence is 90%, income is very close to be a significant variable. On the other hand, cancer death has a p-value of 0.2757, which is not significant to the model. 
 
 Residual Standard Error:
-Residual Standard Error of 5.495 shows that there are about 5.5 years between the observed life expectancy and predicted life expectancy. 
+Residual Standard Error of 5.87 shows that there are about 5.87 years between the observed life expectancy and predicted life expectancy. 
 
 Estimated Effect of Predictors:
-  + An increase of US$1 in government health spending is associated with an increase of 0.0017 year in life expectancy. 
-  + An increase of 1 calory intake is associated with an increase of 0.0054 year in life expectancy.
-  + An increase in 1% of country's population with an access to clean drinking water sources is associated with an increase in 0.2845 year in life expectancy.
-  + A decrease in 1 case of cancer death per 100,000 person per year is associated with an increase of 0.0242 year in life expectancy. 
+  + An increase of US$1 in GDP Per Capita is associated with an increase of 0.0001904 year in life expectancy. 
+  + An increase of 1 calory intake is associated with an increase of 0.006685 year in life expectancy.
+  + An increase in 1% of country's population with an access to clean drinking water sources is associated with an increase in 0.2787 year in life expectancy.
+  + A decrease in 1 case of cancer death per 100,000 person per year is associated with an increase of 0.01989 year in life expectancy. 
+
   
 
 <br><br>
