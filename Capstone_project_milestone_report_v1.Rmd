@@ -110,7 +110,7 @@ Cancer Death
 2002
 </td>
 <td>
-174
+149
 </td>
 </tr>
 
@@ -150,7 +150,7 @@ There are many reasons for death. The dataset only contains very limited variabl
 
 **GDP Per Capita**
 
-Data from 200 countries is used in plots below. GDP Per Capita by country is not normally distributed. 
+Data from 200 countries and territories is used in plots below. GDP Per Capita by country is not normally distributed. 
 
 There are 1/3 of the countries with less than US$557 income per person. Nine of the ten countries with the lowest means of GDP Per Capita are from different parts of Africa. Nepal is the only one Asian country on the bottom ten list. 
 
@@ -167,7 +167,7 @@ Outliers are countries with citizens who have very high income in average ($80,0
 </tr>
 <tr>
 <td colspan="2" align="center">
-<h6>Observation: 14,196. Observation containing missing data: 6,208.</h6>
+<h6>Observation: 7,988 without missing data</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a></h6>
 </td>
 </tr>
@@ -177,7 +177,7 @@ Outliers are countries with citizens who have very high income in average ($80,0
 
 **Life Expectancy**
 
-Data on life expectancy was from 209 countries. The data is left-skewed, suggesting that the majority of countries have the longer life expectancy. 
+Data on life expectancy was from 209 countries and territories. The data is left-skewed, suggesting that the majority of countries have the longer life expectancy. 
 
 Outliers are from countries with the life expectancy of fewer than 30 years of age during wars. They include Mali in 1960 and 1961. Since gaining independence from France in 1960, the West African state of Mali has been afflicted by several rebellions, insurrections, and coups. Other outliers were created by the genocide in Cambodia from 1975 to 1980, that resulted in the deaths of 25% of the country's population from starvation, overwork, and executions. Rwanda is one of these outliers as well due to the genocide in 1994. There were 500,000 to 1,000,000 deaths during that year.
 
@@ -192,7 +192,7 @@ Outliers are from countries with the life expectancy of fewer than 30 years of a
 </tr>
 <tr>
 <td colspan="2" align="center">
-<h6>Observation: 15,561. Observation containing missing data: 3,931.</h6>
+<h6>Observation: 11,630 without missing data</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx" target="_blank">Gapminder, Life Expectancy (Years)</a></h6>
 </td>
 </tr>
@@ -202,7 +202,7 @@ Outliers are from countries with the life expectancy of fewer than 30 years of a
 
 **Total Health Spending**
 
-Data on total health spending was from 189 countries. It is not normally distributed and is right-skewed. There are 3/4 of countries with the total health spending per person of US$564 or less. 
+Data on total health spending was from 189 countries and territories. It is not normally distributed and is right-skewed. There are 3/4 of countries with the total health spending per person of US$564 or less. 
 
 Outliers are countries with total health spending more than US$8,000 per person per year. There are 6 records in this subset. The countries are Luxembourg, Norway, and United States from 2008 to 2010. These are rich countries, and their annual expenses are from $8,054 to $8,361.
 
@@ -217,7 +217,7 @@ Outliers are countries with total health spending more than US$8,000 per person 
 </tr>
 <tr>
 <td colspan="2" align="center">
-<h6>Observation: 4,368. Observation containing missing data: 1,360.</h6>
+<h6>Observation: 3,008 without missing data.</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx" target="_blank">Gapminder, Total health spending per person (USD)</a></h6>
 </td>
 </tr>
@@ -227,7 +227,7 @@ Outliers are countries with total health spending more than US$8,000 per person 
 
 **Government Health Spending**
 
-Data on government health spending was from 191 countries. Similar to the total health spending, it is not normally distributed and is right-skewed. There are about 3/4 of the countries with the government health spending per person of US$460 or less. 
+Data on government health spending was from 191 countries and territories. Similar to the total health spending, it is not normally distributed and is right-skewed. There are about 3/4 of the countries with the government health spending per person of US$460 or less. 
 
 Outliers are Luxembourg and Norway from 2007 to 2010 with more than US$6,000 government health spending per person per year. 
 
@@ -242,7 +242,7 @@ Outliers are Luxembourg and Norway from 2007 to 2010 with more than US$6,000 gov
 </tr>
 <tr>
 <td colspan="2" align="center">
-<h6>Observation: 4,368. Observation containing missing data: 1,329.</h6>
+<h6>Observation: 3,039 without missing data</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx" target="_blank">Gapminder, Government health spending per person (USD)</a></h6>
 </td>
 </tr>
@@ -252,7 +252,7 @@ Outliers are Luxembourg and Norway from 2007 to 2010 with more than US$6,000 gov
 
 **Improved Drinking Water Sources**
 
-Data on improved drinking water sources was from 201 countries. The data is left-skewed, and there are about 2/3 of the countries with more than 90% of the population using improved drinking water sources. 
+Data on improved drinking water sources was from 201 countries and territories. The data is left-skewed, and there are about 2/3 of the countries with more than 90% of the population using improved drinking water sources. 
 
 Outliers are from Afghanistan in different years in the 1990s with less than 10% of the population using improved drinking water sources. In 2007, Afghanistan has improved the accessibility to clean drinking water to 50% of its population. 
 
@@ -267,7 +267,7 @@ Outliers are from Afghanistan in different years in the 1990s with less than 10%
 </tr>
 <tr>
 <td colspan="2" align="center">
-<h6>Observation: 15,561. Observation containing missing data: 3,931.</h6>
+<h6>Observation: 4,045 without missing data.</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEd98lRwrU3gIg&output=xlsx" target="_blank">Gapminder, Improved water source-overall access (%)</a></h6>
 </td>
 </tr>
@@ -277,7 +277,7 @@ Outliers are from Afghanistan in different years in the 1990s with less than 10%
 
 **Food Supply**
 
-Data on average daily intake was from 176 countries. According to the National Health Service of the United Kingdom, the average male adult needs approximately 2,500 calories per day to keep his weight constant, while the average adult female needs 2,000 calories per day. In this regard, the mean and median are close to recommended daily calories intakes. 
+Data on average daily intake was from 176 countries and territories. According to the National Health Service of the United Kingdom, the average male adult needs approximately 2,500 calories per day to keep his weight constant, while the average adult female needs 2,000 calories per day. In this regard, the mean and median are close to recommended daily calories intakes. 
 
 There are only 6 countries with the average daily intake of less than 1,000 calories, but those are from the 1960s to 1990s. Countries include China, Burkina Faso, Maldives in the 1960s; Ethiopia and Djibouti in the 1970s, and Eritrea in the 1990s. Outliers are countries with 3,750 calories per day per person or more, including the United States from 2002 to 2006, Hungary in 1987 and 1989, and Austria in 1999, 2000, 2001, 2006, and 2007.  
 
@@ -292,7 +292,7 @@ There are only 6 countries with the average daily intake of less than 1,000 calo
 </tr>
 <tr>
 <td colspan="2" align="center">
-<h6>Observation: 12,831. Observation containing missing data: 5,331.</h6>
+<h6>Observation: 7,547 without missing data</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=0ArfEDsV3bBwCdGlYVVpXX20tbU13STZyVG0yNkRrZnc&output=xlsx" target="_blank">Gapminder, Food supply (kilocalories/person & day)</a></h6>
 </td>
 </tr>
@@ -302,7 +302,7 @@ There are only 6 countries with the average daily intake of less than 1,000 calo
 
 **Cancer Death**
 
-Data on various cancer deaths was from 174 countries in 2002. The most updated available data is 2002's. The types of cancer include breast, cervical, liver, stomach, lung, and prostate. The data is almost normally distributed but is still right-stewed. 
+Data on various cancer deaths was from 149 countries and territories in 2002. The most updated available data is 2002's. The types of cancer include breast, cervical, liver, stomach, lung, and prostate. The data is almost normally distributed but is still right-stewed. 
 
 The outlier with 249.4 cancer deaths per 100,000 person per year in 2002 is Mongolia due to its extremely high rate of liver cancer (140.6 deaths per 100,000 person). Mongolia has the world's highest rate of liver cancer mortality. High rates of hepatitis C and B infection along with widespread alcohol use have left Mongolia with a burden of liver cancer that it is ill-equipped to handle. 
 
@@ -317,7 +317,7 @@ The outlier with 249.4 cancer deaths per 100,000 person per year in 2002 is Mong
 </tr>
 <tr>
 <td colspan="2" align="center">
-<h6>Observation: 276. Observation containing missing data: 102.</h6>
+<h6>Observation: 149 without missing data</h6>
 <h6>Source: <a href="http://www.gapminder.org/data/" target="_blank">Gapminder, Cancer Deaths Per 100,000 Persons</a> (Search Keyword: Cancer)</h6>
 </td>
 </tr>
