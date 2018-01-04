@@ -519,6 +519,8 @@ The best model:
   + Dependent/Outcome variable: Life Expectancy
   + Independent/Predictor variables: Income, Food Supply, Improved Drinking Water Source, Total Health Spending, and Government Health Spending
 
+<br>
+
 _Comparison of Models_
 
 <table>
@@ -586,6 +588,8 @@ Income, Food Supply, Improved Water Source, Total Health Spending, and Governmen
 </table>
 
 The model with predictor variables Income, Food Supply, Improved Water Source, and Cancer Death has the highest Adjusted R-Squared of 0.6606 and the highest Out-of-Sample R-Squared of 0.6926. Its Sum of Squared Errors of 3411.14 is close to the smallest one in the model with 6 predictors. Therefore, it is selected as the best model to predict life expectancy.
+
+<br>
 
 **Analysis Based on the Best Model**
 
