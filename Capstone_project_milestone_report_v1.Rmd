@@ -202,7 +202,7 @@ Outliers are from countries with the life expectancy of fewer than 30 years of a
 
 **Total Health Spending**
 
-Data on total health spending was from 189 countries and territories. It is not normally distributed and is right-skewed. There are 3/4 of countries with the total health spending per person of US$564 or less. 
+Data on total health spending was from 189 countries and territories. It is not normally distributed and is right-skewed. There are 3/4 of countries and territories with the total health spending per person of US$564 or less. 
 
 Outliers are countries with total health spending more than US$8,000 per person per year. There are 6 records in this subset. The countries are Luxembourg, Norway, and United States from 2008 to 2010. These are rich countries, and their annual expenses are from $8,054 to $8,361.
 
@@ -252,17 +252,17 @@ Outliers are Luxembourg and Norway from 2007 to 2010 with more than US$6,000 gov
 
 **Improved Drinking Water Sources**
 
-Data on improved drinking water sources was from 201 countries and territories. The data is left-skewed, and there are about 2/3 of the countries with more than 90% of the population using improved drinking water sources. 
+Data on improved drinking water sources was from 201 countries and territories. There are 106 countries and territories with more than 90% of the population using improved drinking water sources. 
 
 Outliers are from Afghanistan in different years in the 1990s with less than 10% of the population using improved drinking water sources. In 2007, Afghanistan has improved the accessibility to clean drinking water to 50% of its population. 
 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Water_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/DensityPlot_Water_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Water_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/ECDFPlot_Water_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
@@ -279,20 +279,20 @@ Outliers are from Afghanistan in different years in the 1990s with less than 10%
 
 Data on average daily intake was from 176 countries and territories. According to the National Health Service of the United Kingdom, the average male adult needs approximately 2,500 calories per day to keep his weight constant, while the average adult female needs 2,000 calories per day. In this regard, the mean and median are close to recommended daily calories intakes. 
 
-There are only 6 countries with the average daily intake of less than 1,000 calories, but those are from the 1960s to 1990s. Countries include China, Burkina Faso, Maldives in the 1960s; Ethiopia and Djibouti in the 1970s, and Eritrea in the 1990s. Outliers are countries with 3,750 calories per day per person or more, including the United States from 2002 to 2006, Hungary in 1987 and 1989, and Austria in 1999, 2000, 2001, 2006, and 2007.  
+There are only 6 countries with the average daily intake of less than 1,500 calories, but those are from the 1960s to 1990s. Countries include China, Burkina Faso, Maldives in the 1960s; Ethiopia and Djibouti in the 1970s, and Eritrea in the 1990s. Outliers are countries with 3,750 calories per day per person or more, including the United States from 2002 to 2006, Hungary in 1987 and 1989, and Austria in 1999, 2000, 2001, 2006, and 2007.  
 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Food_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/DensityPlot_Food_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Food_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/ECDFPlot_Food_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
 <td colspan="2" align="center">
-<h6>Observation: 7,547 without missing data</h6>
+<h6>Observation: 7,500 without missing data</h6>
 <h6>Source: <a href="http://docs.google.com/spreadsheet/pub?key=0ArfEDsV3bBwCdGlYVVpXX20tbU13STZyVG0yNkRrZnc&output=xlsx" target="_blank">Gapminder, Food supply (kilocalories/person & day)</a></h6>
 </td>
 </tr>
@@ -309,10 +309,10 @@ The outlier with 249.4 cancer deaths per 100,000 person per year in 2002 is Mong
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_TotC_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/DensityPlot_TotC_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_TotC_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/ECDFPlot_TotC_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
@@ -551,7 +551,7 @@ Income, Food Supply, Improved Water Source, Cancer Death, Total Health Spending,
 0.6905
 </td>
 <td>
-<font color="red">3403.779</font>
+<font color=red>3403.779</font>
 </td>
 </tr>
 
@@ -560,10 +560,10 @@ Income, Food Supply, Improved Water Source, Cancer Death, Total Health Spending,
 Income, Food Supply, Improved Water Source, and Cancer Death
 </td>
 <td>
-<font color="red">0.6606</font>
+<font color=red>0.6606</font>
 </td>
 <td>
-<font color="red">0.6926</font>
+<font color=red>0.6926</font>
 </td>
 <td>
 3411.14

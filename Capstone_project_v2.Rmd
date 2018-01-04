@@ -5,6 +5,7 @@ date: "November 16, 2017"
 output:
   html_document: default
 ---
+Update: January 4, 2018
 
 ```{r}
 
@@ -146,7 +147,7 @@ hist(income_pp$`1960`, xlab="GDP Per Capita 1960", main="Income In Different Cou
 ```{r}
 # Check to see the outliers are resasonable.
 
-subset(income_pp_year_as_row, Income_per_person > 50000)
+subset(income_pp_year_as_row, Income_per_person > 80000)
 
 ```
 
@@ -444,9 +445,10 @@ food_supply_year_as_row <- gather(food_supply, "Year", "Food_Supply", 2:48, na.r
 # change food_supply's value as numberic 
 as.numeric(food_supply_year_as_row$Food_Supply)
 
-# Remove observations with missing values in independent variable column
-food_supply_year_as_row <- filter(food_supply_year_as_row, !is.na(Food_Supply))
-
+# Remove observations with missing values in independent variable and country columns
+food_supply_year_as_row <- filter(food_supply_year_as_row, !is.na(Food_Supply) & !is.na(Country))
+food_supply_year_as_row
+ 
 # Show the mean of food supply in KCal per person per day in  each country from 1961 to 2007
 paste("The Mean of Food Supply in KCal Per Person Per Day By Country From 1961 to 2007")
 food_supply_year_as_row %>% 
@@ -483,8 +485,8 @@ food_sd_r_word <- paste("Standard Deviation =",food_sd_r,"Cal")
 
 food_plot_label <- paste("",food_mean_r_word,"\n",food_median_r_word,"\n",food_sd_r_word)
 
-# Create a text for income plots
-food_grob <- grobTree(textGrob(food_plot_label, x=0.5,  y=0.9, hjust=0,
+# Create a text for food supply plots
+food_grob <- grobTree(textGrob(food_plot_label, x=0.01,  y=0.9, hjust=0,
   gp=gpar(col="black", fontsize=10, fontface="italic")))
 
 ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + geom_density() + labs(x = "Food Supply by Calories Per Person Per Day", y = "Density", title = "Density Plot of Food Supply 1961-2007") + geom_vline(xintercept=food_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=food_mean,y=0.0002),label="Mean", hjust=-0.1) + geom_vline(xintercept = food_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=food_median,y=0.0001),label="Median", hjust=1.1) + annotation_custom(food_grob)
@@ -495,10 +497,12 @@ ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + geom_density() + labs(x 
 
 # Empirical Cumulative Density Function for food_supply_year_as_row
 
-food_grob2 <- grobTree(textGrob(food_plot_label, x=0.5,  y=0.15, hjust=0,
+food_grob2 <- grobTree(textGrob(food_plot_label, x=0.01,  y=0.9, hjust=0,
   gp=gpar(col="black", fontsize=10, fontface="italic")))
 
 ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + stat_ecdf(geom = "point") + labs(x = "Food Supply by Calories Per Person Per Day", y = "F(Food Supply)", title = "Empirical Cumulative Density Function of\nFood Supply 1961-2007") + geom_vline(xintercept=food_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=food_mean,y=0.35),label="Mean", hjust=-0.1) + geom_vline(xintercept = food_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=food_median,y=0.75),label="Median", hjust=1.1) + annotation_custom(food_grob2)
+
+
 
 ```
 
@@ -518,9 +522,7 @@ hist(food_supply$`1961`, xlab="Food Supply in Calories Per Person Per Day in 196
 ```{r}
 # Check the outliers to see whether they are reasonable.
 
-# (change) There are 3 records in this subset. The only country wiht mor ethan 3800 KCal per person per day is Austria in 2000s. 
-
-subset(food_supply_year_as_row, Food_Supply < 1000)
+subset(food_supply_year_as_row, Food_Supply < 1500)
 
 ```
 
@@ -1410,7 +1412,7 @@ totc_sd_r_word <- paste("Standard Deviation =",totc_sd_r,"deaths")
 
 totc_plot_label <- paste("",totc_mean_r_word,"\n",totc_median_r_word,"\n",totc_sd_r_word)
 
-# Create a text for income plots
+# Create a text for cancer death plots
 totc_grob <- grobTree(textGrob(totc_plot_label, x=0.5,  y=0.9, hjust=0,
   gp=gpar(col="black", fontsize=10, fontface="italic")))
 
