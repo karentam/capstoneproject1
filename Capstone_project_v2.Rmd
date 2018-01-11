@@ -5,7 +5,7 @@ date: "November 16, 2017"
 output:
   html_document: default
 ---
-Update: January 4, 2018
+Update: January 10, 2018
 
 ```{r}
 
@@ -32,6 +32,9 @@ library(randomForest)
 
 # Load caTools
 library(caTools)
+
+# Load DAAG
+library(DAAG) 
 
 # Import excel files
 income_pp <- read_excel("income_pp.xlsx")
@@ -1355,13 +1358,19 @@ ggplot(life_food_in_2yrs, aes(x = Food_Supply, y = Life_Expectancy, col = Year))
 
 ```{r}
 
-# Create subsets for data of 1987, 1992, 1997, 2002
+# Create subsets for data of 1987, 1992, 1997, 2002 (for plots)
 all_year_as_row_1987 <- subset(all_year_as_row, Year == 1987) 
 all_year_as_row_1992 <- subset(all_year_as_row, Year == 1992) 
 all_year_as_row_1997 <- subset(all_year_as_row, Year == 1997) 
 all_year_as_row_2002 <- subset(all_year_as_row, Year == 2002) 
 
-# Bind rows in all subsets for data of 1987, 1992, 1997, 2002
+# Create subsets for data from 1998 to 2001. 2002 data will be used. (for regression)
+all_year_as_row_2001 <- subset(all_year_as_row, Year == 2001) 
+all_year_as_row_2000 <- subset(all_year_as_row, Year == 2000) 
+all_year_as_row_1999 <- subset(all_year_as_row, Year == 1999) 
+all_year_as_row_1998 <- subset(all_year_as_row, Year == 1998) 
+
+# Bind rows in all subsets for data of 1987, 1992, 1997, 2002 (for plots)
 
 life_cancer_every5yrs <- bind_rows(all_year_as_row_1987, all_year_as_row_1992)
 
@@ -1369,21 +1378,45 @@ life_cancer_every5yrs <- bind_rows(life_cancer_every5yrs, all_year_as_row_1997)
 
 life_cancer_every5yrs <- bind_rows(life_cancer_every5yrs, all_year_as_row_2002)
 
-# Calculate the total of different cancer deaths in 2010 and create a new column for the total (for creating plot for total cancer deaths)
+
+# Calculate the total of different cancer deaths in 2010 and create a new column for the total (for creating plots for total cancer deaths and regression)
 
 total_cancer_death_2002 <- all_year_as_row_2002 %>% 
   mutate(All_Cancer_Death = Breast_Cancer_Death + Cervical_Cancer_Death + Liver_Cancer_Death + Lung_Cancer_Death + Stomach_Cancer_Death + Prostate_Cancer_Death)
+
+total_cancer_death_2001 <- all_year_as_row_2001 %>% 
+  mutate(All_Cancer_Death = Breast_Cancer_Death + Cervical_Cancer_Death + Liver_Cancer_Death + Lung_Cancer_Death + Stomach_Cancer_Death + Prostate_Cancer_Death)
+
+total_cancer_death_2000 <- all_year_as_row_2000 %>% 
+  mutate(All_Cancer_Death = Breast_Cancer_Death + Cervical_Cancer_Death + Liver_Cancer_Death + Lung_Cancer_Death + Stomach_Cancer_Death + Prostate_Cancer_Death)
+
+total_cancer_death_1999 <- all_year_as_row_1999 %>% 
+  mutate(All_Cancer_Death = Breast_Cancer_Death + Cervical_Cancer_Death + Liver_Cancer_Death + Lung_Cancer_Death + Stomach_Cancer_Death + Prostate_Cancer_Death)
+
+total_cancer_death_1998 <- all_year_as_row_1998 %>% 
+  mutate(All_Cancer_Death = Breast_Cancer_Death + Cervical_Cancer_Death + Liver_Cancer_Death + Lung_Cancer_Death + Stomach_Cancer_Death + Prostate_Cancer_Death)
+
+
+# Bind rows in all subsets for data from 1998 to 2002 (for regression)
+
+total_cancer_death_last5yrs <- bind_rows(total_cancer_death_1998, total_cancer_death_1999)
+total_cancer_death_last5yrs <- bind_rows(total_cancer_death_2000, total_cancer_death_last5yrs)
+total_cancer_death_last5yrs <- bind_rows(total_cancer_death_2001, total_cancer_death_last5yrs)
+total_cancer_death_last5yrs <- bind_rows(total_cancer_death_2002, total_cancer_death_last5yrs)
+
 
 # Create new data frame which has values of different cancer death in rows rather than columns (for creating plot for different cancer deaths in 2002)
 
 all_cancer_as_row_2002_prep <- select(all_year_as_row_2002, Country, Year, Income_per_person, Life_Expectancy, Total_Health_Spending_Per_Person, Government_Health_Spending_Per_Person, Breast_Cancer_Death, Cervical_Cancer_Death, Lung_Cancer_Death, Liver_Cancer_Death, Prostate_Cancer_Death, Stomach_Cancer_Death, Food_Supply, Improved_Water)
 
-all_cancer_as_row_2002 <- gather(all_cancer_as_row_2002_prep, "Cancer", "Death", 7:12, na.rm = FALSE)
 
-# Descriptive Statistics of total_cancer_death_2002
+all_cancer_as_row_2002 <- gather(all_cancer_as_row_2002_prep, "Cancer", "Death", 7:12, na.rm = FALSE) 
+
+# Descriptive Statistics of total_cancer_death_(year) from 1998 to 2002 
 summary(total_cancer_death_2002)
 
-# Check Outliers of total_cancer_death_2001
+
+# Check Outliers of total_cancer_death_2002
 subset(total_cancer_death_2002, All_Cancer_Death > 200)
 
 # Correlation Coefficient for life expectancy and total cancer death
@@ -1463,92 +1496,285 @@ write.csv(all_year_as_row, "income_life_spend_cancer_inner_join.csv", row.names 
 
 ```{r}
 
-# Multiple Linear Regression using dataset all_year_as_row_2002 (latest years of cancer death data)
+# Multiple Linear Regression using dataset all_year_as_row_last5yrs from 1998 to 2002 (latest years of cancer death data)
 
-all_variables_2002 <- total_cancer_death_2002
+all_variables_last5yrs <- total_cancer_death_last5yrs
 
 
 ```
 
 ```{r}
-# Cross-Validation
 
-# Split the dataset to a training set and a testing set
-set.seed(100)
-split = sample.split(all_variables_2002$Life_Expectancy, SplitRatio = 0.7)
-Train2002 = subset(all_variables_2002, split == TRUE)
-Test2002 = subset(all_variables_2002, split == FALSE)
+## Regression the whole dataset all_variables_last5yrs
 
 # Create a regression model with all 6 predictor variables
-AllVariables2002Log_6p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train2002)
-summary(AllVariables2002Log_6p)
+mod_wholeds_6p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = all_variables_last5yrs)
+summary(mod_wholeds_6p)
 
-SSE=sum(AllVariables2002Log_6p$residuals^2)
+SSE=sum(mod_wholeds_6p$residuals^2)
 SSE
 
-# Make a prediction on the testing set with 6 predictor variables
-str(Test2002)
-PredictTest2002_6p <- predict(AllVariables2002Log_6p, newdata = Test2002)
-
-# Calculate Out-of-sample (test) R-Squared with 6 predictor variables
-
-SSE_6p = sum((Test2002$Life_Expectancy - PredictTest2002_6p) ^ 2)
-SST_6p = sum((Test2002$Life_Expectancy - mean(all_variables_2002$Life_Expectancy))^ 2)
-1 - SSE_6p/SST_6p
-
-# Use different methods to select predictor variables
+## Use different methods to select useful predictor variables
 # Create Best Subsets Regression
-ols_best_subset(AllVariables2002Log_6p)
+
+ols_best_subset(mod_wholeds_6p)
 
 # Create Stepwise Forward Regression 
-ols_step_forward(AllVariables2002Log_6p)
+
+ols_step_forward(mod_wholeds_6p)
 
 # Create Random forest
 
-output_forest <- randomForest(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train2002, importance=TRUE)
+output_forest_wholeds <- randomForest(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = all_variables_last5yrs, importance=TRUE)
 
 # View the Random forest results
 
-print(output_forest) 
+print(output_forest_wholeds) 
 
 # Importance of each predictor (Random forest)
 
-print(importance(output_forest)) 
+print(importance(output_forest_wholeds)) 
+
+# Pseudo R-Squared
+
+mean(output_forest_wholeds$rsq) #0.78
+
+# Create a regression model with 4 stronger predictor variables based on Best Subset and Stepwise Forward
+
+mod_wholeds_4p_iwfc <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_last5yrs)
+summary(mod_wholeds_4p_iwfc)
+
+SSE=sum(mod_wholeds_4p_iwfc$residuals^2)
+SSE
+
+# Create a regression model with 4 stronger predictor variables based on Random Forest 
+
+mod_wholeds_4p_iwtg <- lm(Life_Expectancy ~ Income_per_person + Improved_Water + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = all_variables_last5yrs)
+summary(mod_wholeds_4p_iwtg)
+
+SSE=sum(mod_wholeds_4p_iwtg$residuals^2)
+SSE
+
+```
+
+
+
+```{r}
+
+## Cross-Validation
+
+# Split the dataset to a training set and a testing set with split ratio 0.5
+set.seed(102)
+split = sample.split(all_variables_last5yrs$Life_Expectancy, SplitRatio = 0.5)
+Train1 = subset(all_variables_last5yrs, split == TRUE)
+Test1 = subset(all_variables_last5yrs, split == FALSE)
+
+# Create a regression model with all 6 predictor variables
+mod_cv1_6p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train1)
+summary(mod_cv1_6p)
+
+SSE=sum(mod_cv1_6p$residuals^2)
+SSE
+
+# 3-fold cross validation
+
+cv.lm(Train1, form.lm = formula(Life_Expectancy ~ Income_per_person, Improved_Water, Food_Supply, Total_Health_Spending_Per_Person, Government_Health_Spending_Per_Person, All_Cancer_Death), m=3)
+
+
+# Make a prediction on the testing set with 6 predictor variables
+
+PredictTest_cv1_6p <- predict(mod_cv1_6p, newdata = Test1)
+
+# Calculate Out-of-sample (test) R-Squared with 6 predictor variables
+
+SSE_cv1_6p = sum((Test1$Life_Expectancy - PredictTest_cv1_6p) ^ 2)
+SST_cv1_6p = sum((Test1$Life_Expectancy - mean(all_variables_last5yrs$Life_Expectancy))^ 2)
+1 - (SSE_cv1_6p/SST_cv1_6p)
+
+# Out-of-sample R-Squared = 0.639 
+
+# Calculate RMSE for Test1
+
+RMSE1 = sqrt(SSE_cv1_6p/nrow(Test1))
+
+# Plot to choose the best threshold value
+
+# ROCRperf1 = performance(PredictTest_cv1_6p, "True Positive Rate", "False Negative Rate")
+
+# plot(ROCRperf1, colorize = TRUE, print.cutoffs.at=seq(0.1, 0.1), text.adj = c(-0.2, 1.7))
+
+## Split the dataset to a training set and a testing set with split ratio 0.6
+set.seed(103)
+split2 = sample.split(all_variables_last5yrs$Life_Expectancy, SplitRatio = 0.6)
+Train2 = subset(all_variables_last5yrs, split2 == TRUE)
+Test2 = subset(all_variables_last5yrs, split2 == FALSE)
+
+# Create a regression model with all 6 predictor variables
+mod_cv2_6p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train2)
+summary(mod_cv2_6p)
+
+SSE=sum(mod_cv2_6p$residuals^2)
+SSE
+
+# Make a prediction on the testing set with 6 predictor variables
+PredictTest_cv2_6p <- predict(mod_cv2_6p, newdata = Test2)
+
+# Calculate Out-of-sample (test) R-Squared with 6 predictor variables
+
+SSE_cv2_6p = sum((Test1$Life_Expectancy - PredictTest_cv2_6p) ^ 2)
+SST_cv2_6p = sum((Test1$Life_Expectancy - mean(all_variables_last5yrs$Life_Expectancy))^ 2)
+1 - SSE_cv2_6p/SST_cv2_6p
+
+# Out-of-sample R-Squared = -0.574
+
+# Calculate RMSE for Test2
+
+RMSE2 = sqrt(SSE_cv2_6p/nrow(Test2))
+
+
+## Split the dataset to a training set and a testing set with split ratio 0.7
+set.seed(104)
+split3 = sample.split(all_variables_last5yrs$Life_Expectancy, SplitRatio = 0.7)
+Train3 = subset(all_variables_last5yrs, split3 == TRUE)
+Test3 = subset(all_variables_last5yrs, split3 == FALSE)
+
+# Create a regression model with all 6 predictor variables
+mod_cv3_6p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train3)
+summary(mod_cv3_6p)
+
+SSE=sum(mod_cv3_6p$residuals^2)
+SSE
+
+# Make a prediction on the testing set with 6 predictor variables
+PredictTest_cv3_6p <- predict(mod_cv3_6p, newdata = Test3)
+
+# Calculate Out-of-sample (test) R-Squared with 6 predictor variables
+
+SSE_cv3_6p = sum((Test1$Life_Expectancy - PredictTest_cv3_6p) ^ 2)
+SST_cv3_6p = sum((Test1$Life_Expectancy - mean(all_variables_last5yrs$Life_Expectancy))^ 2)
+1 - (SSE_cv3_6p/SST_cv3_6p)
+
+# Out-of-sample R-Squared = -0.574
+
+# Calculate RMSE for Test3
+
+RMSE3 = sqrt(SSE_cv3_6p/nrow(Test3))
+RMSE3
+
+## Split the dataset to a training set and a testing set with split ratio 0.8
+set.seed(105)
+split4 = sample.split(all_variables_last5yrs$Life_Expectancy, SplitRatio = 0.8)
+Train4 = subset(all_variables_last5yrs, split4 == TRUE)
+Test4 = subset(all_variables_last5yrs, split4 == FALSE)
+
+# Create a regression model with all 6 predictor variables
+mod_cv4_6p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train4)
+summary(mod_cv4_6p)
+
+SSE=sum(mod_cv4_6p$residuals^2)
+SSE
+
+# Make a prediction on the testing set with 6 predictor variables
+PredictTest_cv4_6p <- predict(mod_cv4_6p, newdata = Test4)
+
+# Calculate Out-of-sample (test) R-Squared with 6 predictor variables
+
+SSE_cv4_6p = sum((Test1$Life_Expectancy - PredictTest_cv4_6p) ^ 2)
+SST_cv4_6p = sum((Test1$Life_Expectancy - mean(all_variables_last5yrs$Life_Expectancy))^ 2)
+1 - (SSE_cv4_6p/SST_cv4_6p)
+
+# Out-of-sample R-Squared = -0.698
+
+# Calculate RMSE for Test4
+
+RMSE4 = sqrt(SSE_cv4_6p/nrow(Test4))
+RMSE4
+
+## Choose 0.7 threshold value (6 variables model with 0.7 threshold value has the highest Adj R-Squared)
+
+# Create a regression model with 4 significant predictor variables
+mod_cv3_4p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = Train3)
+summary(mod_cv3_4p)
+
+SSE=sum(mod_cv3_4p$residuals^2)
+SSE
+
+# Make a prediction on the testing set with 4 significant predictor variables
+PredictTest_cv3_4p <- predict(mod_cv3_4p, newdata = Test3)
+
+# Calculate Out-of-sample (test) R-Squared with 4 significant variables
+
+SSE_cv3_4p = sum((Test1$Life_Expectancy - PredictTest_cv3_4p) ^ 2)
+SST_cv3_4p = sum((Test1$Life_Expectancy - mean(all_variables_last5yrs$Life_Expectancy))^ 2)
+1 - (SSE_cv3_4p/SST_cv3_4p)
+
+# Out-of-sample R-Squared = -1
+
+# Calculate RMSE for Test4
+
+RMSE3_4p = sqrt(SSE_cv3_4p/nrow(Test3))
+RMSE3_4p
+
+####################
+
+## Use different methods to select predictor variables 
+# Create Best Subsets Regression
+# ols_best_subset(mod_cv1_6p)
+
+# Create Stepwise Forward Regression 
+# ols_step_forward(mod_cv1_6p)
+
+# Create Random forest
+
+#  output_forest_cv1 <- randomForest(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train1, importance=TRUE)
+
+# View the Random forest results
+
+# print(output_forest_cv1) 
+
+# Importance of each predictor (Random forest)
+
+# print(importance(output_forest_cv1)) 
 
 # Create two more regression models based on previous testings and determine which model is the best one. 
 # Create a regression model for a testing set with 4 predictor variables: Income, food, improved water source, and cancer death
 
-AllVariables2002Log_4p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = Train2002)
-summary(AllVariables2002Log_4p)
+# mod_cv1_4p_iwfc <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = Train1)
+# summary(mod_cv1_4p_iwfc)
 
-SSE=sum(AllVariables2002Log_4p$residuals^2)
-SSE
+# SSE=sum(mod_cv1_4p_iwfc$residuals^2)
+# SSE
 
 # Make a prediction on the testing set with 4 predictor variables
-PredictTest2002_4p <- predict(AllVariables2002Log_4p, newdata = Test2002)
+# PredictTest1_4p_iwfc <- predict(mod_cv1_4p_iwfc, newdata = Test1)
 
 # Calculate Out-of-sample (test) R-Squared with 4 predictor variables
 
-SSE_4p = sum((Test2002$Life_Expectancy - PredictTest2002_4p) ^ 2)
-SST_4p = sum((Test2002$Life_Expectancy - mean(all_variables_2002$Life_Expectancy))^ 2)
-1 - SSE_4p/SST_4p
+# SSE_cv1_4p_iwfc = sum((Test1$Life_Expectancy - PredictTest1_4p_iwfc) ^ 2)
+# SST_cv1_4p_iwfc = sum((Test1$Life_Expectancy - mean(all_variables_last5yrs$Life_Expectancy))^ 2)
+# 1 - SSE_cv1_4p_iwfc/SST_cv1_4p_iwfc
+
+
+
+
+
 
 # Create a regression model for a testing set with 5 predictor variables: Income, food, improved water source, total health spending, and government health spending
 
-AllVariables2002Log_5p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train2002)
-summary(AllVariables2002Log_5p)
+# AllVariables2002Log_5p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = Train2002)
+# summary(AllVariables2002Log_5p)
 
-SSE=sum(AllVariables2002Log_5p$residuals^2)
-SSE
+# SSE=sum(AllVariables2002Log_5p$residuals^2)
+# SSE
 
 # Make a prediction on the testing set with 4 predictor variables
-PredictTest2002_5p <- predict(AllVariables2002Log_5p, newdata = Test2002)
+# PredictTest2002_5p <- predict(AllVariables2002Log_5p, newdata = Test2002)
 
 # Calculate Out-of-sample (test) R-Squared with 4 predictor variables
 
-SSE_5p = sum((Test2002$Life_Expectancy - PredictTest2002_5p) ^ 2)
-SST_5p = sum((Test2002$Life_Expectancy - mean(all_variables_2002$Life_Expectancy))^ 2)
-1 - SSE_5p/SST_5p
+# SSE_5p = sum((Test2002$Life_Expectancy - PredictTest2002_5p) ^ 2)
+# SST_5p = sum((Test2002$Life_Expectancy - mean(all_variables_2002$Life_Expectancy))^ 2)
+# 1 - SSE_5p/SST_5p
 
 ```
 
