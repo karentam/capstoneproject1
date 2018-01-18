@@ -2,7 +2,7 @@ Title: Capstone Project Milestone Report
 <br>
 Name: H Karen Tam
 
-Update: January 10, 2018
+Update: January 18, 2018
 
 
 ### An introduction to the problem
@@ -16,7 +16,7 @@ There are many factors that can affect people's life expectancy from the global 
 **Important fields and information**
 <br>
 
-<table border=1, cellspacing=30>
+<table border=0, cellspacing=30>
 
 <tr>
 <th>
@@ -107,7 +107,7 @@ Food Supply (Calories Intake Per Person Per Day)
 Cancer Death 
 </td>
 <td>
-2002
+1995 - 2002
 </td>
 <td>
 149
@@ -162,7 +162,7 @@ Outliers are countries with citizens who have very high income in average ($80,0
 <img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Income_Log10_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/ECDFPlot_Income_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Income_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
@@ -184,10 +184,10 @@ Outliers are from countries with the life expectancy of fewer than 30 years of a
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/DensityPlot_Life_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Life_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/ECDFPlot_Life_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Life_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
@@ -209,10 +209,10 @@ Outliers are countries with total health spending more than US$8,000 per person 
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/DensityPlot_TotHealthSpend_Log10_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_TotHealthSpend_Log10_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/ECDFPlot_TotHealthSpend_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_TotHealthSpend_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
@@ -234,10 +234,10 @@ Outliers are Luxembourg and Norway from 2007 to 2010 with more than US$6,000 gov
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/DensityPlot_GovHealthSpend_Log10_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_GovHealthSpend_Log10_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/d41f97f2f72c534b818d69de0d44c52a921c9733/ECDFPlot_GovHealthSpend_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_GovHealthSpend_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
@@ -259,10 +259,10 @@ Outliers are from Afghanistan in different years in the 1990s with less than 10%
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/DensityPlot_Water_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Water_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/ECDFPlot_Water_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Water_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
@@ -284,10 +284,10 @@ There are only 6 countries with the average daily intake of less than 1,500 calo
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/DensityPlot_Food_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Food_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/ECDFPlot_Food_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Food_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
@@ -309,10 +309,10 @@ The outlier with 249.4 cancer deaths per 100,000 person per year in 2002 is Mong
 <table>
 <tr>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/DensityPlot_TotC_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_TotC_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/7b8583b73c19fc1ded53979dcf76de53b59bbf75/ECDFPlot_TotC_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_TotC_Annot.png?raw=true">
 </td>
 </tr>
 <tr>
@@ -327,14 +327,14 @@ The outlier with 249.4 cancer deaths per 100,000 person per year in 2002 is Mong
 
 **Income vs Life Expectancy**
 
-Using data from different countries in 1960 and 2010, the plot shows that the higher the income, the longer life the person has. However, the difference in life expectancy between wealthy and poor countries is getting smaller in the most recent decades. 
+Using data from different countries and territories in 1960 and 2010, the plot shows that the higher the income, the longer life the person has. However, the difference in life expectancy between wealthy and poor countries/territories is getting smaller in the most recent decades. 
 
 The correlation of 0.58 in 2010 suggests that income and life expectancy have a moderate, positive relationship. The correlation of 0.75 in 1960 shows the stronger positive relationship between income and life expectancy. It confirms that the gap in life expectancy between richer and poorer countries is getting closer.
 
 However, there is a difference in life expectancy between countries on the same income level according to Professor Hans Rosling from Gapmider because it depends on how the money is distributed and how it is used in each country. For example, Swaziland had $5,850 GDP Per Capita in 2002. However, the country had a much shorter life expectancy of 48 years. The reason was that 63% of Swazis lived below the national poverty line which was relatively high for a lower middle-income country. 3.1 million people living with HIV was another public concern that affected the country's life expectancy. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_Log10_CI_2r_Annot.png?raw=true)
-<h6>Observation: 540. Observation containing missing data: 267.</h6>
+<h6>Observation: 273 without missing data.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a>  
@@ -356,7 +356,7 @@ Generally speaking, country's citizens live longer with the higher total health 
 <tr>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10_4r_Annot.png?raw=true">
-<h6>Observation: 1,092. Observation containing missing data: 375.</h6>
+<h6>Observation: 716 without missing data.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx" target="_blank">Gapminder, Total health spending per person (USD)</a>   
@@ -365,7 +365,7 @@ Generally speaking, country's citizens live longer with the higher total health 
 </td>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10_4r_Annot.png?raw=true">
-<h6>Observation: 1,092. Observation containing missing data: 368.</h6>
+<h6>Observation: 716 without missing data.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx" target="_blank">Gapminder, Government health spending per person (USD)</a>     
@@ -406,7 +406,7 @@ Using data from about different countries in 1997 and 2007, the plot suggests th
 It is also reasonable that income may take a role in food supply and life expectancy. When people have money to buy enough food, they will no longer face the threat of starvation. On the other hand, proper nutrition also affects life expectancy by decreasing the chance of having preventable diseases. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_CI_2r_Annot.png?raw=true)
-<h6>Observation: 546. Observation containing missing data: 199.</h6>
+<h6>Observation: 347 without missing data.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a> 
@@ -425,7 +425,7 @@ Improved drinking water sources include piped water into dwelling, plot or yard;
 The plot is created on square root scale. Plot created on Log 10 would have the similar look. There were 108 countries in 2007 and 97 countries in 1997 that could provide clean drinking water sources to more than 90% of the population. So many points are located close to 100%. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_WaterLife_Sqrt_CI_2r_Annot.png?raw=true)
-<h6>Observation: 546. Observation containing missing data: 182.</h6>
+<h6>Observation: 364 without missing data.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a> 
@@ -437,12 +437,12 @@ The plot is created on square root scale. Plot created on Log 10 would have the 
 
 **Life Expectancy vs Total Cancer Death**
 
-Using data from 174 countries in 2002, the plot shows that there is a slight, negative relationship between life expectancy and total cancer death. When cancer death increases, the length of life decreases. The total number of cancer death here includes breast, cervical, lung, liver, stomach, and prostate cancers. 
+Using data from 149 countries and territories in 2002, the plot shows that there is a slight, negative relationship between life expectancy and total cancer death. When cancer death increases, the length of life decreases. The total number of cancer death here includes breast, cervical, lung, liver, stomach, and prostate cancers. 
 
-The correlation of -0.05 suggests that cancer death and life expectancy have a very weak, negative relationship. Cancer is not the major reason for death nowadays, especially in richer countries, because of widespread screening programs that detect cancers at the early and treatable stage. 
+The correlation of -0.02 suggests that cancer death and life expectancy have a very weak, negative relationship. Cancer is not the major reason for death nowadays, especially in richer countries, because of widespread screening programs that detect cancers at the early and treatable stage. 
 
 ![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_CI_r_Annot.png?raw=true)
-<h6>Observation: 276. Observation containing missing data: 103.</h6>
+<h6>Observation: 149 without missing data.</h6>
 <h6>Source: 
 <br>
 <a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a> 
@@ -464,7 +464,7 @@ Next, I would like to see how good the model can predict life expectancy.
 
 ### Multiple Linear Regression
 
-Multiple Linear Regression is used to test how the change in predictor variables predicts the level of change in life expectancy. 
+Multiple Linear Regression, k-fold Cross-Validation, and three variable selection methods are used to identify the best model to predict life expectancy. 
 
 <br>
 
@@ -476,26 +476,28 @@ The dataset used in this test contains the most updated available data from 1998
 
 **Create The First Model Using The Whole Dataset**
 
-![](https://github.com/karentam/capstoneproject1/blob/8c777ce1bc05e366120b4fd9cdc47b7514b5a8fc/wholeds_regression_result.png?raw=true)
+<a name="6pmodelresult"></a>
+
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_6p_result.png?raw=true)
 
 <br>
 
   + 346 observations
-  + Adjusted R-Squared: 0.6898
-  + Sum of Squared Errors: 6761.735
+  + Adjusted R-Squared: 0.69
+  + Sum of Squared Errors: 6762
   + Significant predictor variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
   
 <br>
 
 **Variable Selection**
 
-Best Subsets Regression, Stepwise Forward Regression, and Random Forest are performed to select predictor variables that do the best at predicting life expectancy. The predict variables are selected based on the Adjusted R-Squared. Sum of Squared Errors is also considered when comparing the models.
+Best Subsets Regression, Stepwise Forward Regression, and Random Forest are performed to select predictor variables that do the best at predicting life expectancy. The predict variables are selected based on the Adjusted R-Squared. Sum of Squared Errors and Percentage Error are also considered when comparing the models.
 
 <br>
 
 _Result of Best Subsets Regression_ 
 
-![](https://github.com/karentam/capstoneproject1/blob/8c777ce1bc05e366120b4fd9cdc47b7514b5a8fc/wholeds_best_subset_result.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_best_subsets_result.png?raw=true)
 
 <br> 
 
@@ -508,7 +510,7 @@ The best model:
 
 _Result of Stepwise Forward Regression_
 
-![](https://github.com/karentam/capstoneproject1/blob/8c777ce1bc05e366120b4fd9cdc47b7514b5a8fc/wholeds_stepwise_forward_result.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_stepwise_forward_result.png?raw=true)
 
 <br>
 
@@ -521,66 +523,263 @@ The best model:
 
 _Result of Random Forest_
 
-![](https://github.com/karentam/capstoneproject1/blob/8c777ce1bc05e366120b4fd9cdc47b7514b5a8fc/wholeds_outputforest_result.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_random_forest_result.png?raw=true)
 
 <br>
 
 The best model:
 
   + Predictor variables: Income, Improved Drinking Water Source, Total Health Spending, and Government Health Spending
-  + Mean of squared Residuals of Out-of-Bag predictions versus targets: 14
-  + Percentage of Variable Explained: 78.2 
-  + Pseudo R-Squared: 0.78
+  + Mean of Squared Residuals of out-of-bag predictions versus targets: 13.8
+  + Percentage of Variable Explained: 78.5 
+  + Pseudo R-Squared: 0.781
   
 <br>
-  
-We will compare a model containing Income, Improved Drinking Water Source, Food Supply, and Cancer Death to another model containing Income, Improved Drinking Water Source, Total Health Spending, and Government Health Spending. 
+
+<table>
+
+<tr>
+<td>
+Variable Seletion Method
+</td>
+<td>
+Strong predictor variables
+</td>
+</tr>
+
+<tr>
+<td>
+Best Subsets Regression
+</td>
+<td>
+Income, Improved Drinking Water Source, Food Supply, and Cancer Death
+</td>
+</tr>
+
+<tr>
+<td>
+Stepwise Forward Regression
+</td>
+<td>
+Income, Improved Drinking Water Source, Food Supply, and Cancer Death
+</td>
+</tr>
+
+<tr>
+<td>
+Random Forest
+</td>
+<td>
+Income, Improved Drinking Water Source, Total Health Spending, and Government Health Spending
+</td>
+</tr>
+
+</table>
 
 <br>
 
-**Compare Two Models With Different Predictors Varables Using The Whole Dataset**
+** K-fold Cross Validation**
+
+3-fold Cross Validation is performed for 3 models with different combination of variables. The combinations of variables used are based on recommendations from the above variable selection methods. K-fold Cross Validation can be used for comparing the Mean Squared Errors of the models.
+
+_Model with all 6 predictor variables: Income, Improved Drinking Water Source, Food Supply, Cancer Death, Total Health Spending, and Government Health Spending_
+
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p1.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p2.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p3.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p4.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p5.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p6.png?raw=true)
+
+<br>
+
+_Model with 4 predictor variables: Income, Improved Drinking Water Source, Food Supply, and Cancer Death_
+
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p1.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p2.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p3.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p4.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p5.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p6.png?raw=true)
+
+<br>
+
+_Model with 4 predictor variables: Income, Improved Drinking Water Source, Total Health Spending, and Government Health Spending_
+
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p1.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p2.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p3.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p4.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p5.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p6.png?raw=true)
+
+<br>
+
+<table>
+
+<tr>
+<td>
+No.
+</td>
+<td>
+Model Containing The Following Predictor Variables
+</td>
+<td>
+Significant Variables In The Model
+</td>
+<td>
+Mean Squared Error (MSE)
+</td>
+</tr>
+
+<tr>
+<td>
+1
+</td>
+<td>
+Income, Improved Drinking Water Source, Food Supply, Cancer Death, Total Health Spending, and Government Health Spending
+</td>
+<td>
+Income, Improved Drinking Water Source, Food Supply, and Cancer Death 
+</td>
+<td>
+8579
+</td>
+</tr>
+
+<tr>
+<td>
+2
+</td>
+<td>
+Income, Improved Drinking Water Source, Food Supply, and Cancer Death
+</td>
+<td>
+Income, Improved Drinking Water Source, Food Supply, and Cancer Death 
+</td>
+<td>
+8059
+</td>
+</tr>
+
+<tr>
+<td>
+3
+</td>
+<td>
+Income, Improved Drinking Water Source, Total Health Spending, and Government Health Spending
+</td>
+<td>
+Income and Improved Drinking Water Source
+</td>
+<td>
+7541
+</td>
+</tr>
+
+</table>
+
+<br>
+
+Model 2 is the best choice based on 3-fold Cross Validation because all 4 predictor variables in Model 2 are statistically significant. Although MSE of Model 2 (8059) is higher than MSE of Model 3 (7541), there are only 2 out of 4 predictor variables in Model 3 that are statistically significant. 
+
+<br>
+
+**Compare Models With Different Predictors Varables**
+
+_Predictor Variables: Income, Improved Drinking Water Source, Food Supply, Cancer Death, Total Health Spending, Government Health Spending_
+
+<a href="#6pmodelresult">The result was shown above.</a> 
+
+  + 346 observations
+  + Adjusted R-Squared: 0.69
+  + Sum of Squared Errors: 6762
+  + Percentage Error: (4.47/35.5)*100 = 12.59% 
+  + Significant predictor variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
+  
+<br>
 
 _Predictor Variables: Income, Improved Drinking Water Source, Food Supply, and Cancer Death_
 
-![](https://github.com/karentam/capstoneproject1/blob/8c777ce1bc05e366120b4fd9cdc47b7514b5a8fc/wholeds_4p_iwfc_regression_result.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_4p_iwfc_result.png?raw=true)
 
+<br>
+
+  + 346 observations
+  + Adjusted R-Squared: 0.691
+  + Sum of Squared Errors: 6779
+  + Percentage Error: (4.46/35.5)*100 = 12.56% 
+  + Significant predictor variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
+  
 <br>
 
 _Predictor Variables: Income, Improved Drinking Water Source, Total Health Spending, Government Health Spending_
 
-![](https://github.com/karentam/capstoneproject1/blob/8c777ce1bc05e366120b4fd9cdc47b7514b5a8fc/wholeds_4p_iwtg_regression_result.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/regression_4p_iwtg_result.png?raw=true)
 
 <br>
 
-<table border=1>
+  + 346 observations
+  + Adjusted R-Squared: 0.673
+  + Sum of Squared Errors: 7162
+  + Percentage Error: (4.58/35.2)*100 = 13.01%
+  + Significant predictor variables: Income and Improved Drinking Water Source
+  
+<br>
+
+<table>
 
 <tr>
 <td>
-Predictor Variables
+No.
 </td>
 <td>
-Adjusted R-Squared
+Combination of Predictor Variables
 </td>
 <td>
-Sum of Squared Errors
+Method(s) That Support(s) This Combination
+</td>
+<td>
+Adjusted R-squared
+</td>
+<td>
+Sum of Squared Errors (SSE)
+</td>
+<td>
+Percentage Error
 </td>
 </tr>
 
 <tr>
 <td>
-Income, Food Supply, Improved Water Source, Cancer Death, Total Health Spending, and Government Health Spending
+1
 </td>
 <td>
-0.6898
+Income, Improved Drinking Water Source, Food Supply, Cancer Death, Total Health Spending, and Government Health Spending
 </td>
 <td>
-6761.735
+N/A
+</td>
+<td>
+0.69
+</td>
+<td>
+6762
+</td>
+<td>
+12.59% 
 </td>
 </tr>
 
 <tr>
 <td>
-Income, Food Supply, Improved Water Source, and Cancer Death
+2
+</td>
+<td>
+Income, Improved Drinking Water Source, Food Supply, and Cancer Death
+</td>
+<td>
+Best Subsets Regression and Stepwise Forward regression
 </td>
 <td>
 0.691
@@ -588,11 +787,20 @@ Income, Food Supply, Improved Water Source, and Cancer Death
 <td>
 6779
 </td>
+<td>
+12.56% 
+</td>
 </tr>
 
 <tr>
 <td>
-Income, Improved Water Source, Total Health Spending, and Government Health Spending
+3
+</td>
+<td>
+Income, Improved Drinking Water Source, Total Health Spending, and Government Health Spending
+</td>
+<td>
+Random Forest
 </td>
 <td>
 0.673
@@ -600,150 +808,8 @@ Income, Improved Water Source, Total Health Spending, and Government Health Spen
 <td>
 7162
 </td>
-</tr>
-
-</table>
-
-<br>
-
-The predictor variable combination of Income, Improved Drinking Water Source, Food Supply, and Cancer Death in the second model has the highest Adjusted R-Squared of 0.691. Its Sum of Squared Errors of 6779 is close to the best Sum of Squared Errors in this table. 
-
-<br>
-
-**Cross-Validation**
-
-The dataset is split into a training set and a testing set. Models created by training sets with different threshold ratios (0.5, 0.6, 0.7, and 0.8) are compared by linear regression. Testing sets are also used to make predictions. 
-
-<br>
-
-_Threshold Value 0.5 With All 6 Predictor Variables_
-![](https://github.com/karentam/capstoneproject1/blob/master/train1_cv_6p_regression_result_p1.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/train1_cv_6p_regression_result_p2.png?raw=true)
-
-<br>
-
-_Threshold Value 0.6 With All 6 Predictor Variables_
-![](https://github.com/karentam/capstoneproject1/blob/8c777ce1bc05e366120b4fd9cdc47b7514b5a8fc/train2_cv_6p_regression_result_p1.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/8c777ce1bc05e366120b4fd9cdc47b7514b5a8fc/train2_cv_6p_regression_result_p2.png?raw=true)
-
-<br>
-
-_Threshold Value 0.7 With All 6 Predictor Variables_
-![](https://github.com/karentam/capstoneproject1/blob/8c777ce1bc05e366120b4fd9cdc47b7514b5a8fc/train3_cv_6p_regression_result_p1.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/8c777ce1bc05e366120b4fd9cdc47b7514b5a8fc/train2_cv_6p_regression_result_p2.png?raw=true)
-
-<br>
-
-_Threshold Value 0.8 With All 6 Predictor Variables_
-![](https://github.com/karentam/capstoneproject1/blob/master/train4_cv_6p_regression_result_p1.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/train1_cv_6p_regression_result_p2.png?raw=true)
-
-<br>
-
-<table border=1>
-
-<tr>
 <td>
-Threshold Value
-</td>
-<td>
-Adjusted R-Squared
-</td>
-<td>
-Out-of-Sample R-Squared
-</td>
-<td>
-Root Mean Squared Errors
-</td>
-<td>
-Sum of Squared Errors
-</td>
-<td>
-Significant Predictor Variables
-</td>
-</tr>
-
-<tr>
-<td>
-0.5
-</td>
-<td>
-0.6923
-</td>
-<td>
-0.639
-</td>
-<td>
-3.7
-</td>
-<td>
-5189
-</td>
-<td>
-Income, Improved Drinking Water Source, Food Supply, and Cancer Death
-</td>
-</tr>
-
-<tr>
-<td>
-0.6
-</td>
-<td>
-0.679
-</td>
-<td>
--0.574
-</td>
-<td>
-8.08
-</td>
-<td>
-5550
-</td>
-<td>
-Income, Improved Drinking Water Source, Food Supply, and Cancer Death
-</td>
-</tr>
-
-<tr>
-<td>
-0.7
-</td>
-<td>
-0.697
-</td>
-<td>
--0.99
-</td>
-<td>
-9.98
-</td>
-<td>
-5410
-</td>
-<td>
-Income, Improved Drinking Water Source, Food Supply, and Cancer Death
-</td>
-</tr>
-
-<tr>
-<td>
-0.8
-</td>
-<td>
-0.686
-</td>
-<td>
--0.698
-</td>
-<td>
-12.1
-</td>
-<td>
-6300
-</td>
-<td>
-Income, Improved Drinking Water Source, Food Supply, and Cancer Death
+13.01%
 </td>
 </tr>
 
@@ -751,44 +817,18 @@ Income, Improved Drinking Water Source, Food Supply, and Cancer Death
 
 <br>
 
-The best model for predicting life expectancy is the one with 0.7 threshold value because it has the highest Adjusted R-Squared of 0.697. It is also higher than the Adjusted R-Squared (0.6898) of the model created by the whole dataset and all 6 predictor variables. In addition, the Sum of Squared Errors of the 0.7 threshold value model (5410) is relatively small. 
+Model 2 has the highest Adjusted R-Squared of 0.691 and the lowest Percentage Error of 12.56%. Its SSE of 6779 is very close to Model 1's SSE, the lowest one in the table. Therefore, Model 2 is selected to be the best predictive model. 
 
 <br>
 
-_Question: Out of sample R-Squared: -0.99. It has the negative value. Is it a strong Out of Sample R-squared?_
 
+**The Best Model**
+
+The best model includes 4 significant predictor variables: income, food supply, improved drinking water source, and cancer death
+
+Adjusted R-Squared: 0.691
 <br>
-
-_K-Fold_
-
-<br>
-
-Error
-
-![](https://github.com/karentam/capstoneproject1/blob/master/train1_cv_result_error_p1.png?raw=true)
-<br>
-![](https://github.com/karentam/capstoneproject1/blob/master/train1_cv_result_error_p2.png?raw=true)
-<br>
-![](https://github.com/karentam/capstoneproject1/blob/master/train1_cv_result_error_p3.png?raw=true)
-<br>
-
-
-**Create the Best Model**
-
-The best model is generated by the training set with 0.7 threshold rate and 4 significant predictor variables.
-
-<br>
-
-![](https://github.com/karentam/capstoneproject1/blob/master/train3_cv_4p_regression_result_p1.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/train3_cv_4p_regression_result_p2.png?raw=true)
-
-<br>
-
-There are 346 observations without missing data. This model includes 4 significant predictor variables: income, food supply, improved drinking water source, and cancer death
-
-Adjusted R-Squared: 0.699
-<br>
-69.9% of variation in life expectancy can be explained by this model. 
+69.1% of variation in life expectancy can be explained by this model. 
 
 P-Value:
 <br>
@@ -796,17 +836,18 @@ Income, food supply, improved drinking water source, and cancer death are statis
 
 Residual Standard Error:
 <br>
-Residual Standard Error of 4.66 shows that there are about 4.66 years between the observed life expectancy and predicted life expectancy. 
+Residual Standard Error of 4.46 shows that there are about 4.46 years between the observed life expectancy and predicted life expectancy. 
 
 Estimated Effect of Predictors:
 <br>
-  + An increase of US$1 in GDP Per Capita is associated with an increase of 0.000156 year in life expectancy. 
-  + An increase of 1 calory intake is associated with an increase of 0.00274 year in life expectancy.
-  + An increase in 1% of country's population with an access to clean drinking water sources is associated with an increase in 0.344 year in life expectancy.
-  + A decrease in 1 case of cancer death per 100,000 person per year is associated with an increase of 0.0361 year in life expectancy. 
+  + An increase of US$1 in GDP Per Capita is associated with an increase of 0.000143 year in life expectancy. 
+  + An increase of 1 calory intake is associated with an increase of 0.00221 year in life expectancy.
+  + An increase in 1% of country's population with an access to clean drinking water sources is associated with an increase in 0.355 year in life expectancy.
+  + A decrease in 1 case of cancer death per 100,000 person per year is associated with an increase of 0.0344 year in life expectancy. 
   
-
 <br><br>
+
+
 
 
 
