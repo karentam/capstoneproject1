@@ -42,10 +42,10 @@ I use the following techniques to compare which model created from the dataset i
 
 I use the following metrics to evaluate the models:
 
-a. Whether predictor variables are significant (t-value)
-b. Mean Squared Error (MSE)
-c. Adjusted R-squared
-d. Sum of Squared Errors (SSE)
-e. Percentage Error
+1. Whether predictor variables are significant (t-value)
+2. Mean Squared Error (MSE)
+3. Adjusted R-squared
+4. Sum of Squared Errors (SSE)
+5. Percentage Error
 
 
