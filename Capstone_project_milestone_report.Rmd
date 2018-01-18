@@ -618,18 +618,18 @@ _Model with 4 predictor variables: Income, Improved Drinking Water Source, Total
 <table>
 
 <tr>
-<td>
+<th>
 No.
-</td>
-<td>
+</th>
+<th>
 Model Containing The Following Predictor Variables
-</td>
-<td>
+</th>
+<th>
 Significant Variables In The Model
-</td>
-<td>
+</th>
+<th>
 Mean Squared Error (MSE)
-</td>
+</th>
 </tr>
 
 <tr>
@@ -730,24 +730,24 @@ _Predictor Variables: Income, Improved Drinking Water Source, Total Health Spend
 <table>
 
 <tr>
-<td>
+<th>
 No.
-</td>
-<td>
+</th>
+<th>
 Combination of Predictor Variables
-</td>
-<td>
+</th>
+<th>
 Method(s) That Support(s) This Combination
-</td>
-<td>
+</th>
+<th>
 Adjusted R-squared
-</td>
-<td>
+</th>
+<th>
 Sum of Squared Errors (SSE)
-</td>
-<td>
+</th>
+<th>
 Percentage Error
-</td>
+</th>
 </tr>
 
 <tr>
