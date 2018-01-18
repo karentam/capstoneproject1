@@ -543,7 +543,7 @@ The best model:
 Variable Seletion Method
 </th>
 <th>
-Strong predictor variables
+Strong Predictor Variables
 </th>
 </tr>
 

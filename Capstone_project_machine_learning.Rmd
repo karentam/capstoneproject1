@@ -1,0 +1,47 @@
+---
+title: "Apply Machine Learning to the Capstone Project"
+author: "H Karen Tam"
+date: "January 18, 2018"
+output: html_document
+---
+
+1. How do you frame your main question as a machine learning problem? Is it a supervised or unsupervised problem? If it is supervised, is it a regression or a classification?
+
+My main purpose to perform machine learning is to find the best model to predict life expectancy based on predictor variables available in my dataset. 
+
+In this project, the dataset used for machine learning has 346 observations. I use supervised learning because the output of the problem is present in the available data. Regression techniques are used because the data is numeric and continuous. 
+
+2. What are the main features (also called independent variables or predictors) that you'll use?
+
+First of all, all predictor variables are included in the first model. Then, variable selection methods including Random Forest, Best Subsets Regression, and Stepwise Forward Regression are performed to examine which combination of predictor variables can build the best predictive model. The best predictive model includes the following predictor variables: 
+
+1. Income
+2. Improved Drinking Water Source
+3. Food Supply
+4. Cancer Death
+
+3. Which machine learning technique will you use?
+
+Multiple Linear Regression is used to build different models with various combinations of predictor variables. 
+
+Cross-validation is used in this relatively small dataset to estimate the models by partitioning the original sample into a training set to train the model, and a test set to evaluate it. In this case, 3-fold cross-validation is used, and the sample is randomly partitioned into 3 equal size subsamples.
+
+Variable selection methods including Random Forest, Best Subsets Regression, and Stepwise Forward Regression are performed to identify the strong predictor variables. 3-fold Cross-Validation is also useful in the variable selection process. Then, the best model is built by using the strong predictor varaibles. 
+
+4. How will you evaluate the success of your machine learning technique? What metric will you use?
+
+I use the following techniques to compare which model created from the dataset is the best predictive model:
+
+1. Multiple Linear Regression: I build three models with different combinations of predictor variables. The results are compared based on Adjusted R-squared, Sum of Squared Errors, Percentage Error, and whether the variables are significant. 
+
+2. 3-fold Cross-Validation is performed on three models with different combinations of predictor variables. The results are compared based on Mean Squared Error and whether predictor variables are significant. 
+
+I use the following metrics to evaluate the models:
+
+1. Whether predictor variables are significant (t-value)
+2. Mean Squared Error (MSE)
+3. Adjusted R-squared
+4. Sum of Squared Errors (SSE)
+5. Percentage Error
+
+
