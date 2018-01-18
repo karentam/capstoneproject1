@@ -539,12 +539,12 @@ The best model:
 <table>
 
 <tr>
-<td>
+<th>
 Variable Seletion Method
-</td>
-<td>
+</th>
+<th>
 Strong predictor variables
-</td>
+</th>
 </tr>
 
 <tr>
