@@ -7,7 +7,7 @@ output:
 ---
 
 
-```{r}
+```{r echo=TRUE}
 
 # Load tidyr
 suppressMessages(library(tidyr))
@@ -36,6 +36,9 @@ library(caTools)
 # Load DAAG
 library(DAAG) 
 
+# Load Caret 
+library(caret)
+
 # Import excel files
 income_pp <- read_excel("income_pp.xlsx")
 life_expectancy <- read_excel("life_expectancy.xlsx")
@@ -54,7 +57,7 @@ food_supply <- read_excel("food_supply.xlsx")
 improved_drinking_water <- read_excel("improved_drinking_water.xlsx")
 
 ```
-```{r}
+```{r echo=TRUE}
 
 #### Descriptive Statistics for Income
 
@@ -80,7 +83,7 @@ income_pp_year_as_row %>%
   
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of income_pp_year_as_row 
 summary(income_pp_year_as_row)
@@ -91,7 +94,7 @@ paste("The Standard Deviation of GDP Per Capita is", income_sd_r,".")
   
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Density Plot for income_pp_year_as_row
 
@@ -115,7 +118,7 @@ ggplot(income_pp_year_as_row, aes(x = Income_per_person)) + geom_density() + lab
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Empirical Cumulative Density Function (ECDF) Plot for income_per_person_as_row
 
@@ -129,7 +132,7 @@ ggplot(income_pp_year_as_row, aes(x = Income_per_person)) + stat_ecdf(geom = "po
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Histogram showing income per person in different countries/territories
 
@@ -147,7 +150,7 @@ hist(income_pp$`1960`, xlab="GDP Per Capita 1960", main="Income In Different Cou
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Examine income outliers
 
@@ -157,7 +160,7 @@ subset(income_pp_year_as_row, Income_per_person > 80000)
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 #### Descriptive Statistics for Life Expectancy
 
@@ -179,7 +182,7 @@ life_expectancy_year_as_row %>%
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics
 summary(life_expectancy_year_as_row)
@@ -189,7 +192,7 @@ life_sd_r <- round(sd(life_expectancy_year_as_row$Life_Expectancy, na.rm = TRUE)
 paste("The Standard Deviation of Life Expectancy is", life_sd_r, "years")
   
 ```
-```{r}
+```{r echo=TRUE}
 
 ## Density Plot for life_expectancy_year_as_row
 
@@ -214,7 +217,7 @@ ggplot(life_expectancy_year_as_row, aes(x = Life_Expectancy)) + geom_density() +
 
 
 ```
-```{r}
+```{r echo=TRUE}
 
 ### Empirical Cumulative Density Function (ECDF) for life_expectancy_year_as_row
 
@@ -227,7 +230,7 @@ ggplot(life_expectancy_year_as_row, aes(x = Life_Expectancy)) + stat_ecdf(geom =
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Histogram showing life expectancy in different countries/territories
 
@@ -247,7 +250,7 @@ hist(life_expectancy$`1960`, xlab="Life Expectancy 1960", main="Life Expectancy 
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Check values of life expectancy under 30 years old.
 
@@ -257,7 +260,7 @@ subset(life_expectancy_year_as_row, Life_Expectancy < 30)
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 #### Descriptive Statistics of Total Health Spending
 
@@ -279,7 +282,7 @@ total_health_spending_pp_year_as_row %>%
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of total_health_spending_pp_year_as_row 
 summary(total_health_spending_pp_year_as_row)
@@ -316,7 +319,7 @@ ggplot(total_health_spending_pp_year_as_row, aes(x = Total_Health_Spending_Per_P
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Empirical Cumulative Density Function (ECDF) for total_health_spending_pp_year_as_row
 
@@ -331,7 +334,7 @@ ggplot(total_health_spending_pp_year_as_row, aes(x = Total_Health_Spending_Per_P
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Histogram showing total health spending in different countries/territories
 
@@ -354,7 +357,7 @@ subset(total_health_spending_pp_year_as_row, Total_Health_Spending_Per_Person > 
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 #### Descriptive Statistics of Government Health Spending
 
@@ -377,7 +380,7 @@ government_health_spending_pp_year_as_row %>%
 ```
 
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of government_health_spending_pp_year_as_row
 summary(government_health_spending_pp_year_as_row)
@@ -388,7 +391,7 @@ paste("The Standard Deviation of Government Health Spending is $", govspend_sd_r
   
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Density Plot for government_health_spending_pp_year_as_row
 
@@ -414,7 +417,7 @@ ggplot(government_health_spending_pp_year_as_row, aes(x = Government_Health_Spen
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Empirical Cumulative Density Function (ECDF) for government_health_spending_pp_year_as_row
 
@@ -428,7 +431,7 @@ ggplot(government_health_spending_pp_year_as_row, aes(x = Government_Health_Spen
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Histogram showing government health spending in different countries/territories
 
@@ -442,7 +445,7 @@ hist(government_health_spending_pp$`1995`, xlab="Government Health Spending Per 
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Examine the outliers of Government Health Spending Per Person
 
@@ -452,7 +455,7 @@ subset(government_health_spending_pp_year_as_row, Government_Health_Spending_Per
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 #### Descriptive Statistics of Food Supply
 
@@ -476,7 +479,7 @@ food_supply_year_as_row %>%
 ```
 
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of food_supply_year_as_row
 summary(food_supply_year_as_row)
@@ -487,7 +490,7 @@ paste("The Standard Deviation of Food Supply is", food_sd_r, "Calories per perso
   
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Density Plot for food_supply_year_as_row
 
@@ -512,7 +515,7 @@ ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + geom_density() + labs(x 
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Empirical Cumulative Density Function (ECDF) for food_supply_year_as_row
 
@@ -528,7 +531,7 @@ ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + stat_ecdf(geom = "point"
 ```
 
 
-```{r}
+```{r echo=TRUE}
 
 # Histogram showing food supply in different countries/territories
 
@@ -540,7 +543,7 @@ hist(food_supply$`1961`, xlab="Food Supply in Calories Per Person Per Day in 196
 
 ```
 
-```{r}
+```{r echo=TRUE}
 # Examie the outliers of food supply.
 
 subset(food_supply_year_as_row, Food_Supply > 3750)
@@ -549,7 +552,7 @@ subset(food_supply_year_as_row, Food_Supply > 3750)
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 #### Improved Drinking Water Source
 
@@ -572,7 +575,7 @@ improved_drinking_water_year_as_row %>%
 ```
 
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of improved_drinking_water_year_as_row
 summary(improved_drinking_water_year_as_row)
@@ -583,7 +586,7 @@ paste("The Standard Deviation of the Percentage of the Population Using Improved
   
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Density Plot for improved_drinking_water_year_as_row
 
@@ -608,7 +611,7 @@ ggplot(improved_drinking_water_year_as_row, aes(x = Improved_Water)) + geom_dens
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Empirical Cumulative Density Function (ECDF) for improved_drinking_water_year_as_row
 
@@ -624,7 +627,7 @@ ggplot(improved_drinking_water_year_as_row, aes(x = Improved_Water)) + stat_ecdf
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Histogram showing improved drinking water in different countries/territories
 
@@ -634,7 +637,7 @@ hist(improved_drinking_water$`2010`, xlab="Percentage of the Population Using Im
 
 ```
 
-```{r}
+```{r echo=TRUE}
 # Examine the outliers for improved drinking water source.
 
 subset(improved_drinking_water_year_as_row, Improved_Water < 10)
@@ -644,7 +647,7 @@ subset(improved_drinking_water_year_as_row, Improved_Water < 10)
 
 ```
 
-```{r} 
+```{r echo=TRUE}
 
 
 ## Breast Cancer Death
@@ -667,7 +670,7 @@ breast_cancer_death_year_as_row %>%
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of breast cancer death
 summary(breast_cancer_death_year_as_row)
@@ -678,7 +681,7 @@ paste("The Standard Deviation of Breast Cancer Deaths per 100,000 female is ", i
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Histogram showing breast cancer deaths in different countries/territories
 
@@ -690,7 +693,7 @@ hist(breast_cancer_death$`2002`, xlab="Breast Cancer Deaths Per 100,000 Female 2
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Examine the outliers of breast cancer death
 
@@ -700,7 +703,7 @@ subset(breast_cancer_death_year_as_row, Breast_Cancer_Death > 30)
 
 ```
 
-```{r} 
+```{r echo=TRUE}
 
 #### Cervical Cancer Death
 
@@ -722,7 +725,7 @@ cervical_cancer_death_year_as_row %>%
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of cervical_cancer_death_year_as_row
 summary(cervical_cancer_death_year_as_row)
@@ -733,7 +736,7 @@ paste("The Standard Deviation of Cervical Cancer Deaths Per 100,000 Female is ",
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Histogram showing cervical cancer deaths in different countries/territories
 
@@ -744,7 +747,7 @@ hist(cervical_cancer_death$`2002`, xlab="Cervical Cancer Deaths Per 100,000 Fema
   
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Examine the outliers 
 
@@ -755,8 +758,8 @@ subset(cervical_cancer_death_year_as_row, Cervical_Cancer_Death > 40)
 
 ```
 
-```{r} 
-.#### Liver Cancer Death
+```{r echo=TRUE}
+#### Liver Cancer Death
 
 # Reshape liver_cancer_death_male dataset. Make values of different years as rows. 
 liver_cancer_death_male_year_as_row <- gather(liver_cancer_death_male, "Year", "Liver_Cancer_Death_Male", 2:49, na.rm = FALSE)
@@ -776,7 +779,7 @@ liver_cancer_death_male_year_as_row %>%
 
 ```
 
-```{r} 
+```{r echo=TRUE}
 
 # Reshape liver_cancer_death_female dataset. Make values of different years as rows. 
 liver_cancer_death_female_year_as_row <- gather(liver_cancer_death_female, "Year", "Liver_Cancer_Death_Female", 2:49, na.rm = FALSE)
@@ -796,7 +799,7 @@ liver_cancer_death_female_year_as_row %>%
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Join liver_cancer_death_male_year_as_row and liver_cancer_death_female_year_as_row
 liver_cancer_death_year_as_row <- inner_join(liver_cancer_death_male_year_as_row, liver_cancer_death_female_year_as_row)
@@ -814,7 +817,7 @@ liver_cancer_death_year_as_row %>%
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of liver cancer death
 summary(liver_cancer_death_year_as_row)
@@ -825,7 +828,7 @@ paste("The Standard Deviation of Liver Cancer Deaths Per 100,000 Person Is ", ip
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Create tables for different years in order to create histograms
 liver_cancer_death_1987 <- subset(liver_cancer_death_year_as_row, Year == 1987) 
@@ -842,7 +845,7 @@ hist(liver_cancer_death_2002$Liver_Cancer_Death, xlab="Liver Cancer Deaths Per 1
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Examine the outliers
 
@@ -853,7 +856,7 @@ subset(liver_cancer_death_year_as_row, Liver_Cancer_Death > 80)
 
 ```
 
-```{r} 
+```{r echo=TRUE}
 
 #### Lung Cancer Death
 
@@ -875,7 +878,7 @@ lung_cancer_death_male_year_as_row %>%
 
 ```
 
-```{r} 
+```{r echo=TRUE}
 
 # Reshape lung_cancer_death_female dataset. Make values of different years as rows. 
 lung_cancer_death_female_year_as_row <- gather(lung_cancer_death_female, "Year", "Lung_Cancer_Death_Female", 2:54, na.rm = FALSE)
@@ -895,7 +898,7 @@ lung_cancer_death_female_year_as_row %>%
 
 ```
 
-```{r}
+```{r echo=TRUE}
 # Join lung_cancer_death_male_year_as_row and lung_cancer_death_female_year_as_row
 lung_cancer_death_year_as_row <- inner_join(lung_cancer_death_male_year_as_row, lung_cancer_death_female_year_as_row)
 
@@ -911,7 +914,7 @@ lung_cancer_death_year_as_row %>%
   arrange(desc(mean))
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of lung cancer death
 summary(lung_cancer_death_year_as_row)
@@ -922,7 +925,7 @@ paste("The Standard Deviation of Lung Cancer Deaths Per 100,000 Person Is ", ipp
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Create tables for different years in order to create histograms
 
@@ -940,7 +943,7 @@ hist(lung_cancer_death_2002$Lung_Cancer_Death, xlab="Lung Cancer Deaths Per 100,
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Examine the outliers 
 
@@ -952,7 +955,7 @@ subset(lung_cancer_death_year_as_row, Lung_Cancer_Death > 100)
 ```
 
 
-```{r} 
+```{r echo=TRUE}
 
 #### Prostate Cancer Death
 
@@ -973,7 +976,7 @@ prostate_cancer_death_year_as_row %>%
   arrange(desc(mean))
 
 ```
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of prostate cancer death
 summary(prostate_cancer_death_year_as_row)
@@ -984,7 +987,7 @@ paste("The Standard Deviation of Prostate Cancer Deaths Per 100,000 Male Is ", i
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Histogram showing prostate cancer deaths in different countries
 
@@ -998,7 +1001,7 @@ hist(prostate_cancer_death$`2002`, xlab="Prostate Cancer Deaths Per 100,000 Male
   
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Examine the outliers 
 
@@ -1009,7 +1012,7 @@ subset(prostate_cancer_death_year_as_row, Prostate_Cancer_Death > 50)
 
 ```
 
-```{r} 
+```{r echo=TRUE}
 
 #### Stomach Cancer Death 
 
@@ -1031,7 +1034,7 @@ stomach_cancer_death_male_year_as_row %>%
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Reshape stomach_cancer_death_female. Make values of different years as rows. 
 stomach_cancer_death_female_year_as_row <- gather(stomach_cancer_death_female, "Year", "Stomach_Cancer_Death_Female", 2:54, na.rm = FALSE)
@@ -1051,7 +1054,7 @@ stomach_cancer_death_female_year_as_row %>%
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Join stomach_cancer_death_male_year_as_row and stomach_cancer_death_female_year_as_row
 stomach_cancer_death_year_as_row <- inner_join(stomach_cancer_death_male_year_as_row, stomach_cancer_death_female_year_as_row)
@@ -1070,7 +1073,7 @@ stomach_cancer_death_year_as_row %>%
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Show basic descriptive statistics of stomach cancer death
 summary(stomach_cancer_death_year_as_row)
@@ -1081,7 +1084,7 @@ paste("The Standard Deviation of Stomach Cancer Deaths Per 100,000 Person Is ", 
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Create tables for different years in order to create histograms
 
@@ -1099,7 +1102,7 @@ hist(stomach_cancer_death_2002$Stomach_Cancer_Death, xlab="Stomach Cancer Deaths
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Examine the outliers 
 
@@ -1110,7 +1113,7 @@ subset(stomach_cancer_death_year_as_row, Stomach_Cancer_Death > 110)
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Join all "year_as_row"" datasets using inner_join, not full_Join
 
@@ -1154,7 +1157,7 @@ all_year_as_row <- inner_join(all_year_as_row, food_n_water)
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Join income_pp_year_as_row and life_expectancy_year_as_row by inner_join
 income_vs_life_expectancy_in <- inner_join(income_pp_year_as_row, life_expectancy_year_as_row)
@@ -1194,7 +1197,7 @@ ggplot(income_vs_life_expectancy_in_1960n2010, aes(x = Income_per_person, y = Li
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 # Join life_expectancy_year_as_row, total_health_spending_pp_year_as_row, and government_health_spending_pp_year_as_row by inner_join
 
@@ -1279,7 +1282,7 @@ pairs(~log10(Income_per_person)+log10(Life_Expectancy)+log10(Total_Health_Spendi
 
 ```
 
-```{r}
+```{r echo=TRUE}
 # Join life_expectancy_year_as_row and improved_drinking_water_year_as_row by inner_join
 
 life_water_in <- inner_join(life_expectancy_year_as_row, improved_drinking_water_year_as_row)
@@ -1314,7 +1317,7 @@ life_water_grob <- grobTree(textGrob(cor_life_water, x=0.5,  y=0.15, hjust=0,
 ggplot(life_water_in_2yrs, aes(x = Improved_Water, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Percentage of Population Using Improved Drinking Water Sources", y = "Life Expectancy (Year)", title = "Improved Drinking Water Sources and Life Expectancy\nby Year") + geom_smooth(method = "lm", linetype = 2) + scale_x_sqrt() + annotation_custom(life_water_grob)
 
 ```
-```{r}
+```{r echo=TRUE}
 # Join life_expectancy_year_as_row and food_supply_year_as_row by inner_join
 
 life_food_in <- inner_join(life_expectancy_year_as_row, food_supply_year_as_row)
@@ -1350,7 +1353,7 @@ ggplot(life_food_in_2yrs, aes(x = Food_Supply, y = Life_Expectancy, col = Year))
 ```
 
 
-```{r}
+```{r echo=TRUE}
 
 # Create subsets for data of 1987, 1992, 1997, 2002 (for plots)
 all_year_as_row_1987 <- subset(all_year_as_row, Year == 1987) 
@@ -1482,7 +1485,7 @@ ggplot(life_cancer_every5yrs, aes(x = Stomach_Cancer_Death, y = Life_Expectancy,
 ```
 
 
-```{r}
+```{r echo=TRUE}
 
 # Save the cleaned file as .csv
 
@@ -1499,7 +1502,7 @@ all_variables_last5yrs <- total_cancer_death_last5yrs
 
 ```
 
-```{r}
+```{r echo=TRUE}
 
 ## Regression the whole dataset all_variables_last5yrs
 
@@ -1510,14 +1513,25 @@ summary(mod_wholeds_6p)
 SSE=sum(mod_wholeds_6p$residuals^2)
 SSE
 
+```
+
+```{r echo=TRUE}
 ## Use different methods to select useful predictor variables
 # Create Best Subsets Regression
 
 ols_best_subset(mod_wholeds_6p)
 
+```
+
+```{r echo=TRUE}
+
 # Create Stepwise Forward Regression 
 
 ols_step_forward(mod_wholeds_6p)
+
+```
+
+```{r echo=TRUE}
 
 # Create Random forest
 
@@ -1533,10 +1547,13 @@ print(importance(output_forest_wholeds))
 
 # Pseudo R-Squared
 
-mean(output_forest_wholeds$rsq) #0.78
+mean(output_forest_wholeds$rsq) 
 
+```
 
-## 3-fold Cross-Validation for all 6 variables
+```{r echo=TRUE}
+
+## 10-fold Cross-Validation for all 6 variables
 
 # Change the dataset to data frame to prevent an error when running cv.lm() function
 all_variables_last5yrs_df <- as.data.frame(all_variables_last5yrs)
@@ -1544,32 +1561,71 @@ all_variables_last5yrs_df <- as.data.frame(all_variables_last5yrs)
 # Remove unnecessary columns for cv.lm () function
 all_variables_last5yrs_df <- select(all_variables_last5yrs_df, Income_per_person, Life_Expectancy, Improved_Water, Food_Supply, Total_Health_Spending_Per_Person, Government_Health_Spending_Per_Person, All_Cancer_Death)
 
-cv.lm(all_variables_last5yrs_df, form.lm = formula(Life_Expectancy ~ .), m=3)
+# cv.lm(all_variables_last5yrs_df, form.lm = formula(Life_Expectancy ~ .), m=10)
 
+# Set seed for reproducibility
+data(all_variables_last5yrs_df)
+set.seed(121)
 
-## 3-fold Cross-Validation for 4 stronger predictor variables based on Best Subset and Stepwise Forward
+# Fit linear regression model
+mod_10fold_6p <- train(Life_Expectancy ~ ., all_variables_last5yrs_df, method = "lm", trControl = trainControl(method = "cv", number = 10, verboseIter = TRUE)) 
+mod_10fold_6p
+
+# MAE (Using Mean Absolute Error for Forecast Accuracy. The absolate error is the absolute value of the difference between the forecasted value and the actual value.MAE tells us how big of an error we can expect from the orecast on average.)
+
+# RMSE (Root-mean-square error is a frequently used measure of the differences between sample and ppoluation values predicted by a model or an estimator and the values actually observed.)
+
+```
+
+```{r echo=TRUE}
+## 10-fold Cross-Validation for 4 stronger predictor variables based on Best Subsets Regression and Stepwise Forward Regression
 
 # Remove unnecessary columns for cv.lm () function
 all_variables_last5yrs_df_4p_iwfc <- select(all_variables_last5yrs_df, Income_per_person, Life_Expectancy, Improved_Water, Food_Supply, All_Cancer_Death)
 
-cv.lm(all_variables_last5yrs_df_4p_iwfc, form.lm = formula(Life_Expectancy ~ .), m=3)
+# cv.lm(all_variables_last5yrs_df_4p_iwfc, form.lm = formula(Life_Expectancy ~ .), m=10)
 
+# Set seed for reproducibility
+data(all_variables_last5yrs_df_4p_iwfc)
+set.seed(122)
 
-## 3-fold Cross-Validation for 4 stronger predictor variables based on Random Forest
+# Fit linear regression model
+mod_10fold_4p_iwfc <- train(Life_Expectancy ~ ., all_variables_last5yrs_df_4p_iwfc, method = "lm", trControl = trainControl(method = "cv", number = 10, verboseIter = TRUE)) 
+mod_10fold_4p_iwfc
+
+```
+
+```{r echo=TRUE}
+
+## 10-fold Cross-Validation for 4 stronger predictor variables based on Random Forest
 
 # Remove unnecessary columns for cv.lm () function
 all_variables_last5yrs_df_4p_iwtg <- select(all_variables_last5yrs_df, Income_per_person, Life_Expectancy, Improved_Water, Total_Health_Spending_Per_Person, Government_Health_Spending_Per_Person)
 
-cv.lm(all_variables_last5yrs_df_4p_iwtg, form.lm = formula(Life_Expectancy ~ .), m=3)
+# cv.lm(all_variables_last5yrs_df_4p_iwtg, form.lm = formula(Life_Expectancy ~ .), m=10)
 
+data(all_variables_last5yrs_df_4p_iwtg)
+set.seed(123)
 
-# Create a regression model with 4 stronger predictor variables based on Best Subset and Stepwise Forward 
+# Fit linear regression model
+mod_10fold_4p_iwtg <- train(Life_Expectancy ~ ., all_variables_last5yrs_df_4p_iwtg, method = "lm", trControl = trainControl(method = "cv", number = 10, verboseIter = TRUE)) 
+mod_10fold_4p_iwtg
+
+```
+
+```{r echo=TRUE}
+
+# Create a regression model with 4 stronger predictor variables based on Best Subsets Regression and Stepwise Forward Regression
 
 mod_wholeds_4p_iwtg <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_last5yrs)
 summary(mod_wholeds_4p_iwfc)
 
 SSE=sum(mod_wholeds_4p_iwfc$residuals^2)
 SSE
+
+```
+
+```{r echo=TRUE}
 
 # Create a regression model with 4 stronger predictor variables based on Random Forest 
 
@@ -1580,6 +1636,18 @@ SSE=sum(mod_wholeds_4p_iwtg$residuals^2)
 SSE
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
