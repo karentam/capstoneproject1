@@ -1,8 +1,13 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 Title: Capstone Project Milestone Report 
 <br>
 Name: H Karen Tam
 
-Update: January 18, 2018
+Update: January 24, 2018
 
 
 ### An introduction to the problem
@@ -464,7 +469,7 @@ Next, I would like to see how good the model can predict life expectancy.
 
 ### Multiple Linear Regression
 
-Multiple Linear Regression, k-fold Cross-Validation, and three variable selection methods are used to identify the best model to predict life expectancy. 
+Multiple Linear Regression, k-fold Cross-Validation, and three variable selection methods are used to identify the best model to predict life expectancy. R code and output can be reviewed <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_project_regression_code_output.pdf">here</a>. 
 
 <br>
 
@@ -474,68 +479,13 @@ The dataset used in this test contains the most updated available data from 1998
 
 <br>
 
-**Create The First Model Using The Whole Dataset**
+**Step To Create the Best Predictive Model**
 
-<a name="6pmodelresult"></a>
-
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_6p_result.png?raw=true)
-
-<br>
-
-  + 346 observations
-  + Adjusted R-Squared: 0.69
-  + Sum of Squared Errors: 6762
-  + Significant predictor variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
-  
-<br>
-
-**Variable Selection**
-
-Best Subsets Regression, Stepwise Forward Regression, and Random Forest are performed to select predictor variables that do the best at predicting life expectancy. The predict variables are selected based on the Adjusted R-Squared. Sum of Squared Errors and Percentage Error are also considered when comparing the models.
-
-<br>
-
-_Result of Best Subsets Regression_ 
-
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_best_subsets_result.png?raw=true)
-
-<br> 
-
-The best model:
-
-  + Predictor variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
-  + Adjusted R-Squared: 0.6909
-
-<br>
-
-_Result of Stepwise Forward Regression_
-
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_stepwise_forward_result.png?raw=true)
-
-<br>
-
-The best model:
-
-  + Predictor variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
-  + Adjusted R-Squared: 0.6909
-
-<br>
-
-_Result of Random Forest_
-
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_random_forest_result.png?raw=true)
-
-<br>
-
-The best model:
-
-  + Predictor variables: Income, Improved Drinking Water Source, Total Health Spending, and Government Health Spending
-  + Mean of Squared Residuals of out-of-bag predictions versus targets: 13.8
-  + Percentage of Variable Explained: 78.5 
-  + Pseudo R-Squared: 0.781
-  
-<br>
-
+_Variable Selection_
+  + Best Subsets Regression
+  + Stepwise Forward Regression
+  + Random Forest
+    
 <table>
 
 <tr>
@@ -544,6 +494,9 @@ Variable Seletion Method
 </th>
 <th>
 Strong Predictor Variables
+</th>
+<th>
+Result
 </th>
 </tr>
 
@@ -554,6 +507,9 @@ Best Subsets Regression
 <td>
 Income, Improved Drinking Water Source, Food Supply, and Cancer Death
 </td>
+<td>
+Adjusted R-Squared: 0.6909
+</td>
 </tr>
 
 <tr>
@@ -562,6 +518,9 @@ Stepwise Forward Regression
 </td>
 <td>
 Income, Improved Drinking Water Source, Food Supply, and Cancer Death
+</td>
+<td>
+Adjusted R-Squared: 0.6909
 </td>
 </tr>
 
@@ -572,48 +531,26 @@ Random Forest
 <td>
 Income, Improved Drinking Water Source, Total Health Spending, and Government Health Spending
 </td>
+<td>
+Mean of Squared Residuals of out-of-bag predictions versus targets: 13.8
+<br>
+Percentage of Variable Explained: 78.5
+<br>
+Pseudo R-Squared: 0.781
+</td>
 </tr>
 
 </table>
 
-<br>
-
-** K-fold Cross Validation**
-
-3-fold Cross Validation is performed for 3 models with different combination of variables. The combinations of variables used are based on recommendations from the above variable selection methods. K-fold Cross Validation can be used for comparing the Mean Squared Errors of the models.
-
-_Model with all 6 predictor variables: Income, Improved Drinking Water Source, Food Supply, Cancer Death, Total Health Spending, and Government Health Spending_
-
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p1.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p2.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p3.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p4.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p5.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_6p_result_p6.png?raw=true)
+<h6>The adjusted R-squared gives the percentage of variation explained by only those predictor variables that in reality affect the outcome variable.</h6>
+<h6>Mean of Squared Residuals is a measure of the discrepancy between the data and an estimation model.</h6>
+<h6>Pseudo R-Squared ranges from 0 to 1 with higher values indicating better model fit.</h6>
 
 <br>
 
-_Model with 4 predictor variables: Income, Improved Drinking Water Source, Food Supply, and Cancer Death_
+_k-fold Cross Validation_
 
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p1.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p2.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p3.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p4.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p5.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwfc_result_p6.png?raw=true)
-
-<br>
-
-_Model with 4 predictor variables: Income, Improved Drinking Water Source, Total Health Spending, and Government Health Spending_
-
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p1.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p2.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p3.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p4.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p5.png?raw=true)
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_3-fold_4p_iwtg_result_p6.png?raw=true)
-
-<br>
+10-fold Cross Validation is performed for 3 models with different combination of variables. The combinations of variables used are based on recommendations from the above variable selection methods. 
 
 <table>
 
@@ -625,10 +562,10 @@ No.
 Model Containing The Following Predictor Variables
 </th>
 <th>
-Significant Variables In The Model
+Root Mean Squared Error (RMSE)
 </th>
 <th>
-Mean Squared Error (MSE)
+Mean Absolute Error (MAE)
 </th>
 </tr>
 
@@ -640,11 +577,10 @@ Mean Squared Error (MSE)
 Income, Improved Drinking Water Source, Food Supply, Cancer Death, Total Health Spending, and Government Health Spending
 </td>
 <td>
-Income, Improved Drinking Water Source, Food Supply, and Cancer Death 
+4.46
 </td>
 <td>
-8579
-</td>
+3.09 years
 </tr>
 
 <tr>
@@ -655,10 +591,10 @@ Income, Improved Drinking Water Source, Food Supply, and Cancer Death
 Income, Improved Drinking Water Source, Food Supply, and Cancer Death
 </td>
 <td>
-Income, Improved Drinking Water Source, Food Supply, and Cancer Death 
+4.42
 </td>
 <td>
-8059
+3.07 years
 </td>
 </tr>
 
@@ -670,62 +606,24 @@ Income, Improved Drinking Water Source, Food Supply, and Cancer Death
 Income, Improved Drinking Water Source, Total Health Spending, and Government Health Spending
 </td>
 <td>
-Income and Improved Drinking Water Source
+4.51
 </td>
 <td>
-7541
+3.12 years
 </td>
 </tr>
 
 </table>
 
+<h6>RMSE is used to measure differences between the values predicted by a model and the values actually observed.</h6>
+<h6>MAE is the absolute value of the difference between the forecasted value and the actual value. It tells us how big of an error we can expect from the forecast on average.</h6>
 <br>
 
-Model 2 is the best choice based on 3-fold Cross Validation because all 4 predictor variables in Model 2 are statistically significant. Although MSE of Model 2 (8059) is higher than MSE of Model 3 (7541), there are only 2 out of 4 predictor variables in Model 3 that are statistically significant. 
-
-<br>
-
-**Compare Models With Different Predictors Varables**
-
-_Predictor Variables: Income, Improved Drinking Water Source, Food Supply, Cancer Death, Total Health Spending, Government Health Spending_
-
-<a href="#6pmodelresult">The result was shown above.</a> 
-
-  + 346 observations
-  + Adjusted R-Squared: 0.69
-  + Sum of Squared Errors: 6762
-  + Percentage Error: (4.47/35.5)*100 = 12.59% 
-  + Significant predictor variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
-  
-<br>
-
-_Predictor Variables: Income, Improved Drinking Water Source, Food Supply, and Cancer Death_
-
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_4p_iwfc_result.png?raw=true)
+Model 2 is the most accurate estimater of life expectancy because it has the lowest RMSE of 4.42 and MAE of 3.07 years.
 
 <br>
 
-  + 346 observations
-  + Adjusted R-Squared: 0.691
-  + Sum of Squared Errors: 6779
-  + Percentage Error: (4.46/35.5)*100 = 12.56% 
-  + Significant predictor variables: Income, Food Supply, Improved Drinking Water Source, and Cancer Death
-  
-<br>
-
-_Predictor Variables: Income, Improved Drinking Water Source, Total Health Spending, Government Health Spending_
-
-![](https://github.com/karentam/capstoneproject1/blob/master/regression_4p_iwtg_result.png?raw=true)
-
-<br>
-
-  + 346 observations
-  + Adjusted R-Squared: 0.673
-  + Sum of Squared Errors: 7162
-  + Percentage Error: (4.58/35.2)*100 = 13.01%
-  + Significant predictor variables: Income and Improved Drinking Water Source
-  
-<br>
+_Compare Models with Different Predictor Variables_
 
 <table>
 
@@ -746,7 +644,7 @@ Adjusted R-squared
 Sum of Squared Errors (SSE)
 </th>
 <th>
-Percentage Error
+Residual Standard Error
 </th>
 </tr>
 
@@ -767,7 +665,7 @@ N/A
 6762
 </td>
 <td>
-12.59% 
+4.466 years
 </td>
 </tr>
 
@@ -788,7 +686,7 @@ Best Subsets Regression and Stepwise Forward regression
 6779
 </td>
 <td>
-12.56% 
+4.459 years
 </td>
 </tr>
 
@@ -809,15 +707,18 @@ Random Forest
 7162
 </td>
 <td>
-13.01%
+4.583 years
 </td>
 </tr>
 
 </table>
 
+<h6>The adjusted R-squared gives the percentage of variation explained by only those predictor variables that in reality affect the outcome variable.</h6>
+<h6>Sum of Squared Errors (SSE) is the sum of the squared differences between each observation and its group's mean.</h6>
+<h6>Residual Standard Error is a measure of how close the fit is to the points.</h6>
 <br>
 
-Model 2 has the highest Adjusted R-Squared of 0.691 and the lowest Percentage Error of 12.56%. Its SSE of 6779 is very close to Model 1's SSE, the lowest one in the table. Therefore, Model 2 is selected to be the best predictive model. 
+Model 2 has the highest Adjusted R-Squared of 0.691 and the lowest Residual Standard Error of 4.459 years. Its SSE of 6779 is very close to Model 1's SSE, the lowest one in the table. Therefore, Model 2 is selected to be the best predictive model. 
 
 <br>
 
@@ -846,8 +747,5 @@ Estimated Effect of Predictors:
   + A decrease in 1 case of cancer death per 100,000 person per year is associated with an increase of 0.0344 year in life expectancy. 
   
 <br><br>
-
-
-
 
 
