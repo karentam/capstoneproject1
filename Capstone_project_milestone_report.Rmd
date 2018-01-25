@@ -741,10 +741,10 @@ Residual Standard Error of 4.46 shows that there are about 4.46 years between th
 
 Estimated Effect of Predictors:
 <br>
-  + An increase of US$1 in GDP Per Capita is associated with an increase of 0.000143 year in life expectancy. 
-  + An increase of 1 calory intake is associated with an increase of 0.00221 year in life expectancy.
-  + An increase in 1% of country's population with an access to clean drinking water sources is associated with an increase in 0.355 year in life expectancy.
-  + A decrease in 1 case of cancer death per 100,000 person per year is associated with an increase of 0.0344 year in life expectancy. 
+  + An increase of US$10,000 in GDP Per Capita is associated with an increase of 1.43 years in life expectancy. 
+  + If people faces food shortage due to extreme poverty or wars, a decrease of 1,000 calories intake is associated with a decrease of 2.21 years in life expectancy.
+  + An increase in 10% of country's population with an access to clean drinking water sources is associated with an increase in 3.55 years in life expectancy.
+  + For countries with very large number of cancer deaths, a decrease in 100 cases of cancer death per 100,000 person per year is associated with an increase of 3.44 years in life expectancy. 
   
 <br><br>
 
