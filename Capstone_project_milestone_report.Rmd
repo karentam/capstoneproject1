@@ -31,7 +31,7 @@ Variable
 Years
 </th>
 <th>
-Number of <br>Country & Territory
+Number of <br>Countries & Territories
 </th>
 </tr>
 
@@ -479,7 +479,7 @@ The dataset used in this test contains the most updated available data from 1998
 
 <br>
 
-**Step To Create the Best Predictive Model**
+**Steps To Create the Best Predictive Model**
 
 _Variable Selection_
   + Best Subsets Regression
