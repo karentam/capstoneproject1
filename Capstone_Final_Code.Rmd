@@ -1,0 +1,1701 @@
+---
+Title: "Capstone Project - Code"
+Author: "H Karen Tam"
+Date: "February 8, 2018"
+---
+
+
+```{r echo=TRUE}
+
+# Load tidyr
+suppressMessages(library(tidyr))
+
+# Load dplyr
+suppressMessages(library(dplyr))
+
+# Load ggplot2
+suppressMessages(library(ggplot2))
+
+# Load olsrr
+suppressMessages(library(olsrr))
+
+# Load readxl - read excel files
+library(readxl)
+
+# Load grid
+library(grid)
+
+# Load Random Forest
+library(randomForest)
+
+# Load caTools
+library(caTools)
+
+# Load DAAG
+library(DAAG) 
+
+# Load Caret 
+library(caret)
+
+# Import excel files
+income_pp <- read_excel("income_pp.xlsx")
+life_expectancy <- read_excel("life_expectancy.xlsx")
+total_health_spending_pp <- read_excel("total_health_spending_pp.xlsx")
+government_health_spending_pp <- read_excel("government_health_spending_pp.xlsx")
+breast_cancer_death <- read_excel("breast_cancer_death.xlsx")
+cervical_cancer_death <- read_excel("cervical_cancer_death.xlsx")
+liver_cancer_death_male <- read_excel("liver_cancer_death_male.xlsx")
+liver_cancer_death_female <- read_excel("liver_cancer_death_female.xlsx")
+lung_cancer_death_male <- read_excel("lung_cancer_death_male.xlsx")
+lung_cancer_death_female <- read_excel("lung_cancer_death_female.xlsx")
+prostate_cancer_death <- read_excel("prostate_cancer_death.xlsx")
+stomach_cancer_death_male <- read_excel("stomach_cancer_death_male.xlsx")
+stomach_cancer_death_female <- read_excel("stomach_cancer_death_female.xlsx")
+food_supply <- read_excel("food_supply.xlsx")
+improved_drinking_water <- read_excel("improved_drinking_water.xlsx")
+
+```
+```{r echo=TRUE}
+
+#### Descriptive Statistics for Income
+
+# Reshape dataset income_pp. Make values of different years as rows. 
+income_pp_year_as_row <- gather(income_pp, "Year", "Income_per_person", 2:53, na.rm = FALSE)
+
+# change column income_per_person's value as numberic 
+as.numeric(income_pp_year_as_row$Income_per_person)
+
+# Remove observations with missing values in Income_per_person column
+income_pp_year_as_row <- filter(income_pp_year_as_row, !is.na(Income_per_person))
+
+# Show the mean of GDP per capita of each country/territory from 1960 to 2011
+paste("The Mean of Income Per Person (GDP Per Capita) By Country from 1960 to 2011")
+income_pp_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Income_per_person, na.rm = TRUE), count=sum(!is.na(Income_per_person))) %>%
+  arrange(desc(mean))
+
+# The top five countries with the highest means of GDP Per Capita are small countries and territories in Western Europe. The United Arab Emirates and Qatar in the Middle East, Japan in Asia, and United States in North America are among the top ten as well. 
+
+# Nine of the ten countries with the lowest means of GDP Per Capita are from different parts of Africa. Nepal is the only one Asian country on the bottom ten list. 
+  
+```
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of income_pp_year_as_row 
+summary(income_pp_year_as_row)
+
+# Standard Deviation of Income Per Person
+income_sd_r <- round(sd(income_pp_year_as_row$Income_per_person, na.rm = TRUE), 2)
+paste("The Standard Deviation of GDP Per Capita is", income_sd_r,".")
+  
+```
+
+```{r echo=TRUE}
+
+## Density Plot for income_pp_year_as_row
+
+# Prepare text for income plots
+income_mean <- mean(income_pp_year_as_row$Income_per_person, na.rm = TRUE)
+income_mean_r <- round(mean(income_pp_year_as_row$Income_per_person, na.rm = TRUE), 2)
+income_mean_r_word <- paste("Mean=$",income_mean_r)
+income_median <- median(income_pp_year_as_row$Income_per_person, na.rm = TRUE)
+income_median_r <- round(median(income_pp_year_as_row$Income_per_person, na.rm = TRUE), 2)
+income_median_r_word <- paste("Median=$",income_median_r)
+income_sd <- sd(income_pp_year_as_row$Income_per_person, na.rm = TRUE)
+income_sd_r_word <- paste("Standard Deviation = $",income_sd_r)
+income_plot_label <- paste("",income_mean_r_word,"\n",income_median_r_word,"\n",income_sd_r_word)
+
+# Create text for Income Density Plot
+income_grob <- grobTree(textGrob(income_plot_label, x=0.01,  y=0.9, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create Density Plot for income_pp_year_as_row 
+ggplot(income_pp_year_as_row, aes(x = Income_per_person)) + geom_density() + labs(x = "GDP Per Capita (US$)", y = "Density", title = "Density Plot of Income Per Person 1960-2011") + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x))) + geom_vline(xintercept=income_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=income_mean,y=0.2),label="mean") + geom_vline(xintercept = income_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=income_median,y=0.1),label="median") + annotation_custom(income_grob)
+
+```
+
+```{r echo=TRUE}
+
+## Empirical Cumulative Density Function (ECDF) Plot for income_per_person_as_row
+
+# Create text for Income ECDF Plot 
+income_grob2 <- grobTree(textGrob(income_plot_label, x=0.6,  y=0.15, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Cresate Income ECDF Plot
+ggplot(income_pp_year_as_row, aes(x = Income_per_person)) + stat_ecdf(geom = "point") + labs(x = "GDP Per Capita (US$)", y = "F(Income)", title = "Empirical Cumulative Density Function of Income 1960-2011") + geom_vline(xintercept=income_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=income_mean,y=0.5),label="Mean", hjust=-0.05) + geom_vline(xintercept = income_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=income_median,y=0.25),label="Median", hjust=-0.05) + annotation_custom(income_grob2)
+
+
+```
+
+```{r echo=TRUE}
+
+# Histogram showing income per person in different countries/territories
+
+hist(income_pp$`2010`, xlab="GDP Per Capita 2010", main="Income In Different Countries in 2010")
+
+hist(income_pp$`2000`, xlab="GDP Per Capita 2000", main="Income In Different Countries in 2000")
+
+hist(income_pp$`1990`, xlab="GDP Per Capita 1990", main="Income In Different Countries in 1990")
+
+hist(income_pp$`1980`, xlab="GDP Per Capita 1980", main="Income In Different Countries in 1980")
+
+hist(income_pp$`1970`, xlab="GDP Per Capita 1970", main="Income In Different Countries in 1970")
+
+hist(income_pp$`1960`, xlab="GDP Per Capita 1960", main="Income In Different Countries in 1960")
+
+```
+
+```{r echo=TRUE}
+
+# Examine income outliers
+
+subset(income_pp_year_as_row, Income_per_person > 80000)
+
+# The top two countries with the highest means of GDP Per Capita are small countries in Europe: Monaco and Liechtenstein.
+
+```
+
+```{r echo=TRUE}
+
+#### Descriptive Statistics for Life Expectancy
+
+# Reshape dataset life_expectancy. Make values of different years as rows. 
+life_expectancy_year_as_row <- gather(life_expectancy, "Year", "Life_Expectancy", 2:58, na.rm = FALSE)
+
+# change Life_Expectancy's value as numberic 
+as.numeric(life_expectancy_year_as_row$Life_Expectancy)
+
+# Remove observations with missing values in Life_Expectancy column
+life_expectancy_year_as_row <- filter(life_expectancy_year_as_row, !is.na(Life_Expectancy))
+
+# Show the mean of life expectancy at birth by year of each country from 1960 to 2016
+paste("The Mean of Life Expectancy at Birth (Year) By Country from 1960 to 2016")
+life_expectancy_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Life_Expectancy, na.rm = TRUE), count=sum(!is.na(Life_Expectancy))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics
+summary(life_expectancy_year_as_row)
+
+# Standard Deviation of Life Expectancy
+life_sd_r <- round(sd(life_expectancy_year_as_row$Life_Expectancy, na.rm = TRUE), 2)
+paste("The Standard Deviation of Life Expectancy is", life_sd_r, "years")
+  
+```
+```{r echo=TRUE}
+
+## Density Plot for life_expectancy_year_as_row
+
+# Prepare text for life expectancy plots
+
+life_mean <- mean(life_expectancy_year_as_row$Life_Expectancy, na.rm = TRUE)
+life_mean_r <- round(mean(life_expectancy_year_as_row$Life_Expectancy, na.rm = TRUE), 2)
+life_mean_r_word <- paste("Mean =",life_mean_r,"years")
+life_median <- median(life_expectancy_year_as_row$Life_Expectancy, na.rm = TRUE)
+life_median_r <- round(median(life_expectancy_year_as_row$Life_Expectancy, na.rm = TRUE), 2)
+life_median_r_word <- paste("Median =",life_median_r,"years")
+life_sd <- sd(life_expectancy_year_as_row$Life_Expectancy, na.rm = TRUE)
+life_sd_r_word <- paste("Standard Deviation = ",life_sd_r,"years")
+life_plot_label <- paste("",life_mean_r_word,"\n",life_median_r_word,"\n",life_sd_r_word)
+
+# Create a text for life expectancy density plot
+life_grob <- grobTree(textGrob(life_plot_label, x=0.01,  y=0.9, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create life expectancy density plot
+ggplot(life_expectancy_year_as_row, aes(x = Life_Expectancy)) + geom_density() + labs(x = "Life Expectancy (Year)", y = "Density", title = "Density Plot of Life Expectancy 1960-2016") + geom_vline(xintercept=life_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=life_mean,y=0.005),label="Mean", hjust=1.1) + geom_vline(xintercept = life_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=life_median,y=0.010),label="Median", hjust=-0.1) + annotation_custom(life_grob)
+
+
+```
+```{r echo=TRUE}
+
+### Empirical Cumulative Density Function (ECDF) for life_expectancy_year_as_row
+
+# Prepare text for life expectancy ECDF plot
+life_grob2 <- grobTree(textGrob(life_plot_label, x=0.01, y=0.9, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a life expectancy ECDF plot
+ggplot(life_expectancy_year_as_row, aes(x = Life_Expectancy)) + stat_ecdf(geom = "point") + labs(x = "Life Expectancy (Year)", y = "F(Life Expectancy)", title = "Empirical Cumulative Density Function of Life Expectancy \n1960-2016") + geom_vline(xintercept=life_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=life_mean,y=0.5),label="Mean", hjust=1.1) + geom_vline(xintercept = life_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=life_median,y=0.3),label="Median", hjust=-0.1) + annotation_custom(life_grob2)
+
+```
+
+```{r echo=TRUE}
+
+# Histogram showing life expectancy in different countries/territories
+
+hist(life_expectancy$`2016`, xlab="Life Expectancy 2016", main="Life Expectancy In Different Countries in 2016")
+
+hist(life_expectancy$`2010`, xlab="Life Expectancy 2010", main="Life Expectancy In Different Countries in 2010")
+
+hist(life_expectancy$`2000`, xlab="Life Expectancy 2000", main="Life Expectancy In Different Countries in 2000")
+
+hist(life_expectancy$`1990`, xlab="Life Expectancy 1990", main="Life Expectancy In Different Countries in 1990")
+
+hist(life_expectancy$`1980`, xlab="Life Expectancy 1980", main="Life Expectancy In Different Countries in 1980")
+
+hist(life_expectancy$`1970`, xlab="Life Expectancy 1970", main="Life Expectancy In Different Countries in 1970")
+
+hist(life_expectancy$`1960`, xlab="Life Expectancy 1960", main="Life Expectancy In Different Countries in 1960")
+
+```
+
+```{r echo=TRUE}
+
+# Check values of life expectancy under 30 years old.
+
+subset(life_expectancy_year_as_row, Life_Expectancy < 30)
+
+# There are 9 records in this subset. The numbers are from Mali in 1960 and 1961, Cambodia from 1975 to 1980, and Rwanda in 1994. The short lives can be explained by wars in these countries in the stated years. 
+
+```
+
+```{r echo=TRUE}
+
+#### Descriptive Statistics of Total Health Spending
+
+# Reshape total_health_spending_pp dataset. Make values of different years as rows
+total_health_spending_pp_year_as_row <- gather(total_health_spending_pp, "Year", "Total_Health_Spending_Per_Person", 2:17, na.rm = FALSE)
+
+# change Total Health Spending's value as numberic 
+as.numeric(total_health_spending_pp_year_as_row$Total_Health_Spending_Per_Person)
+
+# Remove observations with missing values in Total_Health_Spending_Per_Person column
+total_health_spending_pp_year_as_row <- filter(total_health_spending_pp_year_as_row, !is.na(Total_Health_Spending_Per_Person))
+
+# Show the mean of total health spending in US$ of each country from 1995 to 2010
+paste("The Mean of Total Health Spending in US$ By Country from 1995 to 2010")
+total_health_spending_pp_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Total_Health_Spending_Per_Person, na.rm = TRUE), count=sum(!is.na(Total_Health_Spending_Per_Person))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of total_health_spending_pp_year_as_row 
+summary(total_health_spending_pp_year_as_row)
+
+# Standard Deviation of Total Health Spending Per Person
+totspend_sd_r <- round(sd(total_health_spending_pp_year_as_row$Total_Health_Spending_Per_Person, na.rm = TRUE), 2)
+paste("The Standard Deviation of Total Health Spending is $", totspend_sd_r, "US Dollars per person.")
+  
+```
+
+```{r}
+
+## Density Plot for total_health_spending_pp_year_as_row
+
+# Prepare text for total health spending plots
+
+totspend_mean <- mean(total_health_spending_pp_year_as_row$Total_Health_Spending_Per_Person, na.rm = TRUE)
+totspend_mean_r <- round(mean(total_health_spending_pp_year_as_row$Total_Health_Spending_Per_Person, na.rm = TRUE), 2)
+totspend_mean_r_word <- paste("Mean = $",totspend_mean_r)
+totspend_median <- median(total_health_spending_pp_year_as_row$Total_Health_Spending_Per_Person, na.rm = TRUE)
+totspend_median_r <- round(median(total_health_spending_pp_year_as_row$Total_Health_Spending_Per_Person, na.rm = TRUE), 2)
+totspend_median_r_word <- paste("Median = $",totspend_median_r)
+totspend_sd <- sd(total_health_spending_pp_year_as_row$Total_Health_Spending_Per_Person, na.rm = TRUE)
+totspend_sd_r_word <- paste("Standard Deviation = $",totspend_sd_r)
+totspend_plot_label <- paste("",totspend_mean_r_word,"\n",totspend_median_r_word,"\n",totspend_sd_r_word)
+
+# Create a text for total health spending density plot
+totspend_grob <- grobTree(textGrob(totspend_plot_label, x=0.01,  y=0.9, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a total health spending density plot
+ggplot(total_health_spending_pp_year_as_row, aes(x = Total_Health_Spending_Per_Person)) + geom_density() + labs(x = "Total Health Spending Per Person (US$)", y = "Density", title = "Density Plot of Total Health Spending Per Person in US$ \n1995-2010") + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x))) + geom_vline(xintercept=totspend_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=totspend_mean,y=0.05),label="Mean") + geom_vline(xintercept = totspend_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=totspend_median,y=0.15), label="Median") + annotation_custom(totspend_grob)
+
+
+```
+
+```{r echo=TRUE}
+
+## Empirical Cumulative Density Function (ECDF) for total_health_spending_pp_year_as_row
+
+# Create a text for total health spending ECDF plot
+
+totspend_grob2 <- grobTree(textGrob(totspend_plot_label, x=0.6,  y=0.15, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a total health spending ECDF plot
+
+ggplot(total_health_spending_pp_year_as_row, aes(x = Total_Health_Spending_Per_Person)) + stat_ecdf(geom = "point") + labs(x = "Total Health Spending Per Person (US$)", y = "F(Total Health Spending)", title = "Empirical Cumulative Density Function \nof Total Health Spending Per Person in US$ \n1995-2010") + geom_vline(xintercept=totspend_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=totspend_mean,y=0.25),label="Mean", hjust=-0.05) + geom_vline(xintercept = totspend_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=totspend_median,y=0.35),label="Median", hjust=-0.05) + annotation_custom(totspend_grob2)
+
+```
+
+```{r echo=TRUE}
+
+# Histogram showing total health spending in different countries/territories
+
+hist(total_health_spending_pp$`2010`, xlab="Total Health Spending Per Person in US Dollar in 2010", main="Total Health Spending In Different Countries in 2010")
+
+hist(total_health_spending_pp$`2005`, xlab="Total Health Spending Per Person in US Dollar in 2005", main="Total Health Spending In Different Countries in 2005")
+
+hist(total_health_spending_pp$`2000`, xlab="Total Health Spending Per Person in US Dollar in 2000", main="Total Health Spending In Different Countries in 2000")
+
+hist(total_health_spending_pp$`1995`, xlab="Total Health Spending Per Person in US Dollar in 1995", main="Total Health Spending In Different Countries in 1995")
+
+```
+
+```{r}
+## Examine the outliers
+
+subset(total_health_spending_pp_year_as_row, Total_Health_Spending_Per_Person > 8000)
+
+# There are 6 records in this subset. The countries are Luxembourg, Norway, and United States from 2008 to 2010. These are rich countries, and their total health spending per person seem to be reasonable.
+
+```
+
+```{r echo=TRUE}
+
+#### Descriptive Statistics of Government Health Spending
+
+# Reshape government_health_spending_pp. Make values of different years as rows. 
+government_health_spending_pp_year_as_row <- gather(government_health_spending_pp, "Year", "Government_Health_Spending_Per_Person", 2:17, na.rm = FALSE)
+
+# change Total Health Spending's value as numberic 
+as.numeric(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person)
+
+# Remove observations with missing values in Government_Health_Spending_Per_Person column
+government_health_spending_pp_year_as_row <- filter(government_health_spending_pp_year_as_row, !is.na(Government_Health_Spending_Per_Person))
+
+# Show the mean of government health spending in US$ of each country from 1995 to 2010
+paste("The Mean of Government Health Spending in US$ By Country from 1995 to 2010")
+government_health_spending_pp_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Government_Health_Spending_Per_Person, na.rm = TRUE), count=sum(!is.na(Government_Health_Spending_Per_Person))) %>%
+  arrange(desc(mean))
+
+```
+
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of government_health_spending_pp_year_as_row
+summary(government_health_spending_pp_year_as_row)
+
+# Standard Deviation of Government Health Spending Per Person
+govspend_sd_r <- round(sd(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person, na.rm = TRUE), 2)
+paste("The Standard Deviation of Government Health Spending is $", govspend_sd_r, "US Dollars per person.")
+  
+```
+
+```{r echo=TRUE}
+
+## Density Plot for government_health_spending_pp_year_as_row
+
+# Prepare text for government health spending plots
+
+govspend_mean <- mean(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person, na.rm = TRUE)
+govspend_mean_r <- round(mean(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person, na.rm = TRUE), 2)
+govspend_mean_r_word <- paste("Mean = $",govspend_mean_r)
+govspend_median <- median(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person, na.rm = TRUE)
+govspend_median_r <- round(median(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person, na.rm = TRUE), 2)
+govspend_median_r_word <- paste("Median = $",govspend_median_r)
+govspend_sd <- sd(government_health_spending_pp_year_as_row$Government_Health_Spending_Per_Person, na.rm = TRUE)
+govspend_sd_r_word <- paste("Standard Deviation = $",govspend_sd_r)
+govspend_plot_label <- paste("",govspend_mean_r_word,"\n",govspend_median_r_word,"\n",govspend_sd_r_word)
+
+# Create a text for government health spending density plot
+govspend_grob <- grobTree(textGrob(govspend_plot_label, x=0.01,  y=0.9, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a government health spending density plot
+ggplot(government_health_spending_pp_year_as_row, aes(x = Government_Health_Spending_Per_Person)) + geom_density() + labs(x = "Government Health Spending Per Person (US$)", y = "Density", title = "Density Plot of Government Health Spending Per Person in US$ \n1995-2010") + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x))) + geom_vline(xintercept=govspend_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=govspend_mean,y=0.15),label="Mean") + geom_vline(xintercept = govspend_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=govspend_median,y=0.05),label="Median") + annotation_custom(govspend_grob)
+
+
+```
+
+```{r echo=TRUE}
+
+## Empirical Cumulative Density Function (ECDF) for government_health_spending_pp_year_as_row
+
+# Create a text for a government health spending ECDF plot
+govspend_grob2 <- grobTree(textGrob(govspend_plot_label, x=0.6,  y=0.15, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a government health spending ECDF plot
+ggplot(government_health_spending_pp_year_as_row, aes(x = Government_Health_Spending_Per_Person)) + stat_ecdf(geom = "point") + labs(x = "Government Health Spending Per Person (US$)", y = "F(Government Health Spending)", title = "Empirical Cumulative Density Function \nof Government Health Spending Per Person in US$ \n1995-2010") + geom_vline(xintercept=govspend_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=govspend_mean,y=0.35),label="Mean", hjust=-0.05) + geom_vline(xintercept = govspend_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=govspend_median,y=0.15),label="Median", hjust=-0.05) + annotation_custom(govspend_grob2)
+
+
+```
+
+```{r echo=TRUE}
+
+# Histogram showing government health spending in different countries/territories
+
+hist(government_health_spending_pp$`2010`, xlab="Government Health Spending Per Person in US Dollar in 2010", main="Government Health Spending In Different Countries in 2010")
+
+hist(government_health_spending_pp$`2005`, xlab="Government Health Spending Per Person in US Dollar in 2005", main="Government Health Spending In Different Countries in 2005")
+
+hist(government_health_spending_pp$`2000`, xlab="Government Health Spending Per Person in US Dollar in 2000", main="Government Health Spending In Different Countries in 2000")
+
+hist(government_health_spending_pp$`1995`, xlab="Government Health Spending Per Person in US Dollar in 1995", main="Government Health Spending In Different Countries in 1995")
+
+```
+
+```{r echo=TRUE}
+
+# Examine the outliers of Government Health Spending Per Person
+
+subset(government_health_spending_pp_year_as_row, Government_Health_Spending_Per_Person > 6000)
+
+# There are 8 records that are higher than US$6,000. These numbers are from Luxembourg and Norway from 2007 to 2010. The numbers should be reasonable.
+
+```
+
+```{r echo=TRUE}
+
+#### Descriptive Statistics of Food Supply
+
+# Reshape food_supply. Make values of different years as rows. 
+food_supply_year_as_row <- gather(food_supply, "Year", "Food_Supply", 2:48, na.rm = FALSE)
+
+# change food_supply's value as numberic 
+as.numeric(food_supply_year_as_row$Food_Supply)
+
+# Remove observations with missing values in Food_Supply and country columns
+food_supply_year_as_row <- filter(food_supply_year_as_row, !is.na(Food_Supply) & !is.na(Country))
+food_supply_year_as_row
+ 
+# Show the mean of food supply in KCal per person per day in each country from 1961 to 2007
+paste("The Mean of Food Supply in KCal Per Person Per Day By Country From 1961 to 2007")
+food_supply_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Food_Supply, na.rm = TRUE), count=sum(!is.na(Food_Supply))) %>%
+  arrange(desc(mean))
+
+```
+
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of food_supply_year_as_row
+summary(food_supply_year_as_row)
+
+# Standard Deviation of Food Supply
+food_sd_r <- round(sd(food_supply_year_as_row$Food_Supply, na.rm = TRUE), 2)
+paste("The Standard Deviation of Food Supply is", food_sd_r, "Calories per person per day.")
+  
+```
+
+```{r echo=TRUE}
+
+## Density Plot for food_supply_year_as_row
+
+# Prepare text for food supply plots
+
+food_mean <- mean(food_supply_year_as_row$Food_Supply, na.rm = TRUE)
+food_mean_r <- round(mean(food_supply_year_as_row$Food_Supply, na.rm = TRUE), 2)
+food_mean_r_word <- paste("Mean =",food_mean_r,"Cal")
+food_median <- median(food_supply_year_as_row$Food_Supply, na.rm = TRUE)
+food_median_r <- round(median(food_supply_year_as_row$Food_Supply, na.rm = TRUE), 2)
+food_median_r_word <- paste("Median =",food_median_r,"Cal")
+food_sd <- sd(food_supply_year_as_row$Food_Supply, na.rm = TRUE)
+food_sd_r_word <- paste("Standard Deviation =",food_sd_r,"Cal")
+food_plot_label <- paste("",food_mean_r_word,"\n",food_median_r_word,"\n",food_sd_r_word)
+
+# Create a text for a food supply density plot
+food_grob <- grobTree(textGrob(food_plot_label, x=0.01,  y=0.9, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a food supply density plot
+ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + geom_density() + labs(x = "Food Supply by Calories Per Person Per Day", y = "Density", title = "Density Plot of Food Supply 1961-2007") + geom_vline(xintercept=food_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=food_mean,y=0.0002),label="Mean", hjust=-0.1) + geom_vline(xintercept = food_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=food_median,y=0.0001),label="Median", hjust=1.1) + annotation_custom(food_grob)
+
+```
+
+```{r echo=TRUE}
+
+## Empirical Cumulative Density Function (ECDF) for food_supply_year_as_row
+
+# Create a text for a food supply ECDF plot
+food_grob2 <- grobTree(textGrob(food_plot_label, x=0.01,  y=0.9, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a food supply ECDF plot
+ggplot(food_supply_year_as_row, aes(x = Food_Supply)) + stat_ecdf(geom = "point") + labs(x = "Food Supply by Calories Per Person Per Day", y = "F(Food Supply)", title = "Empirical Cumulative Density Function of\nFood Supply 1961-2007") + geom_vline(xintercept=food_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=food_mean,y=0.35),label="Mean", hjust=-0.1) + geom_vline(xintercept = food_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=food_median,y=0.75),label="Median", hjust=1.1) + annotation_custom(food_grob2)
+
+
+
+```
+
+
+```{r echo=TRUE}
+
+# Histogram showing food supply in different countries/territories
+
+hist(food_supply$`2007`, xlab="Food Supply in Calories Per Person Per Day in 2007", main="Food Supply In Different Countries in 2007")
+
+hist(food_supply$`1985`, xlab="Food Supply in Calories Per Person Per Day in 1985", main="Food Supply In Different Countries in 1985")
+
+hist(food_supply$`1961`, xlab="Food Supply in Calories Per Person Per Day in 1961", main="Food Supply In Different Countries in 1961")
+
+```
+
+```{r echo=TRUE}
+# Examie the outliers of food supply.
+
+subset(food_supply_year_as_row, Food_Supply > 3750)
+
+# Outliers are countries with 3,750 calories per day per person or more, including the United States from 2002 to 2006, Hungary in 1987 and 1989, and Austria in 1999, 2000, 2001, 2006, and 2007. 
+
+```
+
+```{r echo=TRUE}
+
+#### Improved Drinking Water Source
+
+# Reshape dataset improved_drinking_water. Make values of different years as rows. 
+improved_drinking_water_year_as_row <- gather(improved_drinking_water, "Year", "Improved_Water", 2:22, na.rm = FALSE)
+
+# change Improved drinking water's value as numberic 
+as.numeric(improved_drinking_water_year_as_row$Improved_Water)
+
+# Remove observations with missing values in Improved_Water column
+improved_drinking_water_year_as_row <- filter(improved_drinking_water_year_as_row, !is.na(Improved_Water))
+
+# Show the mean of the percentage of the total population using improved drinking water sources from 1990 to 2010
+paste("The Mean of the Percentage of the Population Using Improved Drinking Water Sources By Country From 1990 to 2010")
+improved_drinking_water_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Improved_Water, na.rm = TRUE), count=sum(!is.na(Improved_Water))) %>%
+  arrange(desc(mean))
+
+```
+
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of improved_drinking_water_year_as_row
+summary(improved_drinking_water_year_as_row)
+
+# Standard Deviation of Improved Drinking Water
+water_sd_r <- round(sd(improved_drinking_water_year_as_row$Improved_Water, na.rm = TRUE), 2)
+paste("The Standard Deviation of the Percentage of the Population Using Improved Drinking Water Sources is", water_sd_r, ".")
+  
+```
+
+```{r echo=TRUE}
+
+## Density Plot for improved_drinking_water_year_as_row
+
+# Prepare text for improved drinking water source plots
+water_mean <- mean(improved_drinking_water_year_as_row$Improved_Water, na.rm = TRUE)
+water_mean_r <- round(mean(improved_drinking_water_year_as_row$Improved_Water, na.rm = TRUE), 2)
+water_mean_r_word <- paste("Mean =", water_mean_r,"%")
+water_median <- median(improved_drinking_water_year_as_row$Improved_Water, na.rm = TRUE)
+water_median_r <- round(median(improved_drinking_water_year_as_row$Improved_Water, na.rm = TRUE), 2)
+water_median_r_word <- paste("Median =",water_median_r,"%")
+water_sd <- sd(improved_drinking_water_year_as_row$Improved_Water, na.rm = TRUE)
+water_sd_r_word <- paste("Standard Deviation =",water_sd_r,"%")
+water_plot_label <- paste("",water_mean_r_word,"\n",water_median_r_word,"\n",water_sd_r_word)
+
+# Create a text for improved drinking water source density plot
+water_grob <- grobTree(textGrob(water_plot_label, x=0.01,  y=0.9, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a improved drinking water source density plot
+ggplot(improved_drinking_water_year_as_row, aes(x = Improved_Water)) + geom_density() + labs(x = "Percentage of Population Using Improved Drinking Water Sources", y = "Density", title = "Density Plot of Improved Drinking Water Sources \n1990-2010") + geom_vline(xintercept=water_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=water_mean,y=0.035),label="Mean") + geom_vline(xintercept = water_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=water_median,y=0.047),label="Median") + annotation_custom(water_grob)
+
+
+```
+
+```{r echo=TRUE}
+
+## Empirical Cumulative Density Function (ECDF) for improved_drinking_water_year_as_row
+
+# Create a text for improved drining water source ECDF plot
+
+water_grob2 <- grobTree(textGrob(water_plot_label, x=0.01,  y=0.9, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create an improved drining water source ECDF plot
+
+ggplot(improved_drinking_water_year_as_row, aes(x = Improved_Water)) + stat_ecdf(geom = "point") + labs(x = "Percentage of Population Using Improved Drinking Water Sources", y = "F(Improved Drinking Water Sources)", title = "Empirical Cumulative Density Function of\nImproved Drinking Water Sources 1990-2010") + geom_vline(xintercept=water_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=water_mean,y=0.1),label="Mean", hjust=1.1) + geom_vline(xintercept = water_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=water_median,y=0.25),label="Median", hjust=-0.03) + annotation_custom(water_grob2)
+
+
+```
+
+```{r echo=TRUE}
+
+# Histogram showing improved drinking water in different countries/territories
+
+hist(improved_drinking_water$`1990`, xlab="Percentage of the Population Using Improved Drinking Water Sources in 1990", main="Using Improved Drinking Water Sources In Different Countries in 1990")
+
+hist(improved_drinking_water$`2010`, xlab="Percentage of the Population Using Improved Drinking Water Sources in 2010", main="Using Improved Drinking Water Sources In Different Countries in 2010")
+
+```
+
+```{r echo=TRUE}
+# Examine the outliers for improved drinking water source.
+
+subset(improved_drinking_water_year_as_row, Improved_Water < 10)
+
+# There are 6 records in this subset. The only country with less than 10% of the population to have access to improved drinking water sources is Afghanistan in 1990s. 
+
+
+```
+
+```{r echo=TRUE}
+
+
+## Breast Cancer Death
+
+# Reshape breast_cancer_death. Make values of different years as rows. 
+breast_cancer_death_year_as_row <- gather(breast_cancer_death, "Year", "Breast_Cancer_Death", 2:54, na.rm = FALSE)
+
+# change breast cacner death's value as numberic 
+as.numeric(breast_cancer_death_year_as_row$Breast_Cancer_Death)
+
+# Remove observations with missing values in Breast_Cancer_Death column
+breast_cancer_death_year_as_row <- filter(breast_cancer_death_year_as_row, !is.na(Breast_Cancer_Death))
+
+# Show the mean of breast cancer deaths per 100,000 female of each country from 1950 to 2002
+paste("The Mean of Breast Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
+breast_cancer_death_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Breast_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Breast_Cancer_Death))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of breast cancer death
+summary(breast_cancer_death_year_as_row)
+
+# Standard Deviation of breast cancer deaths per 100,000 female
+ipp_sd <- round(sd(breast_cancer_death_year_as_row$Breast_Cancer_Death, na.rm = TRUE), 2)
+paste("The Standard Deviation of Breast Cancer Deaths per 100,000 female is ", ipp_sd, ".")
+
+```
+
+```{r echo=TRUE}
+
+# Histogram showing breast cancer deaths in different countries/territories
+
+hist(breast_cancer_death$`1987`, xlab="Breast Cancer Deaths Per 100,000 Female 1987", main="Breast Cancer Deaths In Different Countries in 1987")
+hist(breast_cancer_death$`1992`, xlab="Breast Cancer Deaths Per 100,000 Female 1992", main="Breast Cancer Deaths In Different Countries in 1992")
+hist(breast_cancer_death$`1997`, xlab="Breast Cancer Deaths Per 100,000 Female 1997", main="Breast Cancer Deaths In Different Countries in 1997")
+hist(breast_cancer_death$`2002`, xlab="Breast Cancer Deaths Per 100,000 Female 2002", main="Breast Cancer Deaths In Different Countries in 2002")
+
+
+```
+
+```{r echo=TRUE}
+
+# Examine the outliers of breast cancer death
+
+# There are a total of 12 records shown in this subset. The countries are Iceland, Ireland, and Malta. In 1951, Iceland had the highest number of breast cancer death since 1950. It is reasonable because Iceland's numbers are relatively high in other years. 
+
+subset(breast_cancer_death_year_as_row, Breast_Cancer_Death > 30)
+
+```
+
+```{r echo=TRUE}
+
+#### Cervical Cancer Death
+
+# Reshape cervical_cancer_death dataset. Make values of different years as rows. 
+cervical_cancer_death_year_as_row <- gather(cervical_cancer_death, "Year", "Cervical_Cancer_Death", 2:54, na.rm = FALSE)
+
+# Change cervical cancer death's value as numberic 
+as.numeric(cervical_cancer_death_year_as_row$Cervical_Cancer_Death)
+
+# Remove observations with missing values in Cervical_Cancer_Death column
+cervical_cancer_death_year_as_row <- filter(cervical_cancer_death_year_as_row, !is.na(Cervical_Cancer_Death))
+
+# Show the mean of cervical cancer deaths per 100,000 female of each country from 1950 to 2002
+paste("The Mean of Cervical Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
+cervical_cancer_death_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Cervical_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Cervical_Cancer_Death))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of cervical_cancer_death_year_as_row
+summary(cervical_cancer_death_year_as_row)
+
+# Standard Deviation of cervical cancer deaths per 100,000 female
+ipp_sd <- round(sd(cervical_cancer_death_year_as_row$Cervical_Cancer_Death, na.rm = TRUE), 2)
+paste("The Standard Deviation of Cervical Cancer Deaths Per 100,000 Female is ", ipp_sd, ".")
+
+```
+
+```{r echo=TRUE}
+
+# Histogram showing cervical cancer deaths in different countries/territories
+
+hist(cervical_cancer_death$`1987`, xlab="Cervical Cancer Deaths Per 100,000 Female 1987", main="Cervical Cancer Deaths In Different Countries in 1987")
+hist(cervical_cancer_death$`1992`, xlab="Cervical Cancer Deaths Per 100,000 Female 1992", main="Cervical Cancer Deaths In Different Countries in 1992")
+hist(cervical_cancer_death$`1997`, xlab="Cervical Cancer Deaths Per 100,000 Female 1997", main="Cervical Cancer Deaths In Different Countries in 1997")
+hist(cervical_cancer_death$`2002`, xlab="Cervical Cancer Deaths Per 100,000 Female 2002", main="Cervical Cancer Deaths In Different Countries in 2002")
+  
+```
+
+```{r echo=TRUE}
+
+# Examine the outliers 
+
+subset(cervical_cancer_death_year_as_row, Cervical_Cancer_Death > 40)
+
+# There are a total of 8 records shown in this subset. All outliers are Guinea, Haiti, Lesotho, Rwanda, Swaziland, Tanzania, Zambia, and Zimbabwe in year 2002. It is reasonable because the numbers of these countries are relatively higher in other years. 
+
+
+```
+
+```{r echo=TRUE}
+#### Liver Cancer Death
+
+# Reshape liver_cancer_death_male dataset. Make values of different years as rows. 
+liver_cancer_death_male_year_as_row <- gather(liver_cancer_death_male, "Year", "Liver_Cancer_Death_Male", 2:49, na.rm = FALSE)
+
+# Change liver cancer death's value as numberic 
+as.numeric(liver_cancer_death_male_year_as_row$Liver_Cancer_Death_Male)
+
+# Remove observations with missing values in Liver_Cancer_Death_Male column
+liver_cancer_death_male_year_as_row <- filter(liver_cancer_death_male_year_as_row, !is.na(Liver_Cancer_Death_Male))
+
+# Show the mean of liver cancer deaths per 100,000 male of each country from 1955 to 2002
+paste("The Mean of Liver Cancer Deaths Per 100,000 Male By Country from 1955 to 2002")
+liver_cancer_death_male_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Liver_Cancer_Death_Male, na.rm = TRUE), count=sum(!is.na(Liver_Cancer_Death_Male))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+
+# Reshape liver_cancer_death_female dataset. Make values of different years as rows. 
+liver_cancer_death_female_year_as_row <- gather(liver_cancer_death_female, "Year", "Liver_Cancer_Death_Female", 2:49, na.rm = FALSE)
+
+# Change liver cancer death's value as numberic 
+as.numeric(liver_cancer_death_female_year_as_row$Liver_Cancer_Death_Female)
+
+# Remove observations with missing values in Liver_Cancer_Death_Female column
+liver_cancer_death_female_year_as_row <- filter(liver_cancer_death_female_year_as_row, !is.na(Liver_Cancer_Death_Female))
+
+# Show the mean of liver cancer deaths per 100,000 female of each country from 1955 to 2002
+paste("The Mean of Liver Cancer Deaths Per 100,000 Female By Country from 1955 to 2002")
+liver_cancer_death_female_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Liver_Cancer_Death_Female, na.rm = TRUE), count=sum(!is.na(Liver_Cancer_Death_Female))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+
+# Join liver_cancer_death_male_year_as_row and liver_cancer_death_female_year_as_row
+liver_cancer_death_year_as_row <- inner_join(liver_cancer_death_male_year_as_row, liver_cancer_death_female_year_as_row)
+
+# Add liver cancer death numbers for male and female, create new column, and store the values in liver_cancer_death_year_as_row
+liver_cancer_death_year_as_row <- liver_cancer_death_year_as_row %>% 
+  mutate(Liver_Cancer_Death = Liver_Cancer_Death_Male + Liver_Cancer_Death_Female)
+
+# Show the mean of liver cancer deaths per 100,000 person of each country from 1955 to 2002
+paste("The Mean of Liver Cancer Deaths Per 100,000 Person By Country from 1955 to 2002")
+liver_cancer_death_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Liver_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Liver_Cancer_Death))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of liver cancer death
+summary(liver_cancer_death_year_as_row)
+
+# Standard Deviation of liver cancer deaths per 100,000 person
+ipp_sd <- round(sd(liver_cancer_death_year_as_row$Liver_Cancer_Death, na.rm = TRUE), 2)
+paste("The Standard Deviation of Liver Cancer Deaths Per 100,000 Person Is ", ipp_sd, ".")
+
+```
+
+```{r echo=TRUE}
+
+# Create tables for different years in order to create histograms
+liver_cancer_death_1987 <- subset(liver_cancer_death_year_as_row, Year == 1987) 
+liver_cancer_death_1992 <- subset(liver_cancer_death_year_as_row, Year == 1992) 
+liver_cancer_death_1997 <- subset(liver_cancer_death_year_as_row, Year == 1997) 
+liver_cancer_death_2002 <- subset(liver_cancer_death_year_as_row, Year == 2002) 
+
+# Histogram showing liver cancer deaths in different countries/territories
+
+hist(liver_cancer_death_1987$Liver_Cancer_Death, xlab="Liver Cancer Deaths Per 100,000 Person 1987", main="Liver Cancer Deaths In Different Countries in 1987")
+hist(liver_cancer_death_1992$Liver_Cancer_Death, xlab="Liver Cancer Deaths Per 100,000 Person 1992", main="Liver Cancer Deaths In Different Countries in 1992")
+hist(liver_cancer_death_1997$Liver_Cancer_Death, xlab="Liver Cancer Deaths Per 100,000 Person 1997", main="Liver Cancer Deaths In Different Countries in 1997")
+hist(liver_cancer_death_2002$Liver_Cancer_Death, xlab="Liver Cancer Deaths Per 100,000 Person 2002", main="Liver Cancer Deaths In Different Countries in 2002")
+
+```
+
+```{r echo=TRUE}
+
+# Examine the outliers
+
+subset(liver_cancer_death_year_as_row, Liver_Cancer_Death > 80)
+
+# In fact, Mongolia and Mozambique have much higher rate of liver cancer according to online resources. So the outliers should be correct. 
+
+
+```
+
+```{r echo=TRUE}
+
+#### Lung Cancer Death
+
+# Reshape lung_cancer_death_male dataset. Make values of different years as rows. 
+lung_cancer_death_male_year_as_row <- gather(lung_cancer_death_male, "Year", "Lung_Cancer_Death_Male", 2:54, na.rm = FALSE)
+
+# Change lung cancer death's value as numberic 
+as.numeric(lung_cancer_death_male_year_as_row$Lung_Cancer_Death_Male)
+
+# Remove observations with missing values in Lung_Cancer_Death_Male column
+lung_cancer_death_male_year_as_row <- filter(lung_cancer_death_male_year_as_row, !is.na(Lung_Cancer_Death_Male))
+
+# Show the mean of lung cancer deaths per 100,000 male of each country from 1950 to 2002
+paste("The Mean of Lung Cancer Deaths Per 100,000 Male By Country from 1950 to 2002")
+lung_cancer_death_male_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Lung_Cancer_Death_Male, na.rm = TRUE), count=sum(!is.na(Lung_Cancer_Death_Male))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+
+# Reshape lung_cancer_death_female dataset. Make values of different years as rows. 
+lung_cancer_death_female_year_as_row <- gather(lung_cancer_death_female, "Year", "Lung_Cancer_Death_Female", 2:54, na.rm = FALSE)
+
+# Change lung cancer death's value as numberic 
+as.numeric(lung_cancer_death_female_year_as_row$Lung_Cancer_Death_Female)
+
+# Remove observations with missing values in Lung_Cancer_Death_Female column
+lung_cancer_death_female_year_as_row <- filter(lung_cancer_death_female_year_as_row, !is.na(Lung_Cancer_Death_Female))
+
+# Show the mean of lung cancer deaths per 100,000 female of each country from 1950 to 2002
+paste("The Mean of Lung Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
+lung_cancer_death_female_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Lung_Cancer_Death_Female, na.rm = TRUE), count=sum(!is.na(Lung_Cancer_Death_Female))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+# Join lung_cancer_death_male_year_as_row and lung_cancer_death_female_year_as_row
+lung_cancer_death_year_as_row <- inner_join(lung_cancer_death_male_year_as_row, lung_cancer_death_female_year_as_row)
+
+# Add lung cancer death numbers for male and female, create new column, and store the values in lung_cancer_death_year_as_row
+lung_cancer_death_year_as_row <- lung_cancer_death_year_as_row %>% 
+  mutate(Lung_Cancer_Death = Lung_Cancer_Death_Male + Lung_Cancer_Death_Female)
+
+# Show the mean of lung cancer deaths per 100,000 person of each country from 1950 to 2002
+paste("The Mean of Lung Cancer Deaths Per 100,000 Person By Country from 1950 to 2002")
+lung_cancer_death_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Lung_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Lung_Cancer_Death))) %>%
+  arrange(desc(mean))
+```
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of lung cancer death
+summary(lung_cancer_death_year_as_row)
+
+# Standard Deviation of lung cancer death per 100,000 persons
+ipp_sd <- round(sd(lung_cancer_death_year_as_row$Lung_Cancer_Death, na.rm = TRUE), 2)
+paste("The Standard Deviation of Lung Cancer Deaths Per 100,000 Person Is ", ipp_sd, ".")
+
+```
+
+```{r echo=TRUE}
+
+# Create tables for different years in order to create histograms
+
+lung_cancer_death_1987 <- subset(lung_cancer_death_year_as_row, Year == 1987) 
+lung_cancer_death_1992 <- subset(lung_cancer_death_year_as_row, Year == 1992) 
+lung_cancer_death_1997 <- subset(lung_cancer_death_year_as_row, Year == 1997) 
+lung_cancer_death_2002 <- subset(lung_cancer_death_year_as_row, Year == 2002) 
+
+# Histogram showing lung cancer deaths in different countries/territories
+
+hist(lung_cancer_death_1987$Lung_Cancer_Death, xlab="Lung Cancer Deaths Per 100,000 Person 1987", main="Lung Cancer Deaths In Different Countries in 1987")
+hist(lung_cancer_death_1992$Lung_Cancer_Death, xlab="Lung Cancer Deaths Per 100,000 Person 1992", main="Lung Cancer Deaths In Different Countries in 1992")
+hist(lung_cancer_death_1997$Lung_Cancer_Death, xlab="Lung Cancer Deaths Per 100,000 Person 1997", main="Lung Cancer Deaths In Different Countries in 1997")
+hist(lung_cancer_death_2002$Lung_Cancer_Death, xlab="Lung Cancer Deaths Per 100,000 Person 2002", main="Lung Cancer Deaths In Different Countries in 2002")
+
+```
+
+```{r echo=TRUE}
+
+# Examine the outliers 
+
+subset(lung_cancer_death_year_as_row, Lung_Cancer_Death > 100)
+
+# Outliers are from Hungary from 1993 to 2002. This country has the highest lung cancer rate. The numbers should be correct. 
+
+
+```
+
+
+```{r echo=TRUE}
+
+#### Prostate Cancer Death
+
+# Reshape prostate_cancer_death dataset. Make values of different years as rows. 
+prostate_cancer_death_year_as_row <- gather(prostate_cancer_death, "Year", "Prostate_Cancer_Death", 2:54, na.rm = FALSE)
+
+# Change prostate cancer death's value as numberic 
+as.numeric(prostate_cancer_death_year_as_row$Prostate_Cancer_Death)
+
+# Remove observations with missing values in Prostate_Cancer_Death column
+prostate_cancer_death_year_as_row <- filter(prostate_cancer_death_year_as_row, !is.na(Prostate_Cancer_Death))
+
+# Show the mean of prostate cancer deaths per 100,000 male of each country from 1950 to 2002
+paste("The Mean of Prostate Cancer Deaths Per 100,000 Male By Country from 1950 to 2002")
+prostate_cancer_death_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Prostate_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Prostate_Cancer_Death))) %>%
+  arrange(desc(mean))
+
+```
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of prostate cancer death
+summary(prostate_cancer_death_year_as_row)
+
+# Standard Deviation of prostate cancer deaths per 100,000 male
+ipp_sd <- round(sd(prostate_cancer_death_year_as_row$Prostate_Cancer_Death, na.rm = TRUE), 2)
+paste("The Standard Deviation of Prostate Cancer Deaths Per 100,000 Male Is ", ipp_sd, ".")
+
+```
+
+```{r echo=TRUE}
+
+# Histogram showing prostate cancer deaths in different countries
+
+hist(prostate_cancer_death$`1987`, xlab="Prostate Cancer Deaths Per 100,000 Male 1987", main="Prostate Cancer Deaths In Different Countries in 1987")
+
+hist(prostate_cancer_death$`1992`, xlab="Prostate Cancer Deaths Per 100,000 Male 1992", main="Prostate Cancer Deaths In Different Countries in 1992")
+
+hist(prostate_cancer_death$`1997`, xlab="Prostate Cancer Deaths Per 100,000 Male 1997", main="Prostate Cancer Deaths In Different Countries in 1997")
+
+hist(prostate_cancer_death$`2002`, xlab="Prostate Cancer Deaths Per 100,000 Male 2002", main="Prostate Cancer Deaths In Different Countries in 2002")
+  
+```
+
+```{r echo=TRUE}
+
+# Examine the outliers 
+
+subset(prostate_cancer_death_year_as_row, Prostate_Cancer_Death > 50)
+
+# There are 9 records in this subset. All outliers are from Barbados, as well as Trinidad and Tobago. These countries indeed have higher prostate cancer rate than other countries. The numbers should be correct. 
+
+
+```
+
+```{r echo=TRUE}
+
+#### Stomach Cancer Death 
+
+# Reshape stomach_cancer_death_male dataset. Make values of different years as rows. 
+stomach_cancer_death_male_year_as_row <- gather(stomach_cancer_death_male, "Year", "Stomach_Cancer_Death_Male", 2:54, na.rm = FALSE)
+
+# Change stomach cancer death's value as numberic 
+as.numeric(stomach_cancer_death_male_year_as_row$Stomach_Cancer_Death_Male)
+
+# Remove observations with missing values in Stomach_Cancer_Death_Male column
+stomach_cancer_death_male_year_as_row <- filter(stomach_cancer_death_male_year_as_row, !is.na(Stomach_Cancer_Death_Male))
+
+# Show the mean of stomach cancer deaths per 100,000 male of each country from 1950 to 2002
+paste("The Mean of Stomach Cancer Deaths Per 100,000 Male By Country from 1950 to 2002")
+stomach_cancer_death_male_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Stomach_Cancer_Death_Male, na.rm = TRUE), count=sum(!is.na(Stomach_Cancer_Death_Male))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+
+# Reshape stomach_cancer_death_female. Make values of different years as rows. 
+stomach_cancer_death_female_year_as_row <- gather(stomach_cancer_death_female, "Year", "Stomach_Cancer_Death_Female", 2:54, na.rm = FALSE)
+
+# Change stomach cancer death's value as numberic 
+as.numeric(stomach_cancer_death_female_year_as_row$Stomach_Cancer_Death_Female)
+
+# Remove observations with missing values in Stomach_Cancer_Death_Female column
+stomach_cancer_death_female_year_as_row <- filter(stomach_cancer_death_female_year_as_row, !is.na(Stomach_Cancer_Death_Female))
+
+# Show the mean of stomach cancer deaths per 100,000 female of each country from 1950 to 2002
+paste("The Mean of Stomach Cancer Deaths Per 100,000 Female By Country from 1950 to 2002")
+stomach_cancer_death_female_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Stomach_Cancer_Death_Female, na.rm = TRUE), count=sum(!is.na(Stomach_Cancer_Death_Female))) %>%
+  arrange(desc(mean))
+
+```
+
+```{r echo=TRUE}
+
+# Join stomach_cancer_death_male_year_as_row and stomach_cancer_death_female_year_as_row
+stomach_cancer_death_year_as_row <- inner_join(stomach_cancer_death_male_year_as_row, stomach_cancer_death_female_year_as_row)
+
+# Add stomach cancer death numbers for male and female, create new column, and store the values in stomach_cancer_death_year_as_row
+stomach_cancer_death_year_as_row <- stomach_cancer_death_year_as_row %>% 
+  mutate(Stomach_Cancer_Death = Stomach_Cancer_Death_Male + Stomach_Cancer_Death_Female)
+
+# Show the mean of stomach cancer deaths per 100,000 person of each country from 1950 to 2002
+paste("The Mean of Stomach Cancer Deaths Per 100,000 Person By Country from 1950 to 2002")
+stomach_cancer_death_year_as_row %>% 
+  group_by(Country) %>% 
+  summarise(mean=mean(Stomach_Cancer_Death, na.rm = TRUE), count=sum(!is.na(Stomach_Cancer_Death))) %>%
+  arrange(desc(mean))
+
+
+```
+
+```{r echo=TRUE}
+
+# Show basic descriptive statistics of stomach cancer death
+summary(stomach_cancer_death_year_as_row)
+
+# Standard Deviation of stomach cancer deaths per 100,000 person
+ipp_sd <- round(sd(stomach_cancer_death_year_as_row$Stomach_Cancer_Death, na.rm = TRUE), 2)
+paste("The Standard Deviation of Stomach Cancer Deaths Per 100,000 Person Is ", ipp_sd, ".")
+
+```
+
+```{r echo=TRUE}
+
+# Create tables for different years in order to create histograms
+
+stomach_cancer_death_1987 <- subset(stomach_cancer_death_year_as_row, Year == 1987) 
+stomach_cancer_death_1992 <- subset(stomach_cancer_death_year_as_row, Year == 1992) 
+stomach_cancer_death_1997 <- subset(stomach_cancer_death_year_as_row, Year == 1997) 
+stomach_cancer_death_2002 <- subset(stomach_cancer_death_year_as_row, Year == 2002) 
+
+# Histogram showing stomach cancer deaths in different countries/territories
+
+hist(stomach_cancer_death_1987$Stomach_Cancer_Death, xlab="Stomach Cancer Deaths Per 100,000 Person 1987", main="Stomach Cancer Deaths In Different Countries in 1987")
+hist(stomach_cancer_death_1992$Stomach_Cancer_Death, xlab="Stomach Cancer Deaths Per 100,000 Person 1992", main="Stomach Cancer Deaths In Different Countries in 1992")
+hist(stomach_cancer_death_1997$Stomach_Cancer_Death, xlab="Stomach Cancer Deaths Per 100,000 Person 1997", main="Stomach Cancer Deaths In Different Countries in 1997")
+hist(stomach_cancer_death_2002$Stomach_Cancer_Death, xlab="Stomach Cancer Deaths Per 100,000 Person 2002", main="Stomach Cancer Deaths In Different Countries in 2002")
+
+```
+
+```{r echo=TRUE}
+
+# Examine the outliers 
+
+subset(stomach_cancer_death_year_as_row, Stomach_Cancer_Death > 110)
+
+# There is only one outlier that is over 110 deaths. It is not surprising that Iceland has the highest numbers because its stomach cancer death numbers have been high in different years. 
+
+
+```
+
+```{r echo=TRUE}
+
+## Join all "year_as_row"" datasets using inner_join, not full_Join
+
+# Join income_pp_year_as_row and life_expectancy_year_as_row
+
+income_vs_life_expectancy <- inner_join(income_pp_year_as_row, life_expectancy_year_as_row)
+
+# Join total_health_spending_pp_year_as_row and government_health_spending_pp_year_as_row
+
+total_n_gov_health_spending <- inner_join(total_health_spending_pp_year_as_row, government_health_spending_pp_year_as_row)
+
+# Join income_vs_life_expectancy and total_n_gov_health_spending
+
+income_vs_life_vs_spending <- inner_join(income_vs_life_expectancy, total_n_gov_health_spending)
+
+
+# Join datasets of all types of cancer deaths
+
+breast_cervical_c <- inner_join(breast_cancer_death_year_as_row, cervical_cancer_death_year_as_row)
+
+breast_cervical_lung_c <- inner_join(breast_cervical_c, lung_cancer_death_year_as_row)
+
+breast_cervical_lung_liver_c <- inner_join(breast_cervical_lung_c, liver_cancer_death_year_as_row)
+
+breast_cervical_lung_liver_prostate_c <- inner_join(breast_cervical_lung_liver_c, prostate_cancer_death_year_as_row)
+
+breast_cervical_lung_liver_prostate_stomach_c <- inner_join(breast_cervical_lung_liver_prostate_c, stomach_cancer_death_year_as_row)
+
+
+# Join food supply and improved_drinking_water
+
+food_n_water <- inner_join(food_supply_year_as_row, improved_drinking_water_year_as_row)
+
+# Join cancer death dataset and income/life expectancy/health spending dataset
+
+all_year_as_row <- inner_join(income_vs_life_vs_spending, breast_cervical_lung_liver_prostate_stomach_c)
+
+# Join all_year_as_row and food_n_water
+
+all_year_as_row <- inner_join(all_year_as_row, food_n_water)
+
+```
+
+```{r echo=TRUE}
+
+# Join income_pp_year_as_row and life_expectancy_year_as_row by inner_join
+income_vs_life_expectancy_in <- inner_join(income_pp_year_as_row, life_expectancy_year_as_row)
+
+# Create subsets for income/life data of 1960, 1970, 1980, 1990, 2000, and 2010
+income_vs_life_expectancy_in_1960 <- subset(income_vs_life_expectancy_in, Year == 1960) 
+income_vs_life_expectancy_in_1970 <- subset(income_vs_life_expectancy_in, Year == 1970) 
+income_vs_life_expectancy_in_1980 <- subset(income_vs_life_expectancy_in, Year == 1980) 
+income_vs_life_expectancy_in_1990 <- subset(income_vs_life_expectancy_in, Year == 1990) 
+income_vs_life_expectancy_in_2000 <- subset(income_vs_life_expectancy_in, Year == 2000) 
+income_vs_life_expectancy_in_2010 <- subset(income_vs_life_expectancy_in, Year == 2010) 
+
+# Bind rows in all subsets for income/life data of 1960 and 2010
+income_vs_life_expectancy_in_1960n2010 <- bind_rows(income_vs_life_expectancy_in_2010, income_vs_life_expectancy_in_1960)
+
+
+## Correlation Coefficient for income and life expectancy
+
+# Correlation Coefficient for scatter plot for income and life expectancy
+
+cor_income_life_1960 <- cor(income_vs_life_expectancy_in_1960$Income_per_person, income_vs_life_expectancy_in_1960$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_income_life_1960 <- paste("Correlation = ", round(cor_income_life_1960, 2), "(1960)")
+
+cor_income_life_2010 <- cor(income_vs_life_expectancy_in_2010$Income_per_person, income_vs_life_expectancy_in_2010$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_income_life_2010 <- paste("Correlation = ", round(cor_income_life_2010, 2), "(2010)")
+
+cor_income_life <- paste("",cor_income_life_1960,"\n",cor_income_life_2010)
+
+# Pearson Correlation Test for income and life expectancy
+
+cor_test_income_life <- cor.test(income_vs_life_expectancy_in_2010$Income_per_person, income_vs_life_expectancy_in_2010$Life_Expectancy, method="pearson")
+cor_test_income_life
+
+## Scatterplot for income and life expectancy in 1960 and 2010
+
+# Create a text for a income and life expectancy scatterplot
+income_life_grob <- grobTree(textGrob(cor_income_life, x=0.5,  y=0.15, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a income and life expectancy scatterplot 
+ggplot(income_vs_life_expectancy_in_1960n2010, aes(x = Income_per_person, y = Life_Expectancy, col = Year)) + geom_point(size = 3, alpha = 0.3, position = "jitter") + labs(x = "GDP Per Capita (US$)", y = "Life Expectancy (Year)", title = "Income and Life Expectancy by Year 1960 and 2010") + geom_smooth(method = "lm", linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x))) + annotation_custom(income_life_grob)
+
+```
+
+```{r echo=TRUE}
+
+# Join life_expectancy_year_as_row, total_health_spending_pp_year_as_row, and government_health_spending_pp_year_as_row by inner_join
+
+life_total_gov_spend_in <- inner_join(life_expectancy_year_as_row, total_health_spending_pp_year_as_row)
+
+life_total_gov_spend_in <- inner_join(life_total_gov_spend_in, government_health_spending_pp_year_as_row)
+
+# Create subsets for data of 1995, 2000, 2005, and 2010
+life_total_gov_spend_in_1995 <- subset(life_total_gov_spend_in, Year == 1995) 
+life_total_gov_spend_in_2000 <- subset(life_total_gov_spend_in, Year == 2000) 
+life_total_gov_spend_in_2005 <- subset(life_total_gov_spend_in, Year == 2005) 
+life_total_gov_spend_in_2010 <- subset(life_total_gov_spend_in, Year == 2010) 
+
+# Bind rows in all subsets for data of 1995, 2000, 2005, and 2010
+
+life_total_gov_spend_in_every5yrs <- bind_rows(life_total_gov_spend_in_1995, life_total_gov_spend_in_2000)
+
+life_total_gov_spend_in_every5yrs <- bind_rows(life_total_gov_spend_in_every5yrs, life_total_gov_spend_in_2005)
+
+life_total_gov_spend_in_every5yrs <- bind_rows(life_total_gov_spend_in_every5yrs, life_total_gov_spend_in_2010)
+
+## Correlation Coefficient for life expectancy and total health spending
+
+# Correlation Coefficient for scatterplot for life expectancy and total health spending
+
+cor_life_tothealthspend_1995 <- cor(life_total_gov_spend_in_1995$Total_Health_Spending_Per_Person, life_total_gov_spend_in_1995$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_tothealthspend_1995 <- paste("Correlation = ", round(cor_life_tothealthspend_1995, 2), "(1995)")
+
+cor_life_tothealthspend_2000 <- cor(life_total_gov_spend_in_2000$Total_Health_Spending_Per_Person, life_total_gov_spend_in_2000$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_tothealthspend_2000 <- paste("Correlation = ", round(cor_life_tothealthspend_2000, 2), "(2000)")
+
+cor_life_tothealthspend_2005 <- cor(life_total_gov_spend_in_2005$Total_Health_Spending_Per_Person, life_total_gov_spend_in_2005$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_tothealthspend_2005 <- paste("Correlation = ", round(cor_life_tothealthspend_2005, 2), "(2005)")
+
+cor_life_tothealthspend_2010 <- cor(life_total_gov_spend_in_2010$Total_Health_Spending_Per_Person, life_total_gov_spend_in_2010$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_tothealthspend_2010 <- paste("Correlation = ", round(cor_life_tothealthspend_2010, 2), "(2010)")
+
+cor_life_tothealthspend <- paste("",cor_life_tothealthspend_1995,"\n", cor_life_tothealthspend_2000,"\n", cor_life_tothealthspend_2005,"\n", cor_life_tothealthspend_2010)
+
+# Pearson Correlation Test for life expectancy and total health spending
+
+cor_test_life_tothealthspend <- cor.test(life_total_gov_spend_in_2010$Total_Health_Spending_Per_Person, life_total_gov_spend_in_2010$Life_Expectancy, method="pearson")
+cor_test_life_tothealthspend
+
+## Correlation Coefficient for life expectancy and government health spending
+
+# Correlation Coefficient for scatterplot for life expectancy and government health spending
+
+cor_life_govhealthspend_1995 <- cor(life_total_gov_spend_in_1995$Government_Health_Spending_Per_Person, life_total_gov_spend_in_1995$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_govhealthspend_1995 <- paste("Correlation = ", round(cor_life_govhealthspend_1995, 2), "(1995)")
+
+cor_life_govhealthspend_2000 <- cor(life_total_gov_spend_in_2000$Government_Health_Spending_Per_Person, life_total_gov_spend_in_2000$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_govhealthspend_2000 <- paste("Correlation = ", round(cor_life_govhealthspend_2000, 2), "(2000)")
+
+cor_life_govhealthspend_2005 <- cor(life_total_gov_spend_in_2005$Government_Health_Spending_Per_Person, life_total_gov_spend_in_2005$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_govhealthspend_2005 <- paste("Correlation = ", round(cor_life_govhealthspend_2005, 2), "(2005)")
+
+cor_life_govhealthspend_2010 <- cor(life_total_gov_spend_in_2010$Government_Health_Spending_Per_Person, life_total_gov_spend_in_2010$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_govhealthspend_2010 <- paste("Correlation = ", round(cor_life_govhealthspend_2010, 2), "(2010)")
+
+cor_life_govhealthspend <- paste("",cor_life_govhealthspend_1995,"\n", cor_life_govhealthspend_2000,"\n", cor_life_govhealthspend_2005,"\n", cor_life_govhealthspend_2010)
+
+# Pearson Correlation Test for life expectancy and government health spending
+
+cor_test_life_govhealthspend <- cor.test(life_total_gov_spend_in_2010$Government_Health_Spending_Per_Person, life_total_gov_spend_in_2010$Life_Expectancy, method="pearson")
+cor_test_life_govhealthspend
+
+## Scatterplot - total health spending for life expectancy
+
+# Create a text for a total health spending and life expectancy scatterplot
+life_tothealthspend_grob <- grobTree(textGrob(cor_life_tothealthspend, x=0.5,  y=0.15, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a total health spending and life expectancy scatterplot
+ggplot(life_total_gov_spend_in_every5yrs, aes(x = Total_Health_Spending_Per_Person, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Total Health Spending Per Person (US$)", y = "Life Expectancy (Year)", title = "Total Health Spending and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x))) + annotation_custom(life_tothealthspend_grob)
+
+## Scatterplot - government health spending and life expectancy
+
+# Create a text for a government health spending and life expectancy scatterplot
+life_govhealthspend_grob <- grobTree(textGrob(cor_life_govhealthspend, x=0.5,  y=0.15, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a government health spending and life expectancy scatterplot  
+ggplot(life_total_gov_spend_in_every5yrs, aes(x = Government_Health_Spending_Per_Person, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Government Health Spending Per Person (US$)", y = "Life Expectancy (Year)", title = "Government Health Spending and Life Expectancy\nby Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x))) + annotation_custom(life_govhealthspend_grob)
+
+
+```
+
+```{r echo=TRUE}
+# Join life_expectancy_year_as_row and improved_drinking_water_year_as_row by inner_join
+
+life_water_in <- inner_join(life_expectancy_year_as_row, improved_drinking_water_year_as_row)
+
+# Create subsets for data of 1997 and 2007
+life_water_in_1997 <- subset(life_water_in, Year == 1997) 
+life_water_in_2007 <- subset(life_water_in, Year == 2007) 
+
+# Bind rows in all subsets for data of 1997 and 2007
+life_water_in_2yrs <- bind_rows(life_water_in_1997, life_water_in_2007)
+
+## Correlation Coefficient for life expectancy and improved drinking water
+
+# Correlation Coefficient for scatterplot for life expectancy and improved drinking water
+
+cor_life_water_1997 <- cor(life_water_in_1997$Improved_Water, life_water_in_1997$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_water_1997 <- paste("Correlation = ", round(cor_life_water_1997, 2), "(1997)")
+
+cor_life_water_2007 <- cor(life_water_in_2007$Improved_Water, life_water_in_2007$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_water_2007 <- paste("Correlation = ", round(cor_life_water_2007, 2), "(2007)")
+
+cor_life_water <- paste("",cor_life_water_1997,"\n", cor_life_water_2007)
+
+# Pearson Correlation Test for life expectancy and improved drinking water
+
+cor_test_life_water <- cor.test(life_water_in_2007$Improved_Water, life_water_in_2007$Life_Expectancy, method="pearson")
+cor_test_life_water
+
+## Scatterplot - Improved drinking water source and life expectancy
+
+# Create a text for improved drinking water source and life expectancy scatterplot
+life_water_grob <- grobTree(textGrob(cor_life_water, x=0.5,  y=0.15, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create an improved drinking water source and life expectancy scatterplot
+ggplot(life_water_in_2yrs, aes(x = Improved_Water, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Percentage of Population Using Improved Drinking Water Sources", y = "Life Expectancy (Year)", title = "Improved Drinking Water Sources and Life Expectancy\nby Year") + geom_smooth(method = "lm", linetype = 2) + scale_x_sqrt() + annotation_custom(life_water_grob)
+
+```
+```{r echo=TRUE}
+# Join life_expectancy_year_as_row and food_supply_year_as_row by inner_join
+
+life_food_in <- inner_join(life_expectancy_year_as_row, food_supply_year_as_row)
+
+# Create subsets for data of 1997 and 2007
+life_food_in_1997 <- subset(life_food_in, Year == 1997) 
+life_food_in_2007 <- subset(life_food_in, Year == 2007) 
+
+# Bind rows in all subsets for data of 1997 and 2007
+life_food_in_2yrs <- bind_rows(life_food_in_1997, life_food_in_2007)
+
+## Correlation Coefficient for life expectancy and food supply
+
+# Correlation Coefficient for scatterplot for life expectancy and food supply
+# cor_life_food <- cor(life_food_in_2yrs$Food_Supply, life_food_in_2yrs$Life_Expectancy, use = "complete.obs, method="pearson"")
+
+cor_life_food_1997 <- cor(life_food_in_1997$Food_Supply, life_food_in_1997$Life_Expectancy, use = "complete.obs", method="pearson")
+cor_life_food_1997 <- paste("Correlation = ", round(cor_life_food_1997, 2), "(1997)")
+
+cor_life_food_2007 <- cor(life_food_in_2007$Food_Supply, life_food_in_2007$Life_Expectancy, use = "complete.obs", method="pearson")
+cor_life_food_2007 <- paste("Correlation = ", round(cor_life_food_2007, 2), "(2007)")
+
+cor_life_food <- paste("",cor_life_food_1997,"\n", cor_life_food_2007)
+
+# Pearson Correlation Test for life expectancy and food supply
+
+cor_test_life_food <- cor.test(life_food_in_2007$Food_Supply, life_food_in_2007$Life_Expectancy, method="pearson")
+cor_test_life_food
+
+## Scatterplot - Food Supply and life expectancy
+
+# Create a text for food supply and life expectancy scatterplot
+life_food_grob <- grobTree(textGrob(cor_life_food, x=0.5,  y=0.15, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a food supply and life expectancy scatterplot
+ggplot(life_food_in_2yrs, aes(x = Food_Supply, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "KCal Per Person Per Day", y = "Life Expectancy (Year)", title = "Food Supply and Life Expectancy by Year") + geom_smooth(method = "lm", linetype = 2) + annotation_custom(life_food_grob)
+
+
+```
+
+
+```{r echo=TRUE}
+
+# Create subsets for data of 1987, 1992, 1997, 2002 (for plots)
+all_year_as_row_1987 <- subset(all_year_as_row, Year == 1987) 
+all_year_as_row_1992 <- subset(all_year_as_row, Year == 1992) 
+all_year_as_row_1997 <- subset(all_year_as_row, Year == 1997) 
+all_year_as_row_2002 <- subset(all_year_as_row, Year == 2002) 
+
+# Create subsets for data from 1998 to 2001. 2002 data will also be used with these subsets. (for regression)
+all_year_as_row_2001 <- subset(all_year_as_row, Year == 2001) 
+all_year_as_row_2000 <- subset(all_year_as_row, Year == 2000) 
+all_year_as_row_1999 <- subset(all_year_as_row, Year == 1999) 
+all_year_as_row_1998 <- subset(all_year_as_row, Year == 1998) 
+
+# Bind rows in all subsets for data of 1987, 1992, 1997, 2002 (for plots)
+
+life_cancer_every5yrs <- bind_rows(all_year_as_row_1987, all_year_as_row_1992)
+
+life_cancer_every5yrs <- bind_rows(life_cancer_every5yrs, all_year_as_row_1997)
+
+life_cancer_every5yrs <- bind_rows(life_cancer_every5yrs, all_year_as_row_2002)
+
+
+# Calculate the total of different cancer deaths in 1998, 1999, 2000, 2001, and 2002, and create a new column for the total of each year (for creating plots of total cancer deaths and regression)
+
+total_cancer_death_2002 <- all_year_as_row_2002 %>% 
+  mutate(All_Cancer_Death = Breast_Cancer_Death + Cervical_Cancer_Death + Liver_Cancer_Death + Lung_Cancer_Death + Stomach_Cancer_Death + Prostate_Cancer_Death)
+
+total_cancer_death_2001 <- all_year_as_row_2001 %>% 
+  mutate(All_Cancer_Death = Breast_Cancer_Death + Cervical_Cancer_Death + Liver_Cancer_Death + Lung_Cancer_Death + Stomach_Cancer_Death + Prostate_Cancer_Death)
+
+total_cancer_death_2000 <- all_year_as_row_2000 %>% 
+  mutate(All_Cancer_Death = Breast_Cancer_Death + Cervical_Cancer_Death + Liver_Cancer_Death + Lung_Cancer_Death + Stomach_Cancer_Death + Prostate_Cancer_Death)
+
+total_cancer_death_1999 <- all_year_as_row_1999 %>% 
+  mutate(All_Cancer_Death = Breast_Cancer_Death + Cervical_Cancer_Death + Liver_Cancer_Death + Lung_Cancer_Death + Stomach_Cancer_Death + Prostate_Cancer_Death)
+
+total_cancer_death_1998 <- all_year_as_row_1998 %>% 
+  mutate(All_Cancer_Death = Breast_Cancer_Death + Cervical_Cancer_Death + Liver_Cancer_Death + Lung_Cancer_Death + Stomach_Cancer_Death + Prostate_Cancer_Death)
+
+
+# Bind rows in all subsets for data from 1998 to 2002 (for regression)
+
+total_cancer_death_last5yrs <- bind_rows(total_cancer_death_1998, total_cancer_death_1999)
+total_cancer_death_last5yrs <- bind_rows(total_cancer_death_2000, total_cancer_death_last5yrs)
+total_cancer_death_last5yrs <- bind_rows(total_cancer_death_2001, total_cancer_death_last5yrs)
+total_cancer_death_last5yrs <- bind_rows(total_cancer_death_2002, total_cancer_death_last5yrs)
+
+
+# Create a new dataset which has values of different cancer deaths in rows rather than columns (for creating a plot for different cancer deaths in 2002)
+
+all_cancer_as_row_2002_prep <- select(all_year_as_row_2002, Country, Year, Income_per_person, Life_Expectancy, Total_Health_Spending_Per_Person, Government_Health_Spending_Per_Person, Breast_Cancer_Death, Cervical_Cancer_Death, Lung_Cancer_Death, Liver_Cancer_Death, Prostate_Cancer_Death, Stomach_Cancer_Death, Food_Supply, Improved_Water)
+
+all_cancer_as_row_2002 <- gather(all_cancer_as_row_2002_prep, "Cancer", "Death", 7:12, na.rm = FALSE) 
+
+# Descriptive Statistics of total_cancer_death_(year) from 1998 to 2002 
+summary(total_cancer_death_2002)
+
+# Check Outliers of total_cancer_death_2002
+subset(total_cancer_death_2002, All_Cancer_Death > 200)
+
+## Correlation Coefficient for life expectancy and total cancer death
+
+# Correlation Coefficient for scatterplot for life expectancy and total cancer death
+
+cor_life_totc <- cor(total_cancer_death_2002$All_Cancer_Death, total_cancer_death_2002$Life_Expectancy, use = "complete.obs", method="pearson")
+
+cor_life_totc <- paste("Correlation = ", round(cor_life_totc, 2))
+
+# Pearson correlation test for life expectancy and total cancer death
+
+cor_test_life_totc <- cor.test(total_cancer_death_2002$All_Cancer_Death, total_cancer_death_2002$Life_Expectancy, method="pearson")
+cor_test_life_totc
+
+## Scatterplot - Total cancer death per 100000 person and life expectancy
+
+
+# Create a text for a total cancer death and life expectancy scatterplot
+life_AllC_grob <- grobTree(textGrob(cor_life_totc, x=0.6,  y=0.15, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a total cancer death and life expectancy scatterplot
+
+ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death, y = Life_Expectancy)) + geom_point(size = 3, alpha = 0.5, position = "jitter") + labs(x = "All Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "All Cancer Death and Life Expectancy in 2002") + geom_smooth(method = "lm", linetype = 2) + annotation_custom(life_AllC_grob)
+
+## Density Plot for total_cancer_death_2002
+
+# Prepare text for cancer death plots
+totc_mean <- mean(total_cancer_death_2002$All_Cancer_Death, na.rm = TRUE)
+totc_mean_r <- round(mean(total_cancer_death_2002$All_Cancer_Death, na.rm = TRUE), 2)
+totc_mean_r_word <- paste("Mean =",totc_mean_r,"deaths")
+totc_median <- median(total_cancer_death_2002$All_Cancer_Death, na.rm = TRUE)
+totc_median_r <- round(median(total_cancer_death_2002$All_Cancer_Death, na.rm = TRUE), 2)
+totc_median_r_word <- paste("Median =",totc_median_r,"deaths")
+totc_sd <- sd(total_cancer_death_2002$All_Cancer_Death, na.rm = TRUE)
+totc_sd_r <- round(sd(total_cancer_death_2002$All_Cancer_Death, na.rm = TRUE), 2)
+totc_sd_r_word <- paste("Standard Deviation =",totc_sd_r,"deaths")
+totc_plot_label <- paste("",totc_mean_r_word,"\n",totc_median_r_word,"\n",totc_sd_r_word)
+
+# Create a text for cancer death density plot
+totc_grob <- grobTree(textGrob(totc_plot_label, x=0.5,  y=0.9, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a cancer death density plot
+ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death)) + geom_density() + labs(x = "Total Cancer Death Per 100,000 Person", y = "Density", title = "Density Plot of Total Cancer Death \nPer 100,000 Person in 2002") + geom_vline(xintercept=totc_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=totc_mean,y=0.003),label="Mean", hjust=-0.1) + geom_vline(xintercept = totc_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=totc_median,y=0.005),label="Median", hjust=1.1)  + annotation_custom(totc_grob)
+
+
+## Empirical Cumulative Density Function (ECDF) Plot for total_cancer_death_2002
+
+# Create a text for cancer death ECDF plot
+totc_grob2 <- grobTree(textGrob(totc_plot_label, x=0.5,  y=0.15, hjust=0,
+  gp=gpar(col="black", fontsize=10, fontface="italic")))
+
+# Create a cancer death ECDF plot
+ggplot(total_cancer_death_2002, aes(x = All_Cancer_Death)) + stat_ecdf(geom = "point") + labs(x = "Total Cancer Death Per 100,000 Person", y = "F(Total Cancer Death)", title = "Empirical Cumulative Density Function of \nTotal Cancer Death Per 100,000 Person in 2002") + geom_vline(xintercept=totc_mean, color="blue", size=1, linetype="dashed") +  geom_text(aes(x=totc_mean,y=0.30),label="Mean", hjust=-0.1) + geom_vline(xintercept = totc_median, color="green", size=1, linetype="dashed") + geom_text(aes(x=totc_median,y=0.75),label="Median", hjust=1.1)  + annotation_custom(totc_grob2)
+
+# Scatterplot - Different Types of cancer deaths per 100000 person
+ggplot(all_cancer_as_row_2002, aes(x = Death, y = Life_Expectancy, col = Cancer)) + geom_point(size = 1, alpha = 0.3, position = "jitter") + labs(x = "Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "Different Types of Cancer Death and Life Expectancy in 2002") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+# Scatterplot - Breast cancer deaths per 100000 person 
+ggplot(life_cancer_every5yrs, aes(x = Breast_Cancer_Death, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Breast Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "Breast Cancer Death and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+# Scatterplot - Cervical cancer deaths per 100000 person
+ggplot(life_cancer_every5yrs, aes(x = Cervical_Cancer_Death, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Cervical Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "Cervical Cancer Death and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+# Scatterplot - Liver cancer deaths per 100000 person
+ggplot(life_cancer_every5yrs, aes(x = Liver_Cancer_Death, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Liver Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "Liver Cancer Death and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+# Scatterplot - Lung cancer deaths per 100000 person 
+ggplot(life_cancer_every5yrs, aes(x = Lung_Cancer_Death, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Lung Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "Lung Cancer Death and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+# Scatterplot - Prostate cancer deaths per 100000 person
+ggplot(life_cancer_every5yrs, aes(x = Prostate_Cancer_Death, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Prostate Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "Prostate Cancer Death and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+# Scatterplot - Stomach cancer deaths per 100000 person 
+ggplot(life_cancer_every5yrs, aes(x = Stomach_Cancer_Death, y = Life_Expectancy, col = Year)) + geom_point(size = 1, alpha = 0.5, position = "jitter") + labs(x = "Stomach Cancer Deaths Per 100,000 Person", y = "Life Expectancy (Year)", title = "Stomach Cancer Death and Life Expectancy by Year") + geom_smooth(method = "lm", se = FALSE, linetype = 2) + scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x)))
+
+
+```
+```{r}
+
+# pairs - Charts to pair Income, Life Expectancy, Total and Government Health Spending, Food supply, Improved Water, and All Cancer Death
+pairs(~log10(Income_per_person)+Life_Expectancy+log10(Total_Health_Spending_Per_Person)+log10(Government_Health_Spending_Per_Person)+Improved_Water+Food_Supply+All_Cancer_Death, data=total_cancer_death_last5yrs)
+
+```
+
+
+```{r echo=TRUE}
+
+# Save the cleaned file as .csv
+
+write.csv(all_year_as_row, "income_life_spend_cancer_inner_join.csv", row.names = FALSE)
+
+```
+
+```{r}
+
+# Multiple Linear Regression using dataset all_year_as_row_last5yrs from 1998 to 2002 (latest years of cancer death data)
+
+all_variables_last5yrs <- total_cancer_death_last5yrs
+
+
+```
+
+```{r echo=TRUE}
+
+## Regression the whole dataset all_variables_last5yrs
+
+# Create a regression model with all 6 independent variables
+mod_wholeds_6p <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = all_variables_last5yrs)
+summary(mod_wholeds_6p)
+
+SSE=sum(mod_wholeds_6p$residuals^2)
+SSE
+
+```
+
+```{r echo=TRUE}
+## Use different methods to select useful independent variables
+# Create Best Subsets Regression
+
+ols_best_subset(mod_wholeds_6p)
+
+```
+
+```{r echo=TRUE}
+
+# Create Stepwise Forward Regression 
+
+ols_step_forward(mod_wholeds_6p)
+
+```
+
+```{r echo=TRUE}
+
+# Create Random forest
+
+output_forest_wholeds <- randomForest(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = all_variables_last5yrs, importance=TRUE)
+
+# View the Random forest results
+
+print(output_forest_wholeds) 
+
+# Importance of each independent (Random forest)
+
+print(importance(output_forest_wholeds)) 
+
+# Pseudo R-Squared
+
+mean(output_forest_wholeds$rsq) 
+
+```
+
+```{r echo=TRUE}
+
+## 10-fold Cross-Validation for all 6 variables
+
+# Change the dataset to data frame to prevent an error when running cv.lm() function
+all_variables_last5yrs_df <- as.data.frame(all_variables_last5yrs)
+
+# Remove unnecessary columns for cv.lm () function
+all_variables_last5yrs_df <- select(all_variables_last5yrs_df, Income_per_person, Life_Expectancy, Improved_Water, Food_Supply, Total_Health_Spending_Per_Person, Government_Health_Spending_Per_Person, All_Cancer_Death)
+
+# cv.lm(all_variables_last5yrs_df, form.lm = formula(Life_Expectancy ~ .), m=10)
+
+# Set seed for reproducibility
+data(all_variables_last5yrs_df)
+set.seed(121)
+
+# Fit linear regression model
+mod_10fold_6p <- train(Life_Expectancy ~ ., all_variables_last5yrs_df, method = "lm", trControl = trainControl(method = "cv", number = 10, verboseIter = TRUE)) 
+mod_10fold_6p
+
+# MAE (Using Mean Absolute Error for Forecast Accuracy. The absolate error is the absolute value of the difference between the forecasted value and the actual value.MAE tells us how big of an error we can expect from the orecast on average.)
+
+# RMSE (Root-mean-square error is a frequently used measure of the differences between sample and population values estimated by a model and the values actually observed.)
+
+```
+
+```{r echo=TRUE}
+## 10-fold Cross-Validation for 4 stronger independent variables based on Best Subsets Regression and Stepwise Forward Regression
+
+# Remove unnecessary columns for cv.lm () function
+all_variables_last5yrs_df_4p_iwfc <- select(all_variables_last5yrs_df, Income_per_person, Life_Expectancy, Improved_Water, Food_Supply, All_Cancer_Death)
+
+# cv.lm(all_variables_last5yrs_df_4p_iwfc, form.lm = formula(Life_Expectancy ~ .), m=10)
+
+# Set seed for reproducibility
+data(all_variables_last5yrs_df_4p_iwfc)
+set.seed(122)
+
+# Fit linear regression model
+mod_10fold_4p_iwfc <- train(Life_Expectancy ~ ., all_variables_last5yrs_df_4p_iwfc, method = "lm", trControl = trainControl(method = "cv", number = 10, verboseIter = TRUE)) 
+mod_10fold_4p_iwfc
+
+```
+
+```{r echo=TRUE}
+
+## 10-fold Cross-Validation for 4 stronger independent variables based on Random Forest
+
+# Remove unnecessary columns for cv.lm () function
+all_variables_last5yrs_df_4p_iwtg <- select(all_variables_last5yrs_df, Income_per_person, Life_Expectancy, Improved_Water, Total_Health_Spending_Per_Person, Government_Health_Spending_Per_Person)
+
+# cv.lm(all_variables_last5yrs_df_4p_iwtg, form.lm = formula(Life_Expectancy ~ .), m=10)
+
+data(all_variables_last5yrs_df_4p_iwtg)
+set.seed(123)
+
+# Fit linear regression model
+mod_10fold_4p_iwtg <- train(Life_Expectancy ~ ., all_variables_last5yrs_df_4p_iwtg, method = "lm", trControl = trainControl(method = "cv", number = 10, verboseIter = TRUE)) 
+mod_10fold_4p_iwtg
+
+```
+
+```{r echo=TRUE}
+
+# Create a regression model with 4 stronger independent variables based on Best Subsets Regression and Stepwise Forward Regression
+
+mod_wholeds_4p_iwtg <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_last5yrs)
+summary(mod_wholeds_4p_iwfc)
+
+SSE=sum(mod_wholeds_4p_iwfc$residuals^2)
+SSE
+
+```
+
+```{r echo=TRUE}
+
+# Create a regression model with 4 stronger independent variables based on Random Forest 
+
+mod_wholeds_4p_iwtg <- lm(Life_Expectancy ~ Income_per_person + Improved_Water + Total_Health_Spending_Per_Person + Government_Health_Spending_Per_Person, data = all_variables_last5yrs)
+summary(mod_wholeds_4p_iwtg)
+
+SSE=sum(mod_wholeds_4p_iwtg$residuals^2)
+SSE
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
