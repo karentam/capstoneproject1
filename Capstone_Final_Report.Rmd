@@ -680,10 +680,10 @@ Result
 Best Subsets Regression
 </td>
 <td>
-- Income
-<br>- Improved Drinking Water Source
-<br>- Food Supply
-<br>- Cancer Death
+1. Income
+<br>2. Improved Drinking Water Source
+<br>3. Food Supply
+<br>4. Cancer Death
 </td>
 <td>
 Adjusted R-Squared: 0.69
@@ -698,10 +698,10 @@ Adjusted R-Squared: 0.69
 Stepwise Forward Regression
 </td>
 <td>
-- Income
-<br>- Improved Drinking Water Source
-<br>- Food Supply
-<br>- Cancer Death
+1. Income
+<br>2. Improved Drinking Water Source
+<br>3. Food Supply
+<br>4. Cancer Death
 </td>
 <td>
 Adjusted R-Squared: 0.69
@@ -716,17 +716,17 @@ Adjusted R-Squared: 0.69
 Random Forest
 </td>
 <td>
-- Income
-<br>- Improved Drinking Water Source
-<br>- Total Health Spending
-<br>- Government Health Spending
+1. Income
+<br>2. Improved Drinking Water Source
+<br>3. Total Health Spending
+<br>4. Government Health Spending
 </td>
 <td>
-Mean of Squared Residuals of out-of-bag predictions versus targets: 13.8
+1. Mean of Squared Residuals of out-of-bag predictions versus targets: 13.8
 <br>
-Percentage of Variable Explained: 78.5
+2. Percentage of Variable Explained: 78.5
 <br>
-Pseudo R-Squared: 0.78
+3. Pseudo R-Squared: 0.78
 </td>
 </tr>
 
@@ -761,12 +761,12 @@ Root Mean Squared Error (RMSE)
 1
 </td>
 <td>
-- Income
-<br>- Improved Drinking Water Source
-<br>- Food Supply
-<br>- Cancer Death
-<br>- Total Health Spending
-<br>- Government Health Spending
+1. Income
+<br>2. Improved Drinking Water Source
+<br>3. Food Supply
+<br>4. Cancer Death
+<br>5. Total Health Spending
+<br>6. Government Health Spending
 </td>
 <td>
 4.46
@@ -778,10 +778,10 @@ Root Mean Squared Error (RMSE)
 2
 </td>
 <td>
-- Income
-<br>- Improved Drinking Water Source
-<br>- Food Supply
-<br>- Cancer Death
+1. Income
+<br>2. Improved Drinking Water Source
+<br>3. Food Supply
+<br>4. Cancer Death
 </td>
 <td>
 4.42
@@ -793,10 +793,10 @@ Root Mean Squared Error (RMSE)
 3
 </td>
 <td>
-- Income
-<br>- Improved Drinking Water Source
-<br>- Total Health Spending
-<br>- Government Health Spending
+1. Income
+<br>2. Improved Drinking Water Source
+<br>3. Total Health Spending
+<br>4. Government Health Spending
 </td>
 <td>
 4.51
@@ -843,12 +843,12 @@ Residual Standard Error
 1
 </td>
 <td>
-- Income
-<br>- Improved Drinking Water Source
-<br>- Food Supply
-<br>- Cancer Death
-<br>- Total Health Spending
-<br>- Government Health Spending
+1. Income
+<br>2. Improved Drinking Water Source
+<br>3. Food Supply
+<br>4. Cancer Death
+<br>5. Total Health Spending
+<br>6. Government Health Spending
 </td>
 <td>
 N/A
@@ -869,14 +869,14 @@ N/A
 2
 </td>
 <td>
-- Income
-<br>- Improved Drinking Water Source
-<br>- Food Supply
-<br>- Cancer Death
+1. Income
+<br>2. Improved Drinking Water Source
+<br>3. Food Supply
+<br>4. Cancer Death
 </td>
 <td>
-Best Subsets Regression
-<br>Stepwise Forward Regression
+1. Best Subsets Regression
+<br>2. Stepwise Forward Regression
 </td>
 <td>
 0.69
@@ -894,10 +894,10 @@ Best Subsets Regression
 3
 </td>
 <td>
-- Income
-<br>- Improved Drinking Water Source
-<br>- Total Health Spending
-<br>- Government Health Spending
+1. Income
+<br>2. Improved Drinking Water Source
+<br>3. Total Health Spending
+<br>4. Government Health Spending
 </td>
 <td>
 Random Forest
@@ -1001,7 +1001,8 @@ A decrease in 29 cases of cancer death per 100,000 person per year
 A. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Code.Rmd">R Code of the Project</a>
 <br>
 B. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Correlation_Code_Output.pdf">R Code and Output of the Pearson Correlation Coefficient</a>
-B. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Regression_Code_Output.pdf">R Code and Output of the Multiple Linear Regression</a>. 
+<br>
+C. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Regression_Code_Output.pdf">R Code and Output of the Multiple Linear Regression</a>. 
 
 <br><br>
 
