@@ -1,15 +1,18 @@
 <h3>Capstone Final Report</h3>
 <br>
 Name: H Karen Tam
+<br>
 Date: February 8, 2018
+
+<br>
 
 ### Executive Summary
 
-Some studies suggested that people living in poverty have shorter life spans. From the equity standpoint, everyone should have the equal right to survive. Therefore, it is important to examine elements that are associated with life expectancy, and governments have responsibilities to close the gap of the inequality in terms of developing and implementing public policies. 
+Some studies suggested that people living in poverty have shorter life spans. From the equity standpoint, everyone should have the basic right to survive. Therefore, it is important to examine elements that are associated with life expectancy, and governments have responsibilities to close the gap of the inequality in terms of developing and implementing public policies. 
 
 This project evaluates how income, total and government health spending, improved drinking water source, food supply, and cancer death associate with life expectancy. The data of all variables are from the Gapminder. 
 
-Pearson Correlation Coefficient and Multiple linear regression were used to infer causal relationships between life expectancy and independent variables used in this project. Income, improved drinking water source, and food supply are related to life expectancy based on these two tests. Although cancer death is not significantly correlated with life expectancy, it is significant to the regression model. On the other hand, total and government health spending is correlated with life expectancy but not significant to the regression model. 
+Pearson Correlation Coefficient and Multiple linear regression were used to infer causal relationships between life expectancy and independent variables used in this project. Income, improved drinking water source, and food supply are related to life expectancy based on these two tests. Although cancer death is not significantly correlated with life expectancy, it is statistically significant to the regression model. On the other hand, total and government health spending are correlated with life expectancy but not statistically significant to the regression model. 
 
 <br>
 
@@ -133,12 +136,13 @@ There are many reasons for death. The dataset only contains very limited variabl
 
   + Reshape the data for plots and statistical analysis
 
-    + I used gather() in tidyr package to gather year columns into key-value pairs. It was easier to make scatter plots and do statistical analysis by using the restructured dataset based on countries and years.
+    + I used gather() in tidyr package to gather year columns into key-value pairs. It was easier to make scatter plots and do statistical analysis by using the restructured dataset.
+    + In each row, I summed numbers of different types of cancer and created a column to store the total number of cancer deaths. 
 
   + Remove missing value and join the data from different datasets
 
     + I removed missing values in each individual variable's dataset. 
-    + I used inner_join() in dplyr package to join all variables together into a large dataset. I also calculated total numbers of cancer death for each country in different years by adding numbers of various male and female cancer death. 
+    + I used inner_join() in dplyr package to join all variable's datasets together into a large dataset. I also calculated total numbers of cancer death for each country in different years by adding numbers of various male and female cancer death. 
 
   + Examine outliers
 
@@ -328,6 +332,8 @@ The outlier with 249.4 cancer deaths per 100,000 person per year in 2002 is Mong
 
 ### Pearson Correlation Coefficient
 
+<br>
+
 **Summary of Correlations**
 
 <table>
@@ -343,7 +349,10 @@ r for the Latest Available Year
 Significantly Correlated with Life Expectancy
 </th>
 <th>
-Relationship with Life Expectancy
+Strength of the Relationship
+</th>
+<th>
+Direction of the Relationship
 </th>
 </tr>
 
@@ -358,7 +367,10 @@ Income
 Yes
 </td>
 <td>
-Moderate, Positive
+Moderate
+</td>
+<td>
+Positive
 </td>
 </tr>
 
@@ -373,7 +385,10 @@ Total Health Spending
 Yes
 </td>
 <td>
-Moderate, Positive
+Moderate
+</td>
+<td>
+Positive
 </td>
 </tr>
 
@@ -388,7 +403,10 @@ Government Health Spending
 Yes
 </td>
 <td>
-Moderate, Positive
+Moderate
+</td>
+<td>
+Positive
 </td>
 </tr>
 
@@ -403,7 +421,10 @@ Improved Drinking Water Source
 Yes
 </td>
 <td>
-Strong, Positive
+Strong
+</td>
+<td>
+Positive
 </td>
 </tr>
 
@@ -418,7 +439,10 @@ Food Supply
 Yes
 </td>
 <td>
-Strong, Positive
+Strong
+</td>
+<td>
+Positive
 </td>
 </tr>
 
@@ -433,7 +457,10 @@ Cancer Death
 No
 </td>
 <td>
-Weak, Negative
+Very Weak
+</td>
+<td>
+Negative
 </td>
 </tr>
 
@@ -487,7 +514,7 @@ Generally speaking, country's citizens live longer with the higher total health 
 
 <td valign="top" width="50%">
 
-<table>
+<table border="0">
 <tr>
 <td>
 <img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10_4r_Annot.png?raw=true">
@@ -611,7 +638,7 @@ The correlation suggests that cancer death and life expectancy have a very weak,
 
 ### Multiple Linear Regression
 
-Multiple Linear Regression, k-fold Cross-Validation, and three variable selection methods are used to identify the best model to predict life expectancy. 
+Multiple Linear Regression, k-fold Cross-Validation, and three variable selection methods are used to identify the best model to estimate life expectancy. 
 
 <br>
 
@@ -621,7 +648,7 @@ The dataset used in this test contains the most updated available data from 1998
 
 <br>
 
-**Steps To Create the Best Predictive Model**
+**Steps To Create the Best Regresson Model**
 
 _Variable Selection_
   + Best Subsets Regression
@@ -638,7 +665,7 @@ No.
 Variable Seletion Method
 </th>
 <th>
-Strong Predictor Variables
+Strong Independent Variables
 </th>
 <th>
 Result
@@ -705,7 +732,7 @@ Pseudo R-Squared: 0.78
 
 </table>
 
-<h6>The adjusted R-squared gives the percentage of variation explained by only those predictor variables that in reality affect the outcome variable.</h6>
+<h6>The adjusted R-squared gives the percentage of variation explained by only those independent variables that in reality affect the dependent variable.</h6>
 <h6>Mean of Squared Residuals is a measure of the discrepancy between the data and an estimation model.</h6>
 <h6>Pseudo R-Squared ranges from 0 to 1 with higher values indicating better model fit.</h6>
 
@@ -722,7 +749,7 @@ _k-fold Cross-Validation_
 No.
 </th>
 <th>
-Model Containing The Following Predictor Variables
+Model Containing the Following Independent Variables
 </th>
 <th>
 Root Mean Squared Error (RMSE)
@@ -778,7 +805,7 @@ Income
 
 </table>
 
-<h6>RMSE is used to measure differences between the values predicted by a model and the values actually observed.</h6>
+<h6>RMSE is used to measure differences between the values estimated by a model and the values actually observed.</h6>
 
 <br>
 
@@ -786,7 +813,7 @@ Although Model 2 has the lowest RMSE of 4.42, all three models have similar RMSE
 
 <br>
 
-_Compare Models with Different Predictor Variables_
+_Compare Models with Different Independent Variables_
 
 <table>
 
@@ -795,10 +822,10 @@ _Compare Models with Different Predictor Variables_
 No.
 </th>
 <th>
-Combination of Predictor Variables
+Combination of Independent Variables
 </th>
 <th>
-Method(s) That Support(s) This Combination
+Method(s) that Support(s) This Combination
 </th>
 <th>
 Adjusted R-squared
@@ -849,7 +876,7 @@ Income
 </td>
 <td>
 Best Subsets Regression
-<br>Stepwise Forward regression
+<br>Stepwise Forward Regression
 </td>
 <td>
 0.69
@@ -888,33 +915,33 @@ Random Forest
 
 </table>
 
-<h6>The adjusted R-squared gives the percentage of variation explained by only those predictor variables that in reality affect the outcome variable.</h6>
+<h6>The adjusted R-squared gives the percentage of variation explained by only those Independent variables that in reality affect the dependent variable.</h6>
 <h6>Sum of Squared Errors (SSE) is the sum of the squared differences between each observation and its group's mean.</h6>
 <h6>Residual Standard Error is a measure of how close the fit is to the points.</h6>
 <br>
 
-Selected by Best Subsets Regression and Stepwise Forward Regression, Model 2 has the lowest Residual Standard Error of 4.46 years. Its SSE of 6779 is very close to Model 1's SSE, the lowest one in the table. The Adjusted R-Squared of Model 1 and 2 are almost the same. Therefore, Model 2 is selected to be the estimator of this project. 
+Selected by Best Subsets Regression and Stepwise Forward Regression, Model 2 has the lowest Residual Standard Error of 4.46 years. Its SSE of 6779 is very close to Model 1's SSE, the lowest one in the table. The Adjusted R-Squared of Model 1 and 2 are almost the same. Model 2 is selected to be the estimator of this project. 
 
 <br>
 
 
 **Interpretation of the Selected Model**
 
-The selected model includes 4 significant predictor variables: income, food supply, improved drinking water source, and cancer death
+The selected model includes 4 significant independent variables: income, food supply, improved drinking water source, and cancer death
 
-Adjusted R-Squared: 0.69
+_Adjusted R-Squared: 0.69_
 <br>
 69% of the variation in life expectancy can be explained by this model. 
 
-P-Value:
+_P-Value:_
 <br>
 Income, food supply, improved drinking water source, and cancer death are statistically significant because their p-values are less than 0.05. Statistically significant means that the result is likely not due to random chance. 
 
-Residual Standard Error:
+_Residual Standard Error:_
 <br>
-Residual Standard Error of 4.46 shows that there are about 4.46 years between the observed life expectancy and predicted life expectancy. 
+Residual Standard Error of 4.46 shows that there are about 4.46 years between the observed life expectancy and estimated life expectancy. 
 
-Impacts on Life Expectancy:
+_Impacts on Life Expectancy:_
 <br>
 
 <table>
