@@ -680,10 +680,10 @@ Result
 Best Subsets Regression
 </td>
 <td>
-Income
-<br>Improved Drinking Water Source
-<br>Food Supply
-<br>Cancer Death
+- Income
+<br>- Improved Drinking Water Source
+<br>- Food Supply
+<br>- Cancer Death
 </td>
 <td>
 Adjusted R-Squared: 0.69
@@ -698,10 +698,10 @@ Adjusted R-Squared: 0.69
 Stepwise Forward Regression
 </td>
 <td>
-Income
-<br>Improved Drinking Water Source
-<br>Food Supply
-<br>Cancer Death
+- Income
+<br>- Improved Drinking Water Source
+<br>- Food Supply
+<br>- Cancer Death
 </td>
 <td>
 Adjusted R-Squared: 0.69
@@ -716,10 +716,10 @@ Adjusted R-Squared: 0.69
 Random Forest
 </td>
 <td>
-Income
-<br>Improved Drinking Water Source
-<br>Total Health Spending
-<br>Government Health Spending
+- Income
+<br>- Improved Drinking Water Source
+<br>- Total Health Spending
+<br>- Government Health Spending
 </td>
 <td>
 Mean of Squared Residuals of out-of-bag predictions versus targets: 13.8
@@ -761,12 +761,12 @@ Root Mean Squared Error (RMSE)
 1
 </td>
 <td>
-Income
-<br>Improved Drinking Water Source
-<br>Food Supply
-<br>Cancer Death
-<br>Total Health Spending
-<br>Government Health Spending
+- Income
+<br>- Improved Drinking Water Source
+<br>- Food Supply
+<br>- Cancer Death
+<br>- Total Health Spending
+<br>- Government Health Spending
 </td>
 <td>
 4.46
@@ -778,10 +778,10 @@ Income
 2
 </td>
 <td>
-Income
-<br>Improved Drinking Water Source
-<br>Food Supply
-<br>Cancer Death
+- Income
+<br>- Improved Drinking Water Source
+<br>- Food Supply
+<br>- Cancer Death
 </td>
 <td>
 4.42
@@ -793,10 +793,10 @@ Income
 3
 </td>
 <td>
-Income
-<br>Improved Drinking Water Source
-<br>Total Health Spending
-<br>Government Health Spending
+- Income
+<br>- Improved Drinking Water Source
+<br>- Total Health Spending
+<br>- Government Health Spending
 </td>
 <td>
 4.51
@@ -843,12 +843,12 @@ Residual Standard Error
 1
 </td>
 <td>
-Income
-<br>Improved Drinking Water Source
-<br>Food Supply
-<br>Cancer Death
-<br>Total Health Spending
-<br>Government Health Spending
+- Income
+<br>- Improved Drinking Water Source
+<br>- Food Supply
+<br>- Cancer Death
+<br>- Total Health Spending
+<br>- Government Health Spending
 </td>
 <td>
 N/A
@@ -869,10 +869,10 @@ N/A
 2
 </td>
 <td>
-Income
-<br>Improved Drinking Water Source
-<br>Food Supply
-<br>Cancer Death
+- Income
+<br>- Improved Drinking Water Source
+<br>- Food Supply
+<br>- Cancer Death
 </td>
 <td>
 Best Subsets Regression
@@ -894,10 +894,10 @@ Best Subsets Regression
 3
 </td>
 <td>
-Income
-<br>Improved Drinking Water Source
-<br>Total Health Spending
-<br>Government Health Spending
+- Income
+<br>- Improved Drinking Water Source
+<br>- Total Health Spending
+<br>- Government Health Spending
 </td>
 <td>
 Random Forest
@@ -979,7 +979,6 @@ Food Supply
 </td>
 <td>
 An increase in 453.31 calories intake per person per day
-<br>
 (Note: If people faces food shortage due to extreme poverty or wars)
 </td>
 </tr>
