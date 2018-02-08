@@ -334,6 +334,17 @@ The outlier with 249.4 cancer deaths per 100,000 person per year in 2002 is Mong
 
 <br>
 
+The following is the pairs plot showing the pairwise comparisons of all 7 variables. 
+
+![](https://github.com/karentam/capstoneproject1/blob/master/Pairs_AllVariables.png?raw=true)
+<h6>Observation: 346 without missing data.</h6>
+<h6>Source: 
+<br>
+<a href="http://www.gapminder.org/data/" target="_blank">Gapminder</a> 
+</h6>
+
+<br>
+
 **Summary of Correlations**
 
 <table>
@@ -468,173 +479,7 @@ Negative
 
 <br>
 
-**Income vs Life Expectancy**
-
-<table>
-<tr>
-<td valign="top" width="50%">
-
-Using data from different countries and territories in 1960 and 2010, the plot shows that the higher the income, the longer life the person has. However, the difference in life expectancy between wealthy and poor countries/territories is getting smaller in the most recent decades. 
-
-Income and life expectancy have a moderate, positive relationship. The decrease in correlations between 1960 and 2010 confirms that the gap in life expectancy between richer and poorer countries is getting closer.
-
-However, there is a difference in life expectancy between countries on the same income level because it depends on how the money is distributed and how it is used in each country. For example, Swaziland had $5,850 GDP Per Capita in 2002. However, the country had a much shorter life expectancy of 48 years. The reason was that 63% of Swazis lived below the national poverty line which was relatively high for a lower middle-income country. 3.1 million people living with HIV was another public concern that affected the country's life expectancy. 
-
-</td>
-
-<td valign="top" width="50%">
-
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_IncomeLife_Log10_CI_2r_Annot.png?raw=true)
-<h6>Observation: 273 without missing data.</h6>
-<h6>Source: 
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a>  
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx" target="_blank">Gapminder, Life Expectancy (Years)</a></h6>
-
-</td>
-</tr>
-</table>
-
-<br>
-
-**Life Expectancy vs Total Health Spending / Government Health Spending**
-
-<table>
-<tr>
-<td valign="top" width="50%">
-
-Using data from different countries in 1995, 2000, 2005, and 2010, the plots show that the higher the total and government health spending, the longer people can live. 
-
-Tthe total health spending/government health spending and life expectancy have a moderate, positive relationship.  
-
-Generally speaking, country's citizens live longer with the higher total health spending. However, there are a few outliers. For example, the United States spent US$8,360 per person on health, which was more than other countries. But US citizen's life expectancy is a little shorter compared to other countries with the similar amount of health expenditure because of the large inequality in health spending. 
-
-</td>
-
-<td valign="top" width="50%">
-
-<table border="0">
-<tr>
-<td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_HealthSpendLife_Log10_4r_Annot.png?raw=true">
-<h6>Observation: 716 without missing data.</h6>
-<h6>Source: 
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEeL79qOoKtofQ&output=xlsx" target="_blank">Gapminder, Total health spending per person (USD)</a>   
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx" target="_blank">Gapminder, Life Expectancy (Years)</a></h6>
-</td>
-</tr>
-
-<tr>
-<td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_GovSpendLife_Log10_4r_Annot.png?raw=true">
-<h6>Observation: 716 without missing data.</h6>
-<h6>Source: 
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=tBwBBkViOJoycBhLnWHqwSQ&output=xlsx" target="_blank">Gapminder, Government health spending per person (USD)</a>     
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=tiAiXcrneZrUnnJ9dBU-PAw&output=xlsx" target="_blank">Gapminder, Life Expectancy (Years)</a></h6>
-</td>
-</tr>
-</table>
-
-</td>
-</tr>
-</table>
-
-<br>
-
-
-**Life Expectancy vs Food Supply**
-
-<table>
-<tr>
-<td valign="top" width="50%">
-
-Using data from about different countries in 1997 and 2007, the plot suggests that not having enough calories intake can threaten people's lives. The correlations suggest that food supply and life expectancy have a strong, positive relationship. 
-
-It is also reasonable that income may take a role in food supply and life expectancy. When people have money to buy enough food, they will no longer face the threat of starvation. On the other hand, proper nutrition also affects life expectancy by decreasing the chance of having preventable diseases. 
-
-</td>
-
-<td valign="top" width="50%">
-
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_FoodLife_CI_2r_Annot.png?raw=true)
-<h6>Observation: 347 without missing data.</h6>
-<h6>Source: 
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a> 
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=0ArfEDsV3bBwCdGlYVVpXX20tbU13STZyVG0yNkRrZnc&output=xlsx" target="_blank">Gapminder, Food supply (kilocalories/person & day)</a> 
-</h6>
-
-</td>
-</tr>
-</table>
-
-<br>
-
-**Life Expectancy vs Clean Drinking Water Sources**
-
-<table>
-<tr>
-<td valign="top" width="50%">
-
-Using data from different countries from 1997 to 2007, the plot shows the positive relationship between life expectancy and percentage of the total population using improved drinking water sources. The correlations suggest that improved drinking water sources and life expectancy have a strong, positive relationship. 
-
-Improved drinking water sources include piped water into dwelling, plot or yard; public tap/standpipe; borehole/tube well; protected dug well; protected spring; rainwater collection and bottled water (if a secondary available source is also improved). 
-
-The plot is created on square root scale. There were 108 countries in 2007 and 97 countries in 1997 that could provide clean drinking water sources to more than 90% of the population. So many points are located close to 100%. 
-
-</td>
-
-<td valign="top" width="50%">
-
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_WaterLife_Sqrt_CI_2r_Annot.png?raw=true)
-<h6>Observation: 364 without missing data.</h6>
-<h6>Source: 
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a> 
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=pyj6tScZqmEd98lRwrU3gIg&output=xlsx" target="_blank">Gapminder, Improved water source-overall access (%)</a> 
-</h6>
-
-</td>
-</tr>
-</table>
-
-<br>
-
-**Life Expectancy vs Total Cancer Death**
-
-<table>
-<tr>
-<td valign="top" width="50%">
-
-Using data from 149 countries and territories in 2002, the plot shows that there is a slight, negative relationship between life expectancy and total cancer death. When cancer death increases, the length of life decreases. The total number of cancer death here includes breast, cervical, lung, liver, stomach, and prostate cancers. 
-
-The correlation suggests that cancer death and life expectancy have a very weak, negative relationship. Cancer is not the major reason for death nowadays, especially in richer countries, because of widespread screening programs that detect cancers at the early and treatable stage. 
-
-</td>
-
-<td valign="top" width="50%">
-
-![](https://github.com/karentam/capstoneproject1/blob/master/ScatterPlot_AllCLife_CI_r_Annot.png?raw=true)
-<h6>Observation: 149 without missing data.</h6>
-<h6>Source: 
-<br>
-<a href="http://docs.google.com/spreadsheet/pub?key=0AkBd6lyS3EmpdHo5S0J6ekhVOF9QaVhod05QSGV4T3c&output=xlsx" target="_blank">Gapminder, Income per person (GDP/capita, PPP$ inflation-adjusted)</a> 
-<br>
-<a href="http://www.gapminder.org/data/" target="_blank">Gapminder, Cancer Deaths Per 100,000 Persons</a> (Search Keyword: Cancer)
-</h6>
-
-</td>
-</tr>
-</table>
-
-<br>
+Scatterplot and explanation for each pairwise comparison between life expectancy and 6 independent variables is available <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Corelation_Scatterplot_Explanation.pdf">here</a>.  
 
 ### Multiple Linear Regression
 
@@ -1140,9 +985,11 @@ Provide services to reduce life expectancy related problems in underprivileged c
 
 A. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Code.Rmd">R Code of the Project</a>
 <br>
-B. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Correlation_Code_Output.pdf">R Code and Output of the Pearson Correlation Coefficient</a>
+B. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Corelation_Scatterplot_Explanation.pdf">Scatterplot and Correlation Coefficient for Each Pairwise Comparison between Life Expectancy and Independent Variables</a>
 <br>
-C. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Regression_Code_Output.pdf">R Code and Output of the Multiple Linear Regression</a>
+C. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Correlation_Code_Output.pdf">R Code and Output of the Pearson Correlation Coefficient</a>
+<br>
+D. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Regression_Code_Output.pdf">R Code and Output of the Multiple Linear Regression</a>
 
 <br><br>
 
