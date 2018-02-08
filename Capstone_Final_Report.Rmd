@@ -979,6 +979,7 @@ Food Supply
 </td>
 <td>
 An increase in 453.31 calories intake per person per day
+<br>
 (Note: If people faces food shortage due to extreme poverty or wars)
 </td>
 </tr>
@@ -996,13 +997,152 @@ A decrease in 29 cases of cancer death per 100,000 person per year
   
 <br>
 
+### Conclusion 
+
+The following table shows the summarized results of the Pearson Correlation and the Multiple Linear Regression:
+<table>
+
+<tr>
+<th>
+Independent Variable
+</th>
+<th>
+Correlation
+</th>
+<th>
+Regression
+</th>
+</tr>
+
+<tr>
+<td>
+Income
+</td>
+<td>
+Correlated
+</td>
+<td>
+Significant
+</td>
+</tr>
+
+<tr>
+<td>
+Improved Drinking Water Source
+</td>
+<td>
+Correlated
+</td>
+<td>
+Significant
+</td>
+</tr>
+
+<tr>
+<td>
+Food Supply
+</td>
+<td>
+Correlated
+</td>
+<td>
+Significant
+</td>
+</tr>
+
+<tr>
+<td>
+Cancer Death
+</td>
+<td>
+Not Correlated
+</td>
+<td>
+Significant
+</td>
+</tr>
+
+<tr>
+<td>
+Total Health Spending
+</td>
+<td>
+Correlated
+</td>
+<td>
+Not Significant
+</td>
+</tr>
+
+<tr>
+<td>
+Government Health Spending
+</td>
+<td>
+Correlated
+</td>
+<td>
+Not Significant
+</td>
+</tr>
+
+</table>
+
+<br>
+
+##Recommendations
+
+From the equity standpoint, country and local governments, public health researchers, heathcare facilities, and community nonprofits are critical to close the inequality gap in life expectancy. Recommendations for these stakeholders are as follows:
+
+<table>
+
+<tr>
+<th>
+Stakeholders
+</th>
+<th>
+Recommended Actions
+</th>
+</tr>
+
+<tr>
+<td>
+All Stakeholders
+</td>
+<td>
+Identify life expectancy related problems in underprivileged communities
+</td>
+</tr>
+
+<tr>
+<td>
+Governments
+</td>
+<td>
+Develop policies and implement them effectively
+</td>
+</tr>
+
+<tr>
+<td>
+Community Organizations and Health Facilities
+</td>
+<td>
+Provide services to reduce life expectancy related problems in underprivileged communities
+</td>
+</tr>
+
+</table>
+
+<br>
+
 ### Appendices
 
 A. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Code.Rmd">R Code of the Project</a>
 <br>
 B. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Correlation_Code_Output.pdf">R Code and Output of the Pearson Correlation Coefficient</a>
 <br>
-C. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Regression_Code_Output.pdf">R Code and Output of the Multiple Linear Regression</a>. 
+C. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Regression_Code_Output.pdf">R Code and Output of the Multiple Linear Regression</a>
 
 <br><br>
 
