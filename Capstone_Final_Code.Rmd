@@ -1,7 +1,7 @@
 ---
-Title: "Capstone Project - Code"
-Author: "H Karen Tam"
-Date: "February 8, 2018"
+Author: H Karen Tam
+Date: February 9, 2018
+Title: Capstone Project - Code
 ---
 
 
@@ -36,6 +36,9 @@ library(DAAG)
 
 # Load Caret 
 library(caret)
+
+# Load GGally
+library(GGally)
 
 # Import excel files
 income_pp <- read_excel("income_pp.xlsx")
@@ -1524,8 +1527,13 @@ ggplot(life_cancer_every5yrs, aes(x = Stomach_Cancer_Death, y = Life_Expectancy,
 ```
 ```{r}
 
-# pairs - Charts to pair Income, Life Expectancy, Total and Government Health Spending, Food supply, Improved Water, and All Cancer Death
-pairs(~log10(Income_per_person)+Life_Expectancy+log10(Total_Health_Spending_Per_Person)+log10(Government_Health_Spending_Per_Person)+Improved_Water+Food_Supply+All_Cancer_Death, data=total_cancer_death_last5yrs)
+## Pairs Plot with Correlation Coefficient 
+
+# Prepare some data
+pairs_df <- total_cancer_death_last5yrs[, c(4,3,5,6,19,20,21)]
+
+# Create ggpairs plot with correlation for all variables
+ggpairs(pairs_df, columnLabels=c("Life Expectancy","Income","Total Health Spend", "Gov Health Spend", "Food Supply", "Improved Water", "Cancer Death"))
 
 ```
 
@@ -1662,7 +1670,7 @@ mod_10fold_4p_iwtg
 
 # Create a regression model with 4 stronger independent variables based on Best Subsets Regression and Stepwise Forward Regression
 
-mod_wholeds_4p_iwtg <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_last5yrs)
+mod_wholeds_4p_iwfc <- lm(Life_Expectancy ~ Income_per_person + Food_Supply + Improved_Water + All_Cancer_Death, data = all_variables_last5yrs)
 summary(mod_wholeds_4p_iwfc)
 
 SSE=sum(mod_wholeds_4p_iwfc$residuals^2)
