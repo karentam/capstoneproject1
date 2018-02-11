@@ -20,7 +20,9 @@ Pearson Correlation Coefficient and Multiple linear regression were used to infe
 ### Files
 
 A. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Report.Rmd">Final Report</a>
+<br>
 B. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Report.pdf">PDF file of the Final Report</a>
+<br>
 C. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Code.Rmd">R Code of the Project</a>
 <br>
 D. <a href="https://youtu.be/W8PMZ2WyXCM">Video Presentation of the Project</a>
