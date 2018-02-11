@@ -2,7 +2,7 @@
 <br>
 Name: H Karen Tam
 <br>
-Date: February 8, 2018
+Date: February 10, 2018
 
 <br>
 
@@ -18,9 +18,7 @@ Pearson Correlation Coefficient and Multiple linear regression were used to infe
 
 ### Dataset
 
-Data of seven variables from 1960 to 2016 are from the Gapminder, an independent Swedish foundation with no political, religious or economic affiliations. Each variable has its own dataset. A consolidated dataset was created by combining different variable datasets. 
-
-**Important fields and information**
+Data of seven variables from 1960 to 2016 are from the Gapminder, an independent Swedish foundation with no political, religious or economic affiliations. Each variable has its own dataset. A final dataset was created by combining datasets for the following variables:
 
 <br>
 
@@ -137,7 +135,7 @@ There are many reasons for death. The dataset only contains very limited variabl
   + Reshape the data for plots and statistical analysis
 
     + I used gather() in tidyr package to gather year columns into key-value pairs. It was easier to make scatter plots and do statistical analysis by using the restructured dataset.
-    + In each row, I summed numbers of different types of cancer and created a column to store the total number of cancer deaths. 
+    + In each row, I added up numbers of different types of cancer and created a column to store the total number of cancer deaths. 
 
   + Remove missing value and join the data from different datasets
 
@@ -334,12 +332,12 @@ The outlier with 249.4 cancer deaths per 100,000 person per year in 2002 is Mong
 
 <br>
 
-The following is the pairs plot showing the pairwise comparisons of all 7 variables. 
+The following is the pairs plot showing the pairwise comparisons and correlations of all 7 variables. 
 
-![](https://github.com/karentam/capstoneproject1/blob/master/Pairs_AllVariables.png?raw=true)
+![](https://github.com/karentam/capstoneproject1/blob/master/ggpairs_allvariables.png?raw=true)
 <h6>Observation: 346 without missing data.</h6>
+<h6>From Year 1998 to 2002</h6>
 <h6>Source: 
-<br>
 <a href="http://www.gapminder.org/data/" target="_blank">Gapminder</a> 
 </h6>
 
@@ -354,7 +352,7 @@ The following is the pairs plot showing the pairwise comparisons of all 7 variab
 Independent Variable
 </th>
 <th>
-r for the Latest Available Year
+r (from Year 1998 to 2002)
 </th>
 <th>
 Significantly Correlated with Life Expectancy
@@ -372,7 +370,7 @@ Direction of the Relationship
 Income
 </td>
 <td>
-0.58
+0.60
 </td>
 <td>
 Yes
@@ -408,7 +406,7 @@ Positive
 Government Health Spending
 </td>
 <td>
-0.52
+0.55
 </td>
 <td>
 Yes
@@ -426,7 +424,7 @@ Positive
 Improved Drinking Water Source
 </td>
 <td>
-0.75
+0.80
 </td>
 <td>
 Yes
@@ -462,13 +460,13 @@ Positive
 Cancer Death
 </td>
 <td>
--0.02
+-0.03
 </td>
 <td>
 No
 </td>
 <td>
-Very Weak
+Weak
 </td>
 <td>
 Negative
@@ -479,7 +477,9 @@ Negative
 
 <br>
 
-Scatterplot and explanation for each pairwise comparison between life expectancy and 6 independent variables is available <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Corelation_Scatterplot_Explanation.pdf">here</a>.  
+Scatterplot and explanation for each pairwise comparison between life expectancy and 6 independent variables is available <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Corelation_Scatterplot_Explanation.pdf" target="_blank">here</a>.  
+
+<br>
 
 ### Multiple Linear Regression
 
@@ -805,7 +805,7 @@ Amount Needed to Increase 1 Year in Life Expectancy
 Income
 </td>
 <td>
-An Increase of $7,002.80 in GDP Per Capita
+An Increase of $7,003 in GDP Per Capita
 </td>
 </tr>
 
@@ -814,7 +814,7 @@ An Increase of $7,002.80 in GDP Per Capita
 Improved Drinking Water Source
 </td>
 <td>
-An increase in 2.81% of country's population with an access to clean drinking water sources
+An increase in 3% of country's population with an access to clean drinking water sources
 </td>
 </tr>
 
@@ -823,7 +823,7 @@ An increase in 2.81% of country's population with an access to clean drinking wa
 Food Supply
 </td>
 <td>
-An increase in 453.31 calories intake per person per day
+An increase in 453 calories intake per person per day
 <br>
 (Note: If people faces food shortage due to extreme poverty or wars)
 </td>
@@ -990,6 +990,10 @@ B. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Fi
 C. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Correlation_Code_Output.pdf">R Code and Output of the Pearson Correlation Coefficient</a>
 <br>
 D. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Regression_Code_Output.pdf">R Code and Output of the Multiple Linear Regression</a>
+<br>
+E. <a href="https://youtu.be/W8PMZ2WyXCM">Video Presentation</a>
+<br>
+F. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Slides.pdf">slide Deck</a>
 
 <br><br>
 
