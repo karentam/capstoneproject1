@@ -993,7 +993,7 @@ D. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Fi
 <br>
 E. <a href="https://youtu.be/W8PMZ2WyXCM">Video Presentation</a>
 <br>
-F. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Slides.pdf">slide Deck</a>
+F. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Slides.pdf">Slide Deck</a>
 <br>
 G. <a href="capstoneproject1/Capstone_Final_Report.pdf">PDF file of the Final Report</a>
 
