@@ -192,7 +192,7 @@ Outliers are from countries with the life expectancy of fewer than 30 years of a
 <img src="https://github.com/karentam/capstoneproject1/blob/master/DensityPlot_Life_Annot.png?raw=true">
 </td>
 <td>
-<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Life_Annot.png?raw=true">
+<img src="https://github.com/karentam/capstoneproject1/blob/master/ECDFPlot_Life_Annot_2.png?raw=true">
 </td>
 </tr>
 <tr>
