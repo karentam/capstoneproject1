@@ -957,7 +957,9 @@ Recommended Actions
 All Stakeholders
 </td>
 <td>
-Identify life expectancy related problems in underprivileged communities
+1. Monitor income-level, drinking water condition, and cancer death in communities.
+<hr>
+2. Ensure that there is enough food supply for people.
 </td>
 </tr>
 
@@ -966,7 +968,9 @@ Identify life expectancy related problems in underprivileged communities
 Governments
 </td>
 <td>
-Develop policies and implement them effectively
+1. Develop and implement policies to improve the average income, drinking water condition, and cancer death rate.
+<hr>
+2. Ensure that citizens have 2,000-2,500 calories intake in average each day.
 </td>
 </tr>
 
@@ -975,7 +979,9 @@ Develop policies and implement them effectively
 Community Organizations and Health Facilities
 </td>
 <td>
-Provide services to reduce life expectancy related problems in underprivileged communities
+1. Provide services to reduce low-income, drinking water condition, and high cancer death rate problems in underserved communities.  
+<hr>
+2. Examples: Job training, career center, environment and water source protection campaigns, and cancer early detection programs. 
 </td>
 </tr>
 
@@ -993,7 +999,7 @@ C. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Fi
 <br>
 D. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Appendix_Regression_Code_Output.pdf">R Code and Output of the Multiple Linear Regression</a>
 <br>
-E. <a href="https://youtu.be/W8PMZ2WyXCM">Video Presentation</a>
+E. <a href="https://youtu.be/W3_5wmRKty0">Video Presentation</a>
 <br>
 F. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Slides.pdf">Slide Deck</a>
 <br>
