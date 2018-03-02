@@ -958,7 +958,7 @@ All Stakeholders
 </td>
 <td>
 1. Monitor income-level, drinking water condition, and cancer death in communities.
-<hr>
+<br>
 2. Ensure that there is enough food supply for people.
 </td>
 </tr>
@@ -969,7 +969,7 @@ Governments
 </td>
 <td>
 1. Develop and implement policies to improve the average income, drinking water condition, and cancer death rate.
-<hr>
+<br>
 2. Ensure that citizens have 2,000-2,500 calories intake in average each day.
 </td>
 </tr>
@@ -980,7 +980,7 @@ Community Organizations and Health Facilities
 </td>
 <td>
 1. Provide services to reduce low-income, drinking water condition, and high cancer death rate problems in underserved communities.  
-<hr>
+<br>
 2. Examples: Job training, career center, environment and water source protection campaigns, and cancer early detection programs. 
 </td>
 </tr>
