@@ -27,7 +27,7 @@ B. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Fi
 <br>
 C. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Code.Rmd">R Code of the Project</a>
 <br>
-D. <a href="https://youtu.be/W8PMZ2WyXCM">Video Presentation of the Project</a>
+D. <a href="https://youtu.be/W3_5wmRKty0">Video Presentation of the Project</a>
 <br>
 E. <a href="https://github.com/karentam/capstoneproject1/blob/master/Capstone_Final_Slides.pdf">Slide Deck of the Project</a>
 <br>
